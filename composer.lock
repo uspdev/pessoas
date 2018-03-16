@@ -2667,7 +2667,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/uspdev/replicado.git",
-                "reference": "cbc5c672936a7fc6efb73826448ff13b45f1768d"
+                "reference": "9385b4a7401ecbebaaf248e3de33b58c38c59cc4"
             },
             "type": "library",
             "autoload": {
@@ -2688,7 +2688,7 @@
             ],
             "description": "Classes PHP que consome dados do Sybase Replicado",
             "homepage": "https://git.uspdigital.usp.br/fflch/replicado",
-            "time": "2018-03-16T14:41:09+00:00"
+            "time": "2018-03-16T22:28:57+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

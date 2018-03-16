@@ -9,7 +9,6 @@ use Uspdev\Replicado\Pessoa;
 
 class BuscaController extends Controller
 {
-
     private $ip,$port,$db,$user,$pass;
     public function __construct()
     {

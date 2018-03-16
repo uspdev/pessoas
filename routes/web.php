@@ -22,3 +22,7 @@ Route::get('/buscas/codpes', function () {
         return view('buscas.codpes');
 })->middleware('auth');
 Route::post('/buscas/codpes', 'BuscaController@codpes');
+
+# csvs
+Route::get('/grad.csv','RelatorioController@grad')->middleware('auth');
+Route::get('/pos.csv','RelatorioController@pos')->middleware('auth');

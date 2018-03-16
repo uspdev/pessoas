@@ -122,12 +122,12 @@ return [
         'Relatórios',
         [
             'text' => 'Alunos de Graduação (csv)',
-            'url'  => '/',
+            'url'  => '/grad.csv',
             'icon' => 'file',
         ],
         [
             'text' => 'Alunos de Pós-Graduação (csv)',
-            'url'  => '/',
+            'url'  => '/pos.csv',
             'icon' => 'file',
         ],
     ],
