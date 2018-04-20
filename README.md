@@ -1,2 +1,6 @@
-# sisdata
-Interface web para acessar e fazer download de csv dos dados muito acessos no replicado
+# Motivação
+
+Nas unidades, muitos setores precisam acessar os dados mínimos de alunos, funcionários e docentes,
+esses dados são replicados e as consultas estão abstraídas no projeto [replicado](https://github.com/uspdev/replicado). 
+
+Esse projeto, consiste em uma interface web para tornar o acesso a esses dados mais fácil, para os setores/pessoas que tem essa permissão.
