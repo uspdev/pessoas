@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'Sidata FFLCH',
+    'title' => 'Pessoas',
 
     'title_prefix' => '',
 
@@ -30,9 +30,9 @@ return [
     |
     */
 
-    'logo' => '<b>Sis</b>Data FFLCH',
+    'logo' => 'Pessoas',
 
-    'logo_mini' => '<b>Sis</b>Data',
+    'logo_mini' => '',
 
     /*
     |--------------------------------------------------------------------------
@@ -113,22 +113,7 @@ return [
             'text' => 'Por número USP',
             'url'  => '/buscas/codpes',
             'icon' => 'search',
-        ],
-        [
-            'text'        => 'Por nome',
-            'url'         => '/',
-            'icon'        => 'search',
-        ],
-        'Relatórios',
-        [
-            'text' => 'Alunos de Graduação (csv)',
-            'url'  => '/grad.csv',
-            'icon' => 'file',
-        ],
-        [
-            'text' => 'Alunos de Pós-Graduação (csv)',
-            'url'  => '/pos.csv',
-            'icon' => 'file',
+            'can'  => 'admin',
         ],
     ],
 
