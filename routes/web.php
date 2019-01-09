@@ -14,7 +14,7 @@
 Route::get('/', 'indexController@index');
 
 Route::get('login', 'Auth\LoginController@redirectToProvider')->name('login');
-Route::get('login/senhaunica/callback', 'Auth\LoginController@handleProviderCallback');
+Route::get('callback', 'Auth\LoginController@handleProviderCallback');
 Route::post('logout', 'Auth\LoginController@logout');
 
 #busca por número USP
@@ -23,6 +23,3 @@ Route::get('/buscas/codpes', function () {
 })->middleware('auth');
 Route::post('/buscas/codpes', 'BuscaController@codpes');
 
-# csvs
-Route::get('/grad.csv','RelatorioController@grad')->middleware('auth');
-Route::get('/pos.csv','RelatorioController@pos')->middleware('auth');

@@ -12,12 +12,14 @@ class EventServiceProvider extends ServiceProvider
      *
      * @var array
      */
+
     protected $listen = [
-        'App\Events\Event' => [
-            'App\Listeners\EventListener',
+        Registered::class => [
+            SendEmailVerificationNotification::class,
         ],
+
         \SocialiteProviders\Manager\SocialiteWasCalled::class => [
-            'SocialiteProviders\Senhaunica\SenhaunicaExtendSocialite@handle',
+            'Uspdev\SenhaunicaSocialite\SenhaunicaExtendSocialite@handle',
         ],
     ];
 

@@ -5,6 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
+use Illuminate\Support\Facades\Auth;
+
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -25,6 +27,10 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        # admin
+        Gate::define('admin', function ($user) {
+            $admins = explode(',', trim(config('pessoas.senhaunica_admins')));
+            return in_array($user->codpes, $admins);
+        });
     }
 }

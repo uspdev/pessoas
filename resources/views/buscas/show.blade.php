@@ -15,13 +15,13 @@
         <ul class="list-group">
             <li class='list-group-item'>CPF: {{ $pessoa['numcpf'] }}</li>
         </ul> 
-
         <h4> Telefones </h4>
         <ul class="list-group">
         @foreach ($telefones as $telefone)
             <li class='list-group-item'>{{ $telefone }}</li>
         @endforeach
         </ul> 
+
 
         <h4> E-mails </h4>
         <ul class="list-group">
@@ -32,8 +32,8 @@
 
         <h4> Vínculos Ativos </h4>
         <ul class="list-group">
-        @foreach ($localizas as $localiza)
-            <li class='list-group-item'>{{ $localiza }}</li>
+        @foreach ($vinculos as $vinculo)
+            <li class='list-group-item'>{{ $vinculo }}</li>
         @endforeach
         </ul> 
 
