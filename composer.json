@@ -10,7 +10,7 @@
         "jeroennoten/laravel-adminlte": "^1.23",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "~1.0",
-        "socialiteproviders/senhaunica": "dev-master",
+        "uspdev/senhaunica-socialite": "dev-master",
         "uspdev/replicado": "dev-master"
     },
     "require-dev": {
@@ -59,15 +59,5 @@
         "optimize-autoloader": true
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "repositories": {
-        "SenhaunicaSocialite": {
-            "type": "git",
-            "url": "https://github.com/uspdev/SenhaunicaSocialite.git"
-        },
-        "replicado": {
-            "type": "git",
-            "url": "https://github.com/uspdev/replicado.git"
-        }
-    }
+    "prefer-stable": true
 }
