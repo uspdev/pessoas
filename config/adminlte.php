@@ -108,7 +108,7 @@ return [
     */
 
     'menu' => [
-        'Pessoas',
+        'Menu',
         [
             'text' => 'Por número USP',
             'url'  => '/buscas/codpes',
