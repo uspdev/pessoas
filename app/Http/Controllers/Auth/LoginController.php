@@ -49,18 +49,22 @@ class LoginController extends Controller
 
     public function handleProviderCallback()
     {
-        $user = Socialite::driver('senhaunica')->user();
+        $userSenhaUnica = Socialite::driver('senhaunica')->user();
 
-        $authUser = User::where('codpes', $user->id)->first();
-        if (!$authUser)
-        {
-            $authUser = new User;
-            $authUser->name = $user->name;
-            $authUser->email = $user->email;
-            $authUser->codpes = $user->id;
-            $authUser->save();
+        # busca o usuário local
+        $user = User::where('codpes',$userSenhaUnica->codpes)->first();
+
+        if (is_null($user)) {
+            $user = new User;
         }
-        Auth::login($authUser, true);
+
+        // bind do dados retornados
+        $user->codpes = $userSenhaUnica->codpes;
+        $user->email = $userSenhaUnica->email;
+        $user->name = $userSenhaUnica->nompes;
+        $user->save();
+ 
+        Auth::login($user, true);
         return redirect('/');
     }
 
