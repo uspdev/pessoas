@@ -16,6 +16,11 @@ class AppServiceProvider extends ServiceProvider
     {
         // mariadb suport
         Schema::defaultStringLength(191);
+        
+        // força https na produção
+        if (\App::environment('production')) {
+            \URL::forceScheme('https');
+        }
     }
 
     /**
