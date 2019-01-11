@@ -314,16 +314,16 @@
         },
         {
             "name": "fideloper/proxy",
-            "version": "4.0.0",
+            "version": "4.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fideloper/TrustedProxy.git",
-                "reference": "cf8a0ca4b85659b9557e206c90110a6a4dba980a"
+                "reference": "177c79a2d1f9970f89ee2fb4c12b429af38b6dfb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fideloper/TrustedProxy/zipball/cf8a0ca4b85659b9557e206c90110a6a4dba980a",
-                "reference": "cf8a0ca4b85659b9557e206c90110a6a4dba980a",
+                "url": "https://api.github.com/repos/fideloper/TrustedProxy/zipball/177c79a2d1f9970f89ee2fb4c12b429af38b6dfb",
+                "reference": "177c79a2d1f9970f89ee2fb4c12b429af38b6dfb",
                 "shasum": ""
             },
             "require": {
@@ -364,7 +364,7 @@
                 "proxy",
                 "trusted proxy"
             ],
-            "time": "2018-02-07T20:20:57+00:00"
+            "time": "2019-01-10T14:06:47+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -2829,12 +2829,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/uspdev/replicado.git",
-                "reference": "de686100702885f8810859d1e9457db9c1c996e8"
+                "reference": "3d0942466dd3630e845d56bdb73931546ee14d4d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uspdev/replicado/zipball/de686100702885f8810859d1e9457db9c1c996e8",
-                "reference": "de686100702885f8810859d1e9457db9c1c996e8",
+                "url": "https://api.github.com/repos/uspdev/replicado/zipball/3d0942466dd3630e845d56bdb73931546ee14d4d",
+                "reference": "3d0942466dd3630e845d56bdb73931546ee14d4d",
                 "shasum": ""
             },
             "require": {
@@ -2852,14 +2852,14 @@
             ],
             "authors": [
                 {
-                    "name": "Thiago Gomes Veríssimo",
+                    "name": "Thiago Gomes Verissimo",
                     "email": "thiago.verissimo@usp.br",
                     "homepage": "https://github.com/thiagogomesverissimo"
                 }
             ],
             "description": "Classes PHP que consome dados do Replicado USP",
             "homepage": "https://github.com/uspdev/replicado",
-            "time": "2018-10-11T18:08:31+00:00"
+            "time": "2019-01-09T23:11:06+00:00"
         },
         {
             "name": "uspdev/senhaunica-socialite",
@@ -2867,12 +2867,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/uspdev/senhaunica-socialite.git",
-                "reference": "73583586a40dcd10c981d6c7cbda5ada1bcaa4c9"
+                "reference": "8eb5b9baa2982b215ea250a677744d423dd04f9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uspdev/senhaunica-socialite/zipball/73583586a40dcd10c981d6c7cbda5ada1bcaa4c9",
-                "reference": "73583586a40dcd10c981d6c7cbda5ada1bcaa4c9",
+                "url": "https://api.github.com/repos/uspdev/senhaunica-socialite/zipball/8eb5b9baa2982b215ea250a677744d423dd04f9e",
+                "reference": "8eb5b9baa2982b215ea250a677744d423dd04f9e",
                 "shasum": ""
             },
             "require": {
@@ -2899,7 +2899,7 @@
             ],
             "description": "Senhaunica OAuth1 Provider for Laravel Socialite",
             "homepage": "https://github.com/uspdev/senhaunica-socialite",
-            "time": "2018-12-05T13:54:07+00:00"
+            "time": "2019-01-10T23:55:47+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
