@@ -20,9 +20,6 @@
       <input type="text" class="form-control" name="nomepes" id="nomepes" autocomplete="off" required>
         <ul name="search" id="search"></ul>
     </div>
-    <div class="col-lg-2">
-      <button type="submit" class="btn btn-success">Buscar</button>
-    </div>
   </div>
 </div>
   <input type="hidden" value="" name="codpes" id="codpes">
