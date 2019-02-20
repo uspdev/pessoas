@@ -23,3 +23,8 @@ Route::get('/buscas/codpes', function () {
 })->middleware('auth');
 Route::post('/buscas/codpes', 'BuscaController@codpes');
 
+#busca por nome
+Route::get('/buscas/nomepes', function () {
+        return view('buscas.nomepes');
+})->middleware('auth');
+Route::get('/buscas/partenome', 'BuscaController@partenome')->name('autocomplete.search');

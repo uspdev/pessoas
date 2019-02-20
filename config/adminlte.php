@@ -115,6 +115,12 @@ return [
             'icon' => 'search',
             'can'  => 'admin',
         ],
+        [
+            'text' => 'Por nome',
+            'url'  => '/buscas/nomepes',
+            'icon' => 'search',
+            'can'  => 'admin',
+        ],
     ],
 
     /*
