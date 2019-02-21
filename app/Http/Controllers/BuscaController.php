@@ -12,7 +12,7 @@ class BuscaController extends Controller
     {
         $this->middleware('auth');
     }
- 
+
     public function codpes(Request $request)
     {
         $this->authorize('admin');
@@ -31,7 +31,16 @@ class BuscaController extends Controller
         $vinculos = Pessoa::vinculos($request->codpes);
         return view('buscas.show',compact('pessoa','telefones','emails','vinculos'));
     }
+
+    public function partenome(Request $request)
+    {
+        $this->authorize('admin');
+        if($request->term) {
+            $pessoa = Pessoa::nome($request->term);
+        }
+
+        return response($pessoa);
+    }
+
 }
-
-
 
