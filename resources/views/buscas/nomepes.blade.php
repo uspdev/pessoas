@@ -55,7 +55,7 @@
                 ul_search.empty();
                 if(data.length > 0){
                   $.each(data, function(key, value){
-                    ul_search.append('<li value=' + value.codpes + '><a href="#">' + value.nompes + '</a></li>');
+                    ul_search.append('<li value=' + value.codpes + '><a href="#">(' + value.codpes + ') ' + value.nompes + '</a></li>');
                   });
                 }
                 else{
