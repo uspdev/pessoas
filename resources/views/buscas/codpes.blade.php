@@ -9,7 +9,7 @@
 @section('content')
 @include('alerts')
 
-<form method="POST" action="/buscas/codpes">
+<form method="POST" action="codpes">
 @csrf
 
 <div class="form-group">
