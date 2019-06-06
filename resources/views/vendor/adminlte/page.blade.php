@@ -79,7 +79,7 @@
                         </li>
                         @else
                             <li>
-                                <a href="/login"> <i class="fa fa-fw fa-power-off"></i> Login</a> </li>
+                                <a href="login"> <i class="fa fa-fw fa-power-off"></i> Login</a> </li>
                             </li>
                         @endauth
                     </ul>
