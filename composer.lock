@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d6013e8b9abe897168fe09fac719ef92",
+    "content-hash": "3ff73c2bd71085c3f59cae26c4effa02",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -2824,6 +2824,46 @@
             "time": "2017-11-27T11:13:29+00:00"
         },
         {
+            "name": "uspdev/laravel-usp-theme",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/uspdev/laravel-usp-theme.git",
+                "reference": "ed539c4cead3bd80ff1acff1ddc39f8c2e057b52"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/uspdev/laravel-usp-theme/zipball/ed539c4cead3bd80ff1acff1ddc39f8c2e057b52",
+                "reference": "ed539c4cead3bd80ff1acff1ddc39f8c2e057b52",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Uspdev\\UspTheme\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Uspdev\\UspTheme\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Thiago Gomes Verissimo",
+                    "email": "thiago.verissimo@usp.br"
+                }
+            ],
+            "description": "usp theme for laravel",
+            "time": "2019-05-23T23:56:20+00:00"
+        },
+        {
             "name": "uspdev/replicado",
             "version": "dev-master",
             "source": {
@@ -4697,8 +4737,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "uspdev/senhaunica-socialite": 20,
-        "uspdev/replicado": 20
+        "uspdev/replicado": 20,
+        "uspdev/senhaunica-socialite": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
