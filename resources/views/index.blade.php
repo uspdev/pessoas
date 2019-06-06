@@ -10,7 +10,7 @@
     @auth
         <h4>Olá <b>{{ Auth::user()->name }}</b></h4>
     @else
-        <div><b>Faça o <a href="/login">Login</a> com a senha única.</b></div>
+        <div><b>Faça o <a href="login">Login</a> com a senha única.</b></div>
     @endauth
 @stop
 
