@@ -18,13 +18,13 @@ Route::get('callback', 'Auth\LoginController@handleProviderCallback');
 Route::post('logout', 'Auth\LoginController@logout');
 
 #busca por número USP
-Route::get('/buscas/codpes', function () {
+Route::get('buscas/codpes', function () {
         return view('buscas.codpes');
 })->middleware('auth');
-Route::post('/buscas/codpes', 'BuscaController@codpes');
+Route::post('buscas/codpes', 'BuscaController@codpes');
 
 #busca por nome
-Route::get('/buscas/nomepes', function () {
-        return view('buscas.nomepes');
+Route::get('buscas/nompes', function () {
+        return view('buscas.nompes');
 })->middleware('auth');
-Route::get('/buscas/partenome', 'BuscaController@partenome')->name('autocomplete.search');
+Route::get('buscas/partenome', 'BuscaController@partenome')->name('autocomplete.search');

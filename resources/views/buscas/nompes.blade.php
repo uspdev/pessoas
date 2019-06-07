@@ -15,7 +15,7 @@
             @csrf
             <div class="form-group">
                 <label for="usr">Nome</label>
-                <input type="text" class="form-control" name="nomepes" id="nomepes" autocomplete="off" required>
+                <input type="text" class="form-control" name="nompes" id="nompes" autocomplete="off" required>
                 <ul name="search" id="search"></ul>
             </div>
             <input type="hidden" value="" name="codpes" id="codpes">
@@ -36,12 +36,12 @@ $(document).ready(function() {
         }
     });
 
-    $('#nomepes').keyup(function() {
+    $('#nompes').keyup(function() {
         var term = $.trim($(this).val());
         var ul_search = $('#search');
         ul_search.empty().removeClass("dropdown-menu").css("display:none;");
         setTimeout(function() {
-            if (term.length >= 5 && $.trim($('#nomepes').val()) == term) {
+            if (term.length >= 5 && $.trim($('#nompes').val()) == term) {
                 var _token = $('input[name="_token"]').val();
                 $.ajax({
                     url: "{{ route('autocomplete.search') }}",
@@ -78,7 +78,7 @@ $(document).ready(function() {
 
     $(document).on('click', '#search > li', function() {
         if ($(this).val() > 0) {
-            $('#nomepes').val($(this).text());
+            $('#nompes').val($(this).text());
             $('#codpes').val($(this).val());
             $('#search').fadeOut();
             $('#busca').submit();

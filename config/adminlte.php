@@ -117,7 +117,7 @@ return [
         ],
         [
             'text' => 'Por nome',
-            'url'  => '/buscas/nomepes',
+            'url'  => '/buscas/nompes',
             'icon' => 'search',
             'can'  => 'admin',
         ],
