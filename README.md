@@ -38,7 +38,7 @@ Gerar a chave do laravel
 
 Publicar os assets
 
-    php artisan vendor:publish php artisan vendor:publish --provider="Uspdev\UspTheme\ServiceProvider" --tag=assets --force
+    php artisan vendor:publish --provider="Uspdev\UspTheme\ServiceProvider" --tag=assets --force
 
 
 Você pode rodar em testes usando o servidor embitido
