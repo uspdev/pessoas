@@ -1,24 +1,19 @@
 <?php
 
 return [
-    'title'=> 'USPdev',
-    'dashboard_url' => '/',
-    'logout_method' => 'GET',
-    'logout_url' => 'logout',
-    'login_url' => 'login',
+    'title'=> 'Pessoas',
+    'dashboard_url' => getenv(APP_URL),
+    'logout_method' => 'POST',
+    'logout_url' => getenv(APP_URL).'logout',
+    'login_url' => getenv(APP_URL).'login',
     'menu' => [
         [
-            'text' => 'Item 1',
-            'url'  => '/item1',
+            'text' => 'Busca por número USP',
+            'url'  => getenv(APP_URL).'buscas/codpes',
         ],
         [
-            'text' => 'Item 2',
-            'url'  => '/item2',
-        ],
-        [
-            'text' => 'Item 3',
-            'url'  => '/item3',
-            'can'  => 'admin',
+            'text' => 'Busca por nome',
+            'url'  => getenv(APP_URL).'buscas/nomepes',
         ],
     ]
 ];
