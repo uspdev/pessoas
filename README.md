@@ -5,6 +5,9 @@ esses dados são replicados e as consultas estão abstraídas no projeto [replic
 
 Esse projeto, consiste em uma interface web para tornar o acesso a esses dados mais fácil, para os setores/pessoas que tem essa permissão.
 
+![Home screen](docs/home_screen.png)
+
+
 ## Requisitos
 
 * Um banco de dados local 
@@ -35,7 +38,8 @@ Gerar a chave do laravel
 
 Publicar os assets
 
-    php artisan vendor:publish --provider="JeroenNoten\LaravelAdminLte\ServiceProvider" --tag=assets --force
+    php artisan vendor:publish php artisan vendor:publish --provider="Uspdev\UspTheme\ServiceProvider" --tag=assets --force
+
 
 Você pode rodar em testes usando o servidor embitido
 
