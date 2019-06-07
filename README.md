@@ -5,7 +5,7 @@ esses dados são replicados e as consultas estão abstraídas no projeto [replic
 
 Esse projeto, consiste em uma interface web para tornar o acesso a esses dados mais fácil, para os setores/pessoas que tem essa permissão.
 
-![Home screen](https://github.com/uspdev/pessoas/docs/home_screen.png)
+![Home screen](https://raw.githubusercontent.com/uspdev/pessoas/master/docs/home_screen.png)
 
 
 ## Requisitos
