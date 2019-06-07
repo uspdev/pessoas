@@ -2,18 +2,18 @@
 
 return [
     'title'=> 'Pessoas',
-    'dashboard_url' => '/' . getenv('APP_URL'),
+    'dashboard_url' => getenv('APP_URL'),
     'logout_method' => 'POST',
-    'logout_url' => '/logout',
-    'login_url' => '/login',
+    'logout_url' => getenv('APP_URL') . '/logout',
+    'login_url' => getenv('APP_URL') . '/login',
     'menu' => [
         [
             'text' => 'Busca por número USP',
-            'url'  => '/buscas/codpes',
+            'url'  => getenv('APP_URL') . '/buscas/codpes',
         ],
         [
             'text' => 'Busca por nome',
-            'url'  => '/buscas/nompes',
+            'url'  => getenv('APP_URL') . '/buscas/nompes',
         ],
     ]
 ];
