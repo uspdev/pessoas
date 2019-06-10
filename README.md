@@ -30,7 +30,7 @@ OBS2. deve-se autorizar o usuário em "SENHAUNICA_ADMINS"
 
 Rodar o migration
 
-    php artisan:migrate
+    php artisan migrate
 
 Gerar a chave do laravel
 
@@ -45,4 +45,6 @@ Você pode rodar em testes usando o servidor embitido
 
     php artisan serve
 
-Ou publicar em produção utilizando seu servidor favorito (ex. Apache)
+Ou publicar em produção utilizando seu servidor favorito (ex. Apache). Nesse caso lembre de dar permissão de escrita na pasta ```storage``` para o usuário que roda o processo do servidor, normalmente o ```www-data```.
+
+    chown www-data:www-data storage/ -R
