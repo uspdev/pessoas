@@ -10,10 +10,12 @@ return [
         [
             'text' => 'Busca por número USP',
             'url'  => getenv('APP_URL') . '/buscas/codpes',
+            'can'  => 'admin'
         ],
         [
             'text' => 'Busca por nome',
             'url'  => getenv('APP_URL') . '/buscas/nompes',
+            'can'  => 'admin'
         ],
     ]
 ];
