@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use Uspdev\Replicado\Pessoa;
 
+use App\Utils;
+
+use App\Utils\ReplicadoUtils;
+
 class BuscaController extends Controller
 {
     public function __construct()
@@ -29,7 +33,21 @@ class BuscaController extends Controller
         $telefones = Pessoa::telefones($request->codpes);
         $emails = Pessoa::emails($request->codpes);
         $vinculos = Pessoa::vinculos($request->codpes);
-        return view('buscas.show',compact('pessoa','telefones','emails','vinculos'));
+
+        $endereco = ReplicadoUtils::endereco($request->codpes);
+        // Formata endereço
+        $endereco = [
+            $endereco['nomtiplgr'],
+            $endereco['epflgr'] . ",",
+            $endereco['numlgr'] . " ",
+            $endereco['cpllgr'] . " - ",
+            $endereco['nombro'] . " - ",
+            $endereco['cidloc'] . " - ",
+            $endereco['sglest'] . " - ",
+            "CEP: " . $endereco['codendptl'],
+        ];
+
+        return view('buscas.show',compact('pessoa','telefones','emails','vinculos','endereco'));
     }
 
     public function partenome(Request $request)
