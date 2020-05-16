@@ -41,6 +41,14 @@
     <li class='list-group-item'>{{ $email }}</li>
     @endforeach
 </ul>
-
+<br />
+<div class="font-weight-bold"> Endereço</div>
+<ul class="list-group">
+    <li class='list-group-item'>
+        @foreach ($endereco as $campos)
+            {{ $campos }}
+        @endforeach
+    </li>
+</ul>
 
 @stop
