@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 use Uspdev\Replicado\Pessoa;
 
-//minhas
 use App\Utils;
+
 use App\Utils\ReplicadoUtils;
 
 class BuscaController extends Controller
