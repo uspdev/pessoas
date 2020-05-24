@@ -34,7 +34,7 @@ class BuscaController extends Controller
         $emails = Pessoa::emails($request->codpes);
         $vinculos = Pessoa::vinculos($request->codpes);
 
-        $endereco = ReplicadoUtils::endereco($request->codpes);
+        $endereco = Pessoa::obterEndereco($request->codpes);
         // Formata endereço
         $endereco = [
             $endereco['nomtiplgr'],
