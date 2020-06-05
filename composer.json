@@ -10,7 +10,7 @@
         "laravel/framework": "5.6.*",
         "laravel/tinker": "~1.0",
         "uspdev/laravel-usp-theme": "^1.0",
-        "uspdev/replicado": "dev-master",
+        "uspdev/replicado": "^1.5",
         "uspdev/senhaunica-socialite": "dev-master"
     },
     "require-dev": {
