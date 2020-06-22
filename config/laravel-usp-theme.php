@@ -3,18 +3,18 @@
 return [
     'title'=> 'Pessoas',
     'dashboard_url' => getenv('APP_URL'),
-    'logout_method' => 'POST',
+    'logout_method' => 'GET',
     'logout_url' => getenv('APP_URL') . '/logout',
     'login_url' => getenv('APP_URL') . '/login',
     'menu' => [
         [
             'text' => 'Busca por número USP',
-            'url'  => getenv('APP_URL') . '/buscas/codpes',
+            'url'  =>  getenv('APP_URL') . '/buscas/codpes',
             'can'  => 'admin'
         ],
         [
             'text' => 'Busca por nome',
-            'url'  => getenv('APP_URL') . '/buscas/nompes',
+            'url'  =>  getenv('APP_URL') . '/buscas/nompes',
             'can'  => 'admin'
         ],
     ]
