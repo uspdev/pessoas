@@ -16,7 +16,7 @@ class CreateCamposExtrasTable extends Migration
         Schema::create('campos_extras', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('numero_usp');
+            $table->string('codpes')->unique();
             $table->string('nome');
             $table->date('data_nascimento')->nullable();
             $table->string('sexo')->nullable();
@@ -30,7 +30,7 @@ class CreateCamposExtrasTable extends Migration
             $table->string('nacionalidade')->nullable();
             $table->string('telefone')->nullable();
             $table->string('celular')->nullable();
-            $table->string('email_extra')->nullable();
+            $table->string('emails')->nullable();
             $table->string('cpf')->nullable();
             $table->string('rg')->nullable();
             $table->string('passaporte')->nullable();
@@ -41,8 +41,8 @@ class CreateCamposExtrasTable extends Migration
             $table->string('banco')->nullable();
             $table->string('agencia')->nullable();
             $table->string('conta_corrente')->nullable();
-            $table->string('nome_sigla_uni_vinculo')->nullable();
-            $table->boolean('docente_usp')->nullable();
+            $table->string('sigla_universidade')->nullable();
+            $table->string('docente_usp')->nullable();
             $table->string('empenho')->nullable();
         });
     }
