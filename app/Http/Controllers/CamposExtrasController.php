@@ -36,39 +36,8 @@ class CamposExtrasController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
-        $campoExtra = new CamposExtras;
-        $campoExtra->codpes = $request->codpes;
-        $campoExtra->nome = $request->nome;
-        $campoExtra->data_nascimento = $request->data_nascimento;
-        $campoExtra->sexo = $request->sexo;
-        $campoExtra->pai = $request->pai;
-        $campoExtra->mae = $request->mae;
-        $campoExtra->endereco = $request->endereco;
-        $campoExtra->cep = $request->cep;
-        $campoExtra->cidade = $request->cidade;
-        $campoExtra->uf = $request->uf;
-        $campoExtra->pais = $request->pais;
-        $campoExtra->nacionalidade = $request->nacionalidade;
-        $campoExtra->telefone = $request->telefone;
-        $campoExtra->celular = $request->celular;
-        $campoExtra->emails = $request->emails;
-        $campoExtra->cpf = $request->cpf;
-        $campoExtra->rg = $request->rg;
-        $campoExtra->passaporte = $request->passaporte;
-        $campoExtra->validade_visto = $request->validade_visto;
-        $campoExtra->rne = $request->rne;
-        $campoExtra->pis = $request->pis;
-        $campoExtra->lotado = $request->lotado;
-        $campoExtra->banco = $request->banco;
-        $campoExtra->agencia = $request->agencia;
-        $campoExtra->conta_corrente = $request->conta_corrente;
-        $campoExtra->sigla_universidade = $request->sigla_universidade;
-        $campoExtra->docente_usp = $request->docente_usp;
-        $campoExtra->empenho = $request->empenho;
-
-        $campoExtra->save();
-
+        CamposExtras::create($request->all());
+        
         $request->session()->flash('alert-info', 'Dados editados com sucesso!');
         return redirect('/');
     }

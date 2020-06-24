@@ -9,17 +9,4 @@
 @section('content')
 @include('alerts')
 
-
-@foreach ($campoExtra as $campo)
-    {{ $campo->nome }} - {{ $campo->codpes}} <br>
-@endforeach
-
-
-<form action="{{ route('camposExtras.destroy', $campo->id)}}" method="post">
-    @csrf
-    @method('DELETE')
-    <button class="btn btn-danger" type="submit">Delete</button>
-  </form>
-
-
 @stop
