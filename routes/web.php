@@ -29,3 +29,6 @@ Route::get('buscas/nompes', function () {
         return view('buscas.nompes');
 })->middleware('auth');
 Route::get('buscas/partenome', 'BuscaController@partenome')->name('autocomplete.search');
+
+#rotas para o crud dos campos extras
+Route::resource('camposExtras', 'CamposExtrasController');
