@@ -17,7 +17,7 @@ class CreateCamposExtrasTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('codpes')->unique(); 
-            $table->string('nome'); 
+            $table->string('nome')->nullable();
             $table->date('data_nascimento')->nullable(); 
             $table->string('sexo')->nullable(); 
             $table->string('pai')->nullable(); 

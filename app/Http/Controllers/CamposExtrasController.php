@@ -7,87 +7,26 @@ use Illuminate\Http\Request;
 
 class CamposExtrasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function edit($codpes)
     {
-        $campoExtra = CamposExtras::all();
-        return view('campos.index', compact('campoExtra'));
+        return view('campos.form')->with('codpes',$codpes);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function update(Request $request, $codpes)
     {
-        return view('campos.create');
-    }
+        $campos_extras = CamposExtras::where('codpes',$codpes)->first();
+        if(!$campos_extras){
+            $campos_extras = new CamposExtras;
+            $campos_extras->codpes = $codpes;
+            $campos_extras->save();
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        CamposExtras::create($request->all());
+        $campos_extras->update($request->all());
         
         $request->session()->flash('alert-info', 'Dados editados com sucesso!');
-        return redirect('/');
+        return redirect()->action('BuscaController@codpes', ['codpes'=>5385361]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $campoExtra = CamposExtras::findOrFail($id);
-        return view('campos.edit', compact('campoExtra'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $campoExtra = CamposExtras::findOrFail($id);
-        $campoExtra->delete();
-
-        return "Registro deletado!";
-    }
+ 
 }

@@ -1,39 +1,14 @@
 @extends('laravel-usp-theme::master')
 
-@section('title', 'Dashboard')
+@section('title', '')
 
 @section('content_header')
 
 @section('content')
 @include('alerts')
 
-<form action="{{ route('camposExtras.store') }}" method="POST">
+<form action="/camposExtras/{{$codpes}}" method="POST">
 @csrf
-
-<div class="card">
-    <div class="card-header"><b>Vínculos ativos</b></div>
-    <div class="card-body">
-
-        <div class="row">
-
-            <div class="col-sm form-group">
-                <div class="form-group">
-                    <label for="codpes" class="required"><b>Número USP: </b></label>
-                    <input type="text" class="form-control" id="codpes" name="codpes" value="">
-                </div>
-            </div>
-
-            <div class="col-sm form-group">
-                <div class="form-group">
-                    <label for="docente_usp" class="required"><b>Docente USP: </b></label>
-                    <input type="text" class="form-control" id="docente_usp" name="docente_usp" value="">
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-</div>
 
 <hr>
 

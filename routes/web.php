@@ -19,10 +19,12 @@ Route::post('logout', 'Auth\LoginController@logout');
 Route::get('logout', 'Auth\LoginController@logout');
 
 #busca por número USP
-Route::get('buscas/codpes', function () {
+Route::get('buscas/codpes_form', function () {
         return view('buscas.codpes');
 })->middleware('auth');
+
 Route::post('buscas/codpes', 'BuscaController@codpes');
+Route::get('buscas/codpes', 'BuscaController@codpes');
 
 #busca por nome
 Route::get('buscas/nompes', function () {
@@ -30,5 +32,6 @@ Route::get('buscas/nompes', function () {
 })->middleware('auth');
 Route::get('buscas/partenome', 'BuscaController@partenome')->name('autocomplete.search');
 
-#rotas para o crud dos campos extras
-Route::resource('camposExtras', 'CamposExtrasController');
+#rotas dos campos extras
+Route::get('camposExtras/{codpes}', 'CamposExtrasController@edit');
+Route::post('camposExtras/{codpes}', 'CamposExtrasController@update');

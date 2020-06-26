@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Uspdev\Replicado\Pessoa;
 
 use App\Utils;
+use App\CamposExtras;
 
 use App\Utils\ReplicadoUtils;
 
@@ -24,6 +25,11 @@ class BuscaController extends Controller
         $request->validate([
             'codpes' => 'required|integer',
         ]);
+
+        $campos_extras = CamposExtras::where('codpes',$request->codpes)->first();
+        if(!$campos_extras){
+            $campos_extras = new CamposExtras;
+        }
 
         $pessoa = Pessoa::dump($request->codpes);
         if(empty($pessoa)){
@@ -47,7 +53,7 @@ class BuscaController extends Controller
             "CEP: " . $endereco['codendptl'],
         ];
 
-        return view('buscas.show',compact('pessoa','telefones','emails','vinculos','endereco'));
+        return view('buscas.show',compact('pessoa','telefones','emails','vinculos','endereco','campos_extras'));
     }
 
     public function partenome(Request $request)

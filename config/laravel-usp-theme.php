@@ -9,7 +9,7 @@ return [
     'menu' => [
         [
             'text' => 'Busca por número USP',
-            'url'  =>  getenv('APP_URL') . '/buscas/codpes',
+            'url'  =>  getenv('APP_URL') . '/buscas/codpes_form',
             'can'  => 'admin'
         ],
         [
