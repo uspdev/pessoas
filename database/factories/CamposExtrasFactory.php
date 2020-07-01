@@ -7,6 +7,11 @@ use Faker\Generator as Faker;
 
 $factory->define(CamposExtras::class, function (Faker $faker) {
 
+    $pessoa = [ 
+        $faker->unique()->docente,
+        $faker->unique()->servidor,
+    ];
+
     $sexo = array(
         'Feminino',
         'Masculino',
@@ -27,7 +32,7 @@ $factory->define(CamposExtras::class, function (Faker $faker) {
     );
 
     return [
-        'codpes' => $faker->unique()->numberBetween(10000, 999999),
+        'codpes' => $pessoa[array_rand($pessoa)],
         'nome' => $faker->name,
         'data_nascimento' => $faker->date,
         'validade_visto' => $faker->date,

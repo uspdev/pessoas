@@ -12,6 +12,6 @@ class CamposExtrasSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\CamposExtras::class, 100)->create();
+        factory(App\CamposExtras::class, 10)->create();
     }
 }
