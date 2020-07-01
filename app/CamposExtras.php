@@ -28,12 +28,9 @@ class CamposExtras extends Model
         'passaporte',
         'validade_visto',
         'rne',
-        'lotado',
         'banco',
         'agencia',
         'conta_corrente',
         'sigla_universidade',
-        'docente_usp',
-        'empenho',
     ];
 }

@@ -37,13 +37,10 @@ class CreateCamposExtrasTable extends Migration
             $table->date('validade_visto')->nullable(); 
             $table->string('rne')->nullable(); 
             $table->string('pis')->nullable(); 
-            $table->string('lotado')->nullable(); 
             $table->string('banco')->nullable(); 
             $table->string('agencia')->nullable(); 
             $table->string('conta_corrente')->nullable(); 
             $table->string('sigla_universidade')->nullable(); 
-            $table->string('docente_usp')->nullable(); 
-            $table->string('empenho')->nullable(); 
         });
     }
 
