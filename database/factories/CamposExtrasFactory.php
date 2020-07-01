@@ -12,11 +12,6 @@ $factory->define(CamposExtras::class, function (Faker $faker) {
         'Masculino',
     );
 
-    $docente_usp = array(
-        'Sim',
-        'Não',
-    );
-
     $nacionalidade = array(
         'Brasileiro',
         'Angolano',
@@ -43,7 +38,6 @@ $factory->define(CamposExtras::class, function (Faker $faker) {
         'mae' => $faker->name,
         'emails' => $faker->email,
         'sexo' => $sexo[array_rand($sexo)],
-        'docente_usp' => $docente_usp[array_rand($docente_usp)],
         'celular' => $faker->cellphoneNumber,
         'telefone' => $faker->phone,
         'pis' => $faker->unique()->numberBetween(10000000000, 99999999999),
@@ -58,7 +52,5 @@ $factory->define(CamposExtras::class, function (Faker $faker) {
         'sigla_universidade' => $sigla_universidade[array_rand($sigla_universidade)],
         'rne' => $faker->unique()->numberBetween(10000000000, 99999999999),
         'passaporte' => $faker->unique()->numberBetween(10000000000, 99999999999),
-        'lotado' => 'lotado',
-        'empenho' => 'empenho',
     ];
 });

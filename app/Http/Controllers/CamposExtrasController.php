@@ -25,7 +25,7 @@ class CamposExtrasController extends Controller
         $campos_extras->update($request->all());
         
         $request->session()->flash('alert-info', 'Dados editados com sucesso!');
-        return redirect()->action('BuscaController@codpes', ['codpes'=>5385361]);
+        return redirect()->action('BuscaController@codpes', ['codpes'=>$codpes]);
     }
 
  

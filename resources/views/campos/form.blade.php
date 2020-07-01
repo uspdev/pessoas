@@ -21,7 +21,7 @@
             <div class="col-sm form-group">
                 <div class="form-group">
                     <label for="nome" class="required"><b>Nome: </b></label>
-                    <input type="text" class="form-control" id="nome" name="nome" value="">
+                    <input type="text" class="form-control" id="nome" name="nome" value="{{old('nome',$campos_extras->nome)}}">
                 </div>
             </div>
 
@@ -143,7 +143,7 @@
             <div class="col-sm form-group col-sm-8">
                 <div class="form-group">
                     <label for="endereco" class="required"><b>Endereço: </b></label>
-                    <input type="text" class="form-control" id="endereco" name="endereco" value="">
+                    <input type="text" class="form-control" id="endereco" name="endereco" value="teste">
                 </div>
             </div>
 
@@ -221,7 +221,7 @@
 <hr>
 
 <div class="card">
-    <div class="card-header"><b>Informações financeiras</b></div>
+    <div class="card-header"><b> Informações financeiras </b></div>
     <div class="card-body">
 
         <div class="row">
@@ -255,7 +255,7 @@
 <hr>
 
 <div class="card">
-    <div class="card-header"><b>Outras informações (???)</b></div>
+    <div class="card-header"><b> Outras informações </b></div>
     <div class="card-body">
 
         <div class="row">
@@ -266,28 +266,6 @@
                     <input type="text" class="form-control" id="sigla_universidade" name="sigla_universidade" value="">
                 </div>
             </div>
-        </div>
-
-        <div class="row">
-
-            <div class="col-sm form-group">
-                <div class="form-group">
-                    <label for="lotado" class="required"><b>Lotado: </b></label>
-                    <input type="text" class="form-control" id="lotado" name="lotado" value="">
-                </div>
-            </div>
-
-        </div>
-
-        <div class="row">
-            
-            <div class="col-sm form-group">
-                <div class="form-group">
-                    <label for="empenho" class="required"><b>Empenho: </b></label>
-                    <input type="text" class="form-control" id="empenho" name="empenho" value="">
-                </div>
-            </div>
-
         </div>
 
     </div>
