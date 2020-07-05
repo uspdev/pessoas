@@ -4,7 +4,12 @@
 
 @section('content_header')
 
+@section('javascripts_head')
+  <script src="{{asset('/js/camposExtras.js')}}"></script>
+@endsection('javascript_head')
+
 @section('content')
+
 @include('alerts')
 
 <form action="/camposExtras/{{$codpes}}" method="POST">
@@ -46,7 +51,7 @@
             <div class="col-sm form-group">
                 <div class="form-group">
                     <label for="data_nascimento" class="required"><b>Data de nascimento: </b></label>
-                    <input type="text" class="form-control datepicker" id="data_nascimento" name="data_nascimento" value="{{old('data_nascimento',$campos_extras->data_nascimento)}}">
+                    <input type="text" class="form-control datepicker data" id="data_nascimento" name="data_nascimento" value="{{old('data_nascimento',$campos_extras->data_nascimento)}}">
                 </div>
             </div>   
 
@@ -81,14 +86,14 @@
             <div class="col-sm form-group">
                 <div class="form-group">
                     <label for="cpf" class="required"><b>CPF: </b></label>
-                    <input type="text" class="form-control" id="cpf" name="cpf" value="{{old('cpf',$campos_extras->cpf)}}">
+                    <input type="text" class="form-control cpf" id="cpf" name="cpf" value="{{old('cpf',$campos_extras->cpf)}}">
                 </div>
             </div>
 
             <div class="col-sm form-group">
                 <div class="form-group">
                     <label for="rg" class="required"><b>RG: </b></label>
-                    <input type="text" class="form-control" id="rg" name="rg" value="{{old('rg',$campos_extras->rg)}}">
+                    <input type="text" class="form-control rg" id="rg" name="rg" value="{{old('rg',$campos_extras->rg)}}">
                 </div>
             </div>
 
@@ -114,7 +119,7 @@
             <div class="col-sm form-group">
                 <div class="form-group">
                     <label for="validade_visto" class="required"><b>Data de validade do visto: </b></label>
-                    <input type="text" class="form-control datepicker" id="validade_visto" name="validade_visto" value="{{old('validade_visto',$campos_extras->validade_visto)}}">
+                    <input type="text" class="form-control datepicker data" id="validade_visto" name="validade_visto" value="{{old('validade_visto',$campos_extras->validade_visto)}}">
                 </div>
             </div>   
 
@@ -150,7 +155,7 @@
             <div class="col-sm form-group col-sm-4">
                 <div class="form-group">
                     <label for="cep" class="required"><b>CEP: </b></label>
-                    <input type="text" class="form-control" id="cep" name="cep" value="{{old('cep',$campos_extras->cep)}}">
+                    <input type="text" class="form-control cep" id="cep" name="cep" value="{{old('cep',$campos_extras->cep)}}">
                 </div>
             </div>
 
@@ -195,14 +200,14 @@
             <div class="col-sm form-group">
                 <div class="form-group">
                     <label for="telefone" class="required"><b>Telefone: </b></label>
-                    <input type="text" class="form-control" id="telefone" name="telefone" value="{{old('telefone',$campos_extras->telefone)}}">
+                    <input type="text" class="form-control telefone_com_ddd" id="telefone" name="telefone" value="{{old('telefone',$campos_extras->telefone)}}">
                 </div>
             </div>
 
             <div class="col-sm form-group">
                 <div class="form-group">
                     <label for="celular" class="required"><b>Celular: </b></label>
-                    <input type="text" class="form-control" id="celular" name="celular" value="{{old('celular',$campos_extras->celular)}}">
+                    <input type="text" class="form-control celular_com_ddd" id="celular" name="celular" value="{{old('celular',$campos_extras->celular)}}">
                 </div>
             </div>
 
@@ -236,7 +241,7 @@
             <div class="col-sm form-group">
                 <div class="form-group">
                     <label for="agencia" class="required"><b>Agência: </b></label>
-                    <input type="text" class="form-control" id="agencia" name="agencia" value="{{old('agencia',$campos_extras->agencia)}}">
+                    <input type="text" class="form-control agencia" id="agencia" name="agencia" value="{{old('agencia',$campos_extras->agencia)}}">
                 </div>
             </div>
 
