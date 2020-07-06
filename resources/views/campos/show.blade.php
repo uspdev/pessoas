@@ -35,6 +35,7 @@
                 <div class="font-weight-bold"> Data de nascimento: </div>
                     <ul class="list-group">
                         <li class='list-group-item'>{{$campos_extras->data_nascimento}}</li>
+
                     </ul>
                 <br />
                 <div class="font-weight-bold"> Nome da mãe: </div>
@@ -105,7 +106,7 @@
                 <br />
                 <div class="font-weight-bold"> Cidade: </div>
                     <ul class="list-group">
-                        <li class='list-group-item'>{{$campos_extras->endereco}}</li>
+                        <li class='list-group-item'>{{$campos_extras->cidade}}</li>
                     </ul>
                 <br />
                 <div class="font-weight-bold"> UF: </div>

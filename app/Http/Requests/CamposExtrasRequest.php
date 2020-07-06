@@ -26,7 +26,7 @@ class CamposExtrasRequest extends FormRequest
         return [
             'nome'               => 'nullable',
             'data_nascimento'    => 'nullable|data',
-            'codpes'             => 'nullable|numeric',
+            'codpes'             => 'required|numeric',
             'sexo'               => 'nullable',
             'pai'                => 'nullable',
             'mae'                => 'nullable',
@@ -46,7 +46,7 @@ class CamposExtrasRequest extends FormRequest
             'validade_visto'     => 'nullable|data',
             'rne'                => 'nullable',
             'banco'              => 'nullable',
-            'agencia'            => 'nullable|numeric',
+            'agencia'            => 'nullable',
             'conta_corrente'     => 'nullable',
             'sigla_universidade' => 'nullable',
         ];
