@@ -5,6 +5,8 @@
     
         <a href="/camposExtras/{{ $pessoa['codpes'] }}" class="btn btn-info"> Editar </a> <br>
 
+        <br>
+        
         <div class="font-weight-bold"> Número USP </div>
             <ul class="list-group">
                 <li class='list-group-item py-1'>{{ $campos_extras->codpes }}</li>
@@ -33,6 +35,7 @@
                 <div class="font-weight-bold"> Data de nascimento: </div>
                     <ul class="list-group">
                         <li class='list-group-item'>{{$campos_extras->data_nascimento}}</li>
+
                     </ul>
                 <br />
                 <div class="font-weight-bold"> Nome da mãe: </div>
@@ -86,30 +89,38 @@
         </div>
 
         <br />
-        <div class="font-weight-bold"> Endereço: </div>
-            <ul class="list-group">
-                <li class='list-group-item'>{{$campos_extras->endereco}}</li>
-            </ul>
-        <br />
-        <div class="font-weight-bold"> CEP: </div>
-            <ul class="list-group">
-                <li class='list-group-item'>{{$campos_extras->cep}}</li>
-            </ul>
-        <br />
-        <div class="font-weight-bold"> Cidade: </div>
-            <ul class="list-group">
-                <li class='list-group-item'>{{$campos_extras->endereco}}</li>
-            </ul>
-        <br />
-        <div class="font-weight-bold"> UF: </div>
-            <ul class="list-group">
-                <li class='list-group-item'>{{$campos_extras->uf}}</li>
-            </ul>
-        <br />
-        <div class="font-weight-bold"> País: </div>
-            <ul class="list-group">
-                <li class='list-group-item'>{{$campos_extras->pais}}</li>
-            </ul>
+
+        <div class="card">
+            <div class="card-header"><b> Endereço </b></div>
+            <div class="card-body">
+
+                <div class="font-weight-bold"> Endereço: </div>
+                    <ul class="list-group">
+                        <li class='list-group-item'>{{$campos_extras->endereco}}</li>
+                    </ul>
+                <br />
+                <div class="font-weight-bold"> CEP: </div>
+                    <ul class="list-group">
+                        <li class='list-group-item'>{{$campos_extras->cep}}</li>
+                    </ul>
+                <br />
+                <div class="font-weight-bold"> Cidade: </div>
+                    <ul class="list-group">
+                        <li class='list-group-item'>{{$campos_extras->cidade}}</li>
+                    </ul>
+                <br />
+                <div class="font-weight-bold"> UF: </div>
+                    <ul class="list-group">
+                        <li class='list-group-item'>{{$campos_extras->uf}}</li>
+                    </ul>
+                <br />
+                <div class="font-weight-bold"> País: </div>
+                    <ul class="list-group">
+                        <li class='list-group-item'>{{$campos_extras->pais}}</li>
+                    </ul>
+                </div>
+            </div>
+
         <br />
 
         <div class="card">

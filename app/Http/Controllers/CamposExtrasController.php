@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\CamposExtras;
 use Illuminate\Http\Request;
+use App\Http\Requests\CamposExtrasRequest;
 
 class CamposExtrasController extends Controller
 {
@@ -27,11 +28,10 @@ class CamposExtrasController extends Controller
             ]);
     }
 
-    public function update(Request $request, $codpes)
+    public function update(CamposExtrasRequest $request, $codpes)
     {
         $campos_extras = $this->load_campos_extras($codpes);
         $campos_extras->update($request->all());
-        
         $request->session()->flash('alert-info', 'Dados editados com sucesso!');
         return redirect()->action('BuscaController@codpes', ['codpes'=>$codpes]);
     }
