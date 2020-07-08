@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Uspdev\Replicado\Pessoa as PessoaReplicado;
 
 class Pessoa extends Model
 {
@@ -41,5 +42,27 @@ class Pessoa extends Model
     {
         if(!empty($value))
             $this->attributes['cpf'] = preg_replace("/[^0-9]/", "", $value);
+    }
+
+    public function replicado(){
+
+        $endereco = PessoaReplicado::obterEndereco($this->codpes);
+        // Formata endereço
+        $endereco = "
+            {$endereco['nomtiplgr']} {$endereco['epflgr']} ,
+            {$endereco['numlgr']} {$endereco['cpllgr']} -
+            {$endereco['nombro']} - {$endereco['cidloc']}  -
+            {$endereco['sglest']} - CEP: {$endereco['codendptl']}
+        ";
+        $dump = PessoaReplicado::dump($this->codpes);
+
+        return [
+            'nompes'    => $dump['nompes'],
+            'numcpf'    => $dump['numcpf'],
+            'telefones' => PessoaReplicado::telefones($this->codpes),
+            'emails'    => PessoaReplicado::emails($this->codpes),
+            'vinculos'  => PessoaReplicado::vinculos($this->codpes),
+            'endereco'  => $endereco,
+        ];
     }
 }

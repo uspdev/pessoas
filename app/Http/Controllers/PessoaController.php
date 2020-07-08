@@ -4,15 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Uspdev\Replicado\Pessoa as PessoaR;
-
 use App\Http\Requests\PessoaRequest;
-
 use App\Pessoa;
-
 use App\Utils;
-use App\CamposExtras;
-
 use App\Utils\ReplicadoUtils;
 
 class PessoaController extends Controller
@@ -22,90 +16,72 @@ class PessoaController extends Controller
         $this->middleware('auth');
     }
 
-    public function form_codpes(Request $request){
+    public function search(Request $request){
         $this->authorize('admin');
-        return view('pessoas.form_codpes');
+        return view('pessoas.search');
     }
 
-    public function form_nompes(Request $request){
+    public function store(Request $request){
         $this->authorize('admin');
-        return view('pessoas.nompes');
+
+        /* 1 - identificamos o número USP - busca por nome ou busca por codpes*/
+        if(!empty($request->by_codpes)){
+            $codpes = $request->by_codpes;
+        } else if(!empty($request->codpes)){
+            $codpes = $request->codpes;
+        } else {
+            $request->session()->flash('alert-danger', 'Pessoa não encontrada');
+            return redirect('/'); 
+        }
+
+        /* 2- Verificamos se a pessoa existe no replicado */
+        if(empty(\Uspdev\Replicado\Pessoa::dump($codpes))){
+            $request->session()->flash('alert-danger', 'Pessoa não encontrada');
+            return redirect('/');
+        }
+
+        /* 3 - se existe no replicado, cadastramos localmente */
+        $pessoa = Pessoa::where('codpes',$codpes)->first();
+        if(!$pessoa){
+            $pessoa = new Pessoa;
+            $pessoa->codpes = $codpes;
+            $pessoa->save();
+        }
+
+        return redirect("/pessoas/{$codpes}");
     }
 
-    public function show(Request $request)
+    public function show(Request $request, $codpes)
     {
         $this->authorize('admin');
-
-        $request->validate([
-            'codpes' => 'required|integer',
-        ]);
-
-        $pessoa = CamposExtras::where('codpes',$request->codpes)->first();
-        if(!$pessoa){
-            $pessoa = new CamposExtras;
-        }
-
-        $pessoa = PessoaR::dump($request->codpes);
-        if(empty($pessoa)){
-            $request->session()->flash('alert-danger', 'Pessoa não encontrada');
-            return redirect('pessoas/codpes');
-        }
-        
-        $telefones = PessoaR::telefones($request->codpes);
-        $emails = PessoaR::emails($request->codpes);
-        $vinculos = PessoaR::vinculos($request->codpes);
-
-        $endereco = PessoaR::obterEndereco($request->codpes);
-        // Formata endereço
-        $endereco = [
-            $endereco['nomtiplgr'],
-            $endereco['epflgr'] . ",",
-            $endereco['numlgr'] . " ",
-            $endereco['cpllgr'] . " - ",
-            $endereco['nombro'] . " - ",
-            $endereco['cidloc'] . " - ",
-            $endereco['sglest'] . " - ",
-            "CEP: " . $endereco['codendptl'],
-        ];
-
-        return view('pessoas.show',compact('pessoa','telefones','emails','vinculos','endereco','campos_extras'));
+        $pessoa = Pessoa::where('codpes',$codpes)->first();
+        return view('pessoas.show')->with('pessoa',$pessoa);
     }
 
     public function edit($codpes)
     {   
         $this->authorize('admin');
-        $pessoa = $this->load_campos_extras($codpes);
-        return view('campos_extras.form')->with([
+        $pessoa = Pessoa::where('codpes',$codpes)->first();
+        return view('pessoas.edit')->with([
             'codpes' => $codpes,
-            'campos_extras' => $pessoa
+            'pessoa' => $pessoa
             ]);
     }
 
-    public function update(CamposExtrasRequest $request, $codpes)
+    public function update(PessoaRequest $request, $codpes)
     {
         $this->authorize('admin');
-        $pessoa = $this->load_campos_extras($codpes);
-        $pessoa->update($request->all());
+        $pessoa = Pessoa::where('codpes',$codpes)->first();
+        $pessoa->update($request->validated());
         $request->session()->flash('alert-info', 'Dados editados com sucesso!');
-        return redirect()->action('PessoaController@codpes', ['codpes'=>$codpes]);
-    }
-
-    /* Métodos auxiliares */
-    private function load_campos_extras($codpes){
-        $pessoa = CamposExtras::where('codpes',$codpes)->first();
-        if(!$pessoa){
-            $pessoa = new CamposExtras;
-            $pessoa->codpes = $codpes;
-            $pessoa->save();
-        }
-        return $pessoa;
+        return redirect("/pessoas/{$codpes}");
     }
 
     public function partenome(Request $request)
     {
         $this->authorize('admin');
         if($request->term) {
-            $pessoa = PessoaR::nome($request->term);
+            $pessoa = \Uspdev\Replicado\Pessoa::nome($request->term);
         }
         return response($pessoa);
     }

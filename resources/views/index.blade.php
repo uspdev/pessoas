@@ -18,6 +18,9 @@ mais fácil, para os setores/pessoas que tem essa permissão.
 
 <br />
 <br />
-<br />
+
+@can('admin')
+@include('pessoas.partials.search')
+@endcan('admin')
 
 @stop

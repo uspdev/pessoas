@@ -18,18 +18,12 @@ Route::get('callback', 'Auth\LoginController@handleProviderCallback');
 Route::post('logout', 'Auth\LoginController@logout');
 Route::get('logout', 'Auth\LoginController@logout');
 
-#busca por número USP
-Route::get('buscas/codpes/{codpes}', 'PessoaController@show');
-#Route::post('buscas/codpes', 'PessoaController@codpes');
+# model Pessoa
+Route::get('pessoas/{codpes}', 'PessoaController@show');
+Route::post('pessoas', 'PessoaController@store');
+Route::get('pessoas/{codpes}/edit', 'PessoaController@edit');
+Route::patch('pessoas/{codpes}', 'PessoaController@update');
 
-#Route::get('buscas/codpes_form', 'PessoaController@form_codpes');
-#
-#Route::get('buscas/codpes', 'PessoaController@show');
-
-#busca por nome
-Route::get('buscas/nompes', 'PessoaController@form_nompes');
-Route::get('buscas/partenome', 'PessoaController@partenome')->name('autocomplete.search');
-
-#rotas dos campos extras
-Route::get('campos_extras/{codpes}', 'CamposExtrasController@edit');
-Route::post('campos_extras/{codpes}', 'CamposExtrasController@update');
+#buscas
+Route::get('search', 'PessoaController@search');
+Route::get('search/partenome', 'PessoaController@partenome')->name('autocomplete.search');

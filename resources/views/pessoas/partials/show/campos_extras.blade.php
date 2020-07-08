@@ -1,9 +1,13 @@
 
 <div class="card">
     <div class="card-header"><b>Campos Extras</b></div>
-    <div class="card-body">
     
-        <a href="/campos_extras/{{ $pessoa['codpes'] }}" class="btn btn-info"> Editar </a> <br>
+    <div class="card-body">
+    Os campos abaixo não são dos sistemas USP. Eles são destinados para uso local na unidade, 
+    em diversas situações nas quais essas informações não podem ser inseridas para pessoa em questão
+    na base da USP ou quando essa informação está errada e precisa ser usada localmente até que
+    seja então corrigida.
+        <br> <a href="/pessoas/{{ $pessoa->codpes }}/edit" class="btn btn-info"> Editar campos locais </a> <br>
       
         <br />
 
@@ -13,33 +17,33 @@
 
                 <div class="font-weight-bold"> Nome: </div>
                 <ul class="list-group">
-                    <li class='list-group-item'>{{ $campos_extras->nome }}</li>
+                    <li class='list-group-item'>{{ $pessoa->nome }}</li>
                 </ul>
                 <br />
                 <div class="font-weight-bold"> Sexo: </div>
                     <ul class="list-group">
-                        <li class='list-group-item'>{{$campos_extras->sexo}}</li>
+                        <li class='list-group-item'>{{$pessoa->sexo}}</li>
                     </ul>
                 <br />
                 <div class="font-weight-bold"> Nacionalidade: </div>
                     <ul class="list-group">
-                        <li class='list-group-item'>{{$campos_extras->nacionalidade}}</li>
+                        <li class='list-group-item'>{{$pessoa->nacionalidade}}</li>
                     </ul>
                 <br />
                 <div class="font-weight-bold"> Data de nascimento: </div>
                     <ul class="list-group">
-                        <li class='list-group-item'>{{$campos_extras->data_nascimento}}</li>
+                        <li class='list-group-item'>{{$pessoa->data_nascimento}}</li>
 
                     </ul>
                 <br />
                 <div class="font-weight-bold"> Nome da mãe: </div>
                     <ul class="list-group">
-                        <li class='list-group-item'>{{$campos_extras->mae}}</li>
+                        <li class='list-group-item'>{{$pessoa->mae}}</li>
                     </ul>
                 <br />
                 <div class="font-weight-bold"> Nome do pai: </div>
                     <ul class="list-group">
-                        <li class='list-group-item'>{{$campos_extras->pai}}</li>
+                        <li class='list-group-item'>{{$pessoa->pai}}</li>
                     </ul>
                     
             </div>
@@ -52,32 +56,32 @@
             <div class="card-body">
                 <div class="font-weight-bold"> CPF: </div>
                     <ul class="list-group">
-                        <li class='list-group-item'>{{$campos_extras->cpf}}</li>
+                        <li class='list-group-item'>{{$pessoa->cpf}}</li>
                     </ul>
                 <br />
                 <div class="font-weight-bold"> RG: </div>
                     <ul class="list-group">
-                        <li class='list-group-item'>{{$campos_extras->rg}}</li>
+                        <li class='list-group-item'>{{$pessoa->rg}}</li>
                     </ul>
                 <br />
                 <div class="font-weight-bold"> PIS: </div>
                     <ul class="list-group">
-                        <li class='list-group-item'>{{$campos_extras->pis}}</li>
+                        <li class='list-group-item'>{{$pessoa->pis}}</li>
                     </ul>
                 <br />
                 <div class="font-weight-bold"> Passaporte: </div>
                     <ul class="list-group">
-                        <li class='list-group-item'>{{$campos_extras->passaporte}}</li>
+                        <li class='list-group-item'>{{$pessoa->passaporte}}</li>
                     </ul>
                 <br />
                 <div class="font-weight-bold"> Data de validade do visto: </div>
                     <ul class="list-group">
-                        <li class='list-group-item'>{{$campos_extras->validade_visto}}</li>
+                        <li class='list-group-item'>{{$pessoa->validade_visto}}</li>
                     </ul>
                 <br />
                 <div class="font-weight-bold"> RNE: </div>
                     <ul class="list-group">
-                        <li class='list-group-item'>{{$campos_extras->rne}}</li>
+                        <li class='list-group-item'>{{$pessoa->rne}}</li>
                     </ul>
             </div>
         </div>
@@ -90,27 +94,27 @@
 
                 <div class="font-weight-bold"> Endereço: </div>
                     <ul class="list-group">
-                        <li class='list-group-item'>{{$campos_extras->endereco}}</li>
+                        <li class='list-group-item'>{{$pessoa->endereco}}</li>
                     </ul>
                 <br />
                 <div class="font-weight-bold"> CEP: </div>
                     <ul class="list-group">
-                        <li class='list-group-item'>{{$campos_extras->cep}}</li>
+                        <li class='list-group-item'>{{$pessoa->cep}}</li>
                     </ul>
                 <br />
                 <div class="font-weight-bold"> Cidade: </div>
                     <ul class="list-group">
-                        <li class='list-group-item'>{{$campos_extras->cidade}}</li>
+                        <li class='list-group-item'>{{$pessoa->cidade}}</li>
                     </ul>
                 <br />
                 <div class="font-weight-bold"> UF: </div>
                     <ul class="list-group">
-                        <li class='list-group-item'>{{$campos_extras->uf}}</li>
+                        <li class='list-group-item'>{{$pessoa->uf}}</li>
                     </ul>
                 <br />
                 <div class="font-weight-bold"> País: </div>
                     <ul class="list-group">
-                        <li class='list-group-item'>{{$campos_extras->pais}}</li>
+                        <li class='list-group-item'>{{$pessoa->pais}}</li>
                     </ul>
                 </div>
             </div>
@@ -123,17 +127,17 @@
 
                 <div class="font-weight-bold"> Telefone: </div>
                     <ul class="list-group">
-                        <li class='list-group-item'>{{$campos_extras->telefone}}</li>
+                        <li class='list-group-item'>{{$pessoa->telefone}}</li>
                     </ul>
                 <br />
                 <div class="font-weight-bold"> Celular: </div>
                     <ul class="list-group">
-                        <li class='list-group-item'>{{$campos_extras->celular}}</li>
+                        <li class='list-group-item'>{{$pessoa->celular}}</li>
                     </ul>
                 <br />
                 <div class="font-weight-bold"> E-mails: </div>
                     <ul class="list-group">
-                        <li class='list-group-item'>{{$campos_extras->emails}}</li>
+                        <li class='list-group-item'>{{$pessoa->emails}}</li>
                     </ul>
                 <br />
             </div>
@@ -147,17 +151,17 @@
 
                 <div class="font-weight-bold"> Banco: </div>
                     <ul class="list-group">
-                        <li class='list-group-item'>{{$campos_extras->banco}}</li>
+                        <li class='list-group-item'>{{$pessoa->banco}}</li>
                     </ul>
                 <br />
                 <div class="font-weight-bold"> Agência: </div>
                     <ul class="list-group">
-                        <li class='list-group-item'>{{$campos_extras->agencia}}</li>
+                        <li class='list-group-item'>{{$pessoa->agencia}}</li>
                     </ul>
                 <br />
                 <div class="font-weight-bold"> Conta Corrente: </div>
                     <ul class="list-group">
-                        <li class='list-group-item'>{{$campos_extras->conta_corrente}}</li>
+                        <li class='list-group-item'>{{$pessoa->conta_corrente}}</li>
                     </ul>
 
             </div>
@@ -171,7 +175,7 @@
 
                 <div class="font-weight-bold"> Nome e sigla da Universidade na qual tem vínculo profissional: </div>
                     <ul class="list-group">
-                        <li class='list-group-item'>{{$campos_extras->sigla_universidade}}</li>
+                        <li class='list-group-item'>{{$pessoa->sigla_universidade}}</li>
                     </ul>
 
 

@@ -8,13 +8,8 @@ return [
     'login_url' => getenv('APP_URL') . '/login',
     'menu' => [
         [
-            'text' => 'Busca por número USP',
-            'url'  =>  getenv('APP_URL') . '/buscas/codpes_form',
-            'can'  => 'admin'
-        ],
-        [
-            'text' => 'Busca por nome',
-            'url'  =>  getenv('APP_URL') . '/buscas/nompes',
+            'text' => 'Busca',
+            'url'  =>  getenv('APP_URL') . '/search',
             'can'  => 'admin'
         ],
     ]

@@ -9,11 +9,9 @@
 @section('content')
 @include('alerts')
 
-@include('pessoas.partials.show.replicado')
-<br>
-@include('pessoas.partials.show.campos_extras')
-@stop
+@include('pessoas.partials.search')
 
+@endsection
 
 
 
