@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCamposExtrasTable extends Migration
+class CreatePessoasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCamposExtrasTable extends Migration
      */
     public function up()
     {
-        Schema::create('campos_extras', function (Blueprint $table) {
+        Schema::create('pessoas', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('codpes')->unique(); 
@@ -51,6 +51,6 @@ class CreateCamposExtrasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('campos_extras');
+        Schema::dropIfExists('pessoas');
     }
 }

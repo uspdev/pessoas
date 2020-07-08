@@ -3,25 +3,19 @@
     <div class="card-header"><b>Campos Extras</b></div>
     <div class="card-body">
     
-        <a href="/camposExtras/{{ $pessoa['codpes'] }}" class="btn btn-info"> Editar </a> <br>
-
-        <br>
-        
-        <div class="font-weight-bold"> Número USP </div>
-            <ul class="list-group">
-                <li class='list-group-item py-1'>{{ $campos_extras->codpes }}</li>
-            </ul>
-        <br />
-        <div class="font-weight-bold"> Nome: </div>
-            <ul class="list-group">
-                <li class='list-group-item'>{{ $campos_extras->nome }}</li>
-            </ul>
+        <a href="/campos_extras/{{ $pessoa['codpes'] }}" class="btn btn-info"> Editar </a> <br>
+      
         <br />
 
         <div class="card">
             <div class="card-header"><b>Dados pessoais</b></div>
             <div class="card-body">
 
+                <div class="font-weight-bold"> Nome: </div>
+                <ul class="list-group">
+                    <li class='list-group-item'>{{ $campos_extras->nome }}</li>
+                </ul>
+                <br />
                 <div class="font-weight-bold"> Sexo: </div>
                     <ul class="list-group">
                         <li class='list-group-item'>{{$campos_extras->sexo}}</li>

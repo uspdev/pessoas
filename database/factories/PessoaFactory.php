@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\CamposExtras;
+use App\Pessoa;
 use Faker\Generator as Faker;
 
-$factory->define(CamposExtras::class, function (Faker $faker) {
+$factory->define(Pessoa::class, function (Faker $faker) {
 
     $pessoa = [ 
         $faker->unique()->docente,

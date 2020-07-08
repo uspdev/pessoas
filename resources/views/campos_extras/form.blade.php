@@ -12,7 +12,7 @@
 
 @include('alerts')
 
-<form action="/camposExtras/{{$codpes}}" method="POST">
+<form action="/campos_extras/{{$codpes}}" method="POST">
 @csrf
 
 <hr>

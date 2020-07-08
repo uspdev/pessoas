@@ -3,7 +3,7 @@
 use Faker\Factory;
 use Illuminate\Database\Seeder;
 
-class CamposExtrasSeeder extends Seeder
+class PessoaSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class CamposExtrasSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\CamposExtras::class, 10)->create();
+        factory(App\Pessoa::class, 10)->create();
     }
 }

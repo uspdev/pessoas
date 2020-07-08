@@ -1,14 +1,3 @@
-@extends('laravel-usp-theme::master')
-
-@section('title', 'Dashboard')
-
-@section('content_header')
-<h1></h1>
-@stop
-
-@section('content')
-@include('alerts')
-
 <div class="card">
     <div class="card-header"><b>Dados sistemas USP</b></div>
     <div class="card-body">
@@ -56,12 +45,3 @@
         </ul>
     </div>
 </div>
-<br>
-
-@include('campos.show')
-@stop
-
-
-
-
-

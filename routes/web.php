@@ -19,19 +19,17 @@ Route::post('logout', 'Auth\LoginController@logout');
 Route::get('logout', 'Auth\LoginController@logout');
 
 #busca por número USP
-Route::get('buscas/codpes_form', function () {
-        return view('buscas.codpes');
-})->middleware('auth');
+Route::get('buscas/codpes/{codpes}', 'PessoaController@show');
+#Route::post('buscas/codpes', 'PessoaController@codpes');
 
-Route::post('buscas/codpes', 'BuscaController@codpes');
-Route::get('buscas/codpes', 'BuscaController@codpes');
+#Route::get('buscas/codpes_form', 'PessoaController@form_codpes');
+#
+#Route::get('buscas/codpes', 'PessoaController@show');
 
 #busca por nome
-Route::get('buscas/nompes', function () {
-        return view('buscas.nompes');
-})->middleware('auth');
-Route::get('buscas/partenome', 'BuscaController@partenome')->name('autocomplete.search');
+Route::get('buscas/nompes', 'PessoaController@form_nompes');
+Route::get('buscas/partenome', 'PessoaController@partenome')->name('autocomplete.search');
 
 #rotas dos campos extras
-Route::get('camposExtras/{codpes}', 'CamposExtrasController@edit');
-Route::post('camposExtras/{codpes}', 'CamposExtrasController@update');
+Route::get('campos_extras/{codpes}', 'CamposExtrasController@edit');
+Route::post('campos_extras/{codpes}', 'CamposExtrasController@update');
