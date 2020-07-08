@@ -25,10 +25,10 @@ class PessoaController extends Controller
         $this->authorize('admin');
 
         /* 1 - identificamos o número USP - busca por nome ou busca por codpes*/
-        if(!empty($request->by_codpes)){
-            $codpes = $request->by_codpes;
-        } else if(!empty($request->codpes)){
+        if(!empty($request->codpes)){
             $codpes = $request->codpes;
+        } else if(!empty($request->by_codpes)){
+            $codpes = $request->by_codpes;
         } else {
             $request->session()->flash('alert-danger', 'Pessoa não encontrada');
             return redirect('/'); 
