@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'title'=> 'Pessoas',
+    'title' => 'Pessoas',
     'dashboard_url' => getenv('APP_URL'),
     'logout_method' => 'GET',
     'logout_url' => getenv('APP_URL') . '/logout',
@@ -11,6 +11,11 @@ return [
             'text' => 'Busca',
             'url'  =>  getenv('APP_URL') . '/search',
             'can'  => 'admin'
+        ],
+        [
+            'text' => 'Pessoas Autorizadas',
+            'url'  => '/users',
+            'can'  => 'authorized'
         ],
     ]
 ];
