@@ -38,7 +38,7 @@ class AuthServiceProvider extends ServiceProvider
             if($user->role == 'authorized') {
                 return true;
             }
-            $admins = explode(',', trim(config('users.admins'))); //mudei lista para users.admins
+            $admins = explode(',', trim(config('users.admins')));
             return ( in_array($user->codpes, $admins) and $user->codpes );
         });
     }

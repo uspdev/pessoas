@@ -11,13 +11,20 @@
 
 <form method="POST" role="form" class="form-inline" action="/users">
 {{ csrf_field() }}
-
-        <div class="form-group">
-            <label>Número USP que você gostaria de dar acesso a esse sistema: </label>
-
-             <input name="numero_usp" class="form-control" value="">
+        
+    <div class="card">
+        <div class="card-header">Novos usuários</div>
+        <div class="card-body">
+            <div class="form-group">
+                <div class="input-group-btn">
+                    <label for="numero_usp" class="">Número USP que você gostaria de dar acesso a esse sistema: </label>
+                    <input type="text" class="form-control" id="numero_usp" name="numero_usp" value="">
+                    <button type="submit" class="btn btn-primary "> Adicionar </button>                
+                </div>
+            </div>
         </div>
-            <button type="submit" class="btn btn-primary"> Enviar </button>
+    </div>
+    
 </form>
 
 @stop
