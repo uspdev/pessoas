@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:authorized');
+        //$this->middleware('can:authorized');
     }
 
     /**
@@ -21,7 +21,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('role', 'authorized')->get();
+        $users = User::where('role', 'admin')
+                        ->orWhere('role', 'authorized')->get();
         return view('users.index', compact('users'));
     }
 
@@ -101,11 +102,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
         $user = User::find($id);
         $user->delete();
-
-        return redirect('/users')->with('success', 'Usuário apagado!');
+        $request->session()->flash('alert-warning', 'Usuário apagado!');
+        return redirect()->route('users.index');
     }
 }
