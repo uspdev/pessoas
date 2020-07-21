@@ -9,11 +9,12 @@
     @include('messages.flash')
     @include('messages.errors')
 
-<form method="POST" role="form" class="form-inline" action="/users">
+<form method="post" class="form-inline" action="/users/{{$users->id}}"> 
 {{ csrf_field() }}
-        
+{{ method_field('PUT') }}
+
     <div class="card">
-        <div class="card-header"><b>Edição do usuário - {{ $users->name }}</b></div>
+        <div class="card-header"><b>Edição do usuário(a) - {{ $users->name }}</b></div>
         <div class="card-body">
             <div class="form-group">
 
@@ -21,12 +22,12 @@
                     <div class="form-group col-sm-12">
                         <label for="role" name="role">Tipo de permissão: </label>
                             <label class="checkbox-inline col-sm-3">
-                                <input type="checkbox" class="form-check-input" id="restrito" name="role" value="">Restrito
+                                <input type="checkbox" class="form-check-input" id="restrito" name="role" value="authorized">Restrito
                             </label>
                         
  
                             <label class="checkbox-inline col-sm-3">
-                                <input type="checkbox" class="form-check-input" id="completo" name="role" value="">Completo
+                                <input type="checkbox" class="form-check-input" id="completo" name="role" value="admin">Completo
                             </label>
 
                             

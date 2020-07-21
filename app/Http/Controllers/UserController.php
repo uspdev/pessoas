@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        //$this->middleware('can:authorized');
+        $this->middleware('can:authorized');
     }
 
     /**
@@ -45,17 +45,17 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'numero_usp' => ['required', new Numeros_USP($request->numero_usp)],
+            'codpes' => ['required', new Numeros_USP($request->codpes)],
         ]);
 
-        $user = User::where('codpes', $request->numero_usp)->first();
+        $user = User::where('codpes', $request->codpes)->first();
         if (is_null($user)) {
             $user = new User;
         }
 
-        $user->codpes = $request->numero_usp;
-        $user->email = Pessoa::email($request->numero_usp);
-        $user->name = Pessoa::dump($request->numero_usp)['nompesttd'];
+        $user->codpes = $request->codpes;
+        $user->email = Pessoa::email($request->codpes);
+        $user->name = Pessoa::dump($request->codpes)['nompesttd'];
         $user->role = 'authorized';
         $user->save();
         $request->session()->flash('alert-info', 'Pessoa adicionada com sucesso');
@@ -93,7 +93,11 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->role = $request->role;
+        $user->update();
+        $request->session()->flash('alert-info', 'Permissão alterada com sucesso');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -106,7 +110,7 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        $request->session()->flash('alert-warning', 'Usuário apagado!');
+        $request->session()->flash('alert-warning', 'Usuário deletado!');
         return redirect()->route('users.index');
     }
 }

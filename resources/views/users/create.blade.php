@@ -17,8 +17,8 @@
         <div class="card-body">
             <div class="form-group">
                 <div class="input-group-btn">
-                    <label for="numero_usp" class="">Número USP que você gostaria de dar acesso a esse sistema: </label>
-                    <input type="text" class="form-control" id="numero_usp" name="numero_usp" value="">
+                    <label for="codpes" class="">Número USP que você gostaria de dar acesso a esse sistema: </label>
+                    <input type="text" class="form-control" id="codpes" name="codpes" value="">
                     <button type="submit" class="btn btn-primary "> Adicionar </button>                
                 </div>
             </div>
