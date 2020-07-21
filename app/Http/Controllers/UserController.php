@@ -96,7 +96,7 @@ class UserController extends Controller
         $user = User::find($id);
         $user->role = $request->role;
         $user->update();
-        $request->session()->flash('alert-info', 'Permissão alterada com sucesso');
+        $request->session()->flash('alert-info', 'Permissão alterada!');
         return redirect()->route('users.index');
     }
 

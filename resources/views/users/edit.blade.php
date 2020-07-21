@@ -6,8 +6,6 @@
 @stop
 
 @section('content')
-    @include('messages.flash')
-    @include('messages.errors')
 
 <form method="post" class="form-inline" action="/users/{{$users->id}}"> 
 {{ csrf_field() }}
@@ -20,20 +18,21 @@
 
                 <div class="row">
                     <div class="form-group col-sm-12">
-                        <label for="role" name="role">Tipo de permissão: </label>
-                            <label class="checkbox-inline col-sm-3">
-                                <input type="checkbox" class="form-check-input" id="restrito" name="role" value="authorized">Restrito
-                            </label>
-                        
- 
-                            <label class="checkbox-inline col-sm-3">
-                                <input type="checkbox" class="form-check-input" id="completo" name="role" value="admin">Completo
-                            </label>
 
-                            
-                            <div class="col-sm-2 form-group">
-                                <button type="submit" class="btn btn-success">Salvar</button>
-                            </div>
+                        <label for="role" name="role">Tipo de permissão: </label><br>
+
+                        <label class="radio-inline col-sm-3">
+                            <input type="radio" class="form-radio-input" id="role" name="role" value="admin" @if($users->role == "admin")checked @endif> Completo
+                        </label>
+
+                        <label class="radio-inline col-sm-3">
+                            <input type="radio" class="form-radio-input" id="role" name="role" value="authorized" @if($users->role == "authorized")checked @endif> Restrito
+                        </label>
+
+                        <div class="col-sm-2 form-group">
+                            <button type="submit" class="btn btn-success">Salvar</button>
+                        </div> 
+
                     </div>
                 </div>
 

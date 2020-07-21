@@ -33,13 +33,11 @@ class AuthServiceProvider extends ServiceProvider
             return in_array($user->codpes, $admins);
         });
 
-        # authorized 
+        # authorized or admin for permissions
         Gate::define('authorized', function ($user) {
             if($user->role == 'authorized' || $user->role == 'admin') {
                 return true;
             }
-            //$admins = explode(',', trim(config('users.admins')));
-            //return ( in_array($user->codpes, $admins) and $user->codpes );
         });
     }
 }

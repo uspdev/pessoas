@@ -10,7 +10,7 @@ return [
         [
             'text' => 'Busca',
             'url'  =>  getenv('APP_URL') . '/search',
-            //'can'  => 'admin'
+            'can'  => 'admin'
         ],
         [
             'text' => 'Pessoas Autorizadas',
