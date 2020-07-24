@@ -22,7 +22,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::where('role', 'admin')
-                        ->orWhere('role', 'authorized')->get();
+            ->orWhere('role', 'authorized')->get();
         return view('users.index', compact('users'));
     }
 
@@ -81,6 +81,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $this->authorize('admin');
         return view('users.edit')->with('users', $user);
     }
 
@@ -93,6 +94,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('admin');
         $user = User::find($id);
         $user->role = $request->role;
         $user->update();
@@ -108,6 +110,7 @@ class UserController extends Controller
      */
     public function destroy($id, Request $request)
     {
+        $this->authorize('admin');
         $user = User::find($id);
         $user->delete();
         $request->session()->flash('alert-warning', 'Usuário deletado!');

@@ -3,6 +3,7 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
+use Respect\Validation\Validator as v;
 use Uspdev\Replicado\Pessoa;
 
 class Numeros_USP implements Rule
