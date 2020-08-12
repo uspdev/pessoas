@@ -16,7 +16,7 @@ jQuery(function ($) {
             if (term.length >= 6 && $.trim($('#nompes').val()) == term) {
                 var _token = $('input[name="_token"]').val();
                 $.ajax({
-                    url: "/search/partenome",
+                    url: "search/partenome",
                     data: {
                         term: term,
                         _token: _token

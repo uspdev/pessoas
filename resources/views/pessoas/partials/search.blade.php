@@ -7,7 +7,7 @@
 <div class="row">
 
     <div class="col-lg-5">
-        <form id="busca" method="POST" action="/pessoas">
+        <form id="busca" method="POST" action="pessoas">
             @csrf
 
             <b>Busque por:</b><br>
@@ -21,7 +21,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-success">Buscar</button><br>
+            <input type="submit" class="btn btn-success" name="Buscar" value="Buscar"><br>
 
             <br><b> Ou busque por</b><br>
 
