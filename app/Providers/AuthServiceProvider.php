@@ -32,5 +32,12 @@ class AuthServiceProvider extends ServiceProvider
             $admins = explode(',', trim(config('pessoas.senhaunica_admins')));
             return in_array($user->codpes, $admins);
         });
+
+        # authorized or admin for permissions
+        Gate::define('authorized', function ($user) {
+            if($user->role == 'authorized' || $user->role == 'admin') {
+                return true;
+            }
+        });
     }
 }

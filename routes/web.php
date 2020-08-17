@@ -27,3 +27,6 @@ Route::patch('pessoas/{codpes}', 'PessoaController@update');
 #buscas
 Route::get('search', 'PessoaController@search');
 Route::get('search/partenome', 'PessoaController@partenome')->name('autocomplete.search');
+
+# model User
+Route::resource('users', 'UserController');
