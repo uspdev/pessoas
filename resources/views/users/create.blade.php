@@ -6,8 +6,7 @@
 @stop
 
 @section('content')
-@include('messages.flash')
-@include('messages.errors')
+@include('alerts')
 
 <form method="POST" role="form" class="form-inline" action="/users">
     {{ csrf_field() }}

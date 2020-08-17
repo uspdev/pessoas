@@ -22,7 +22,6 @@ class CreateUsersTable extends Migration
 
             $table->string('password')->nullable();
             $table->string('codpes');
-            $table->string('role')->default('none');
         });
     }
 
