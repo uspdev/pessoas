@@ -15,7 +15,7 @@ return [
         [
             'text' => 'Pessoas Autorizadas',
             'url'  => '/users',
-            'can'  => 'authorized'
+            'can'  => 'admin'
         ],
     ]
 ];

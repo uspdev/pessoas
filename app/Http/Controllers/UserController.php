@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Rules\Numeros_USP;
 use App\User;
 use Uspdev\Replicado\Pessoa;
 
@@ -11,7 +10,7 @@ class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('can:authorized');
+        $this->middleware('can:admin');
     }
 
     /**
@@ -21,8 +20,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('role', 'admin')
-            ->orWhere('role', 'authorized')->get();
+        $users = User::all();
         return view('users.index', compact('users'));
     }
 
@@ -45,7 +43,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'codpes' => ['required', new Numeros_USP($request->codpes)],
+            'codpes' => ['required', 'codpes'],
         ]);
 
         $user = User::where('codpes', $request->codpes)->first();
@@ -92,11 +90,17 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
+        /* Proteger Rule::in() */
+        /*
+        $request->validate([
+            'role' => ['required', 'codpes'],
+        ]);
+        */
+
         $this->authorize('admin');
-        $user = User::find($id);
-        $user->role = $request->role;
+        $user->role = $request->role;  
         $user->update();
         $request->session()->flash('alert-info', 'Permissão alterada!');
         return redirect()->route('users.index');
@@ -108,10 +112,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, Request $request)
+    public function destroy(Request $request, User $user)
     {
         $this->authorize('admin');
-        $user = User::find($id);
         $user->delete();
         $request->session()->flash('alert-warning', 'Usuário deletado!');
         return redirect()->route('users.index');
