@@ -8,7 +8,7 @@
 @section('content')
 @include('alerts')
 
-<form method="POST" role="form" class="form-inline" action="/users">
+<form method="POST" role="form" class="form-inline" action="{{ url('/users/') }}">
     {{ csrf_field() }}
 
     <div class="card">

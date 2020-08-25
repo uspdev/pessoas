@@ -2,19 +2,19 @@
 
 return [
     'title' => 'Pessoas',
-    'dashboard_url' => getenv('APP_URL'),
+    'dashboard_url' => config('app.url'),
     'logout_method' => 'GET',
-    'logout_url' => getenv('APP_URL') . '/logout',
-    'login_url' => getenv('APP_URL') . '/login',
+    'logout_url' => config('app.url') . '/logout',
+    'login_url' => config('app.url') . '/login',
     'menu' => [
         [
             'text' => 'Busca',
-            'url'  =>  getenv('APP_URL') . '/search',
+            'url'  =>  config('app.url') . '/search',
             'can'  => 'admin'
         ],
         [
             'text' => 'Pessoas Autorizadas',
-            'url'  => '/users',
+            'url'  => config('app.url') . '/users',
             'can'  => 'admin'
         ],
     ]
