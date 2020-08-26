@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Uspdev\Replicado\Pessoa;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -92,15 +93,13 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        /* Proteger Rule::in() */
-        /*
+
         $request->validate([
-            'role' => ['required', 'codpes'],
+            'role' => ['required', Rule::in($user->roles())],
         ]);
-        */
 
         $this->authorize('admin');
-        $user->role = $request->role;  
+        $user->role = $request->role;
         $user->update();
         $request->session()->flash('alert-info', 'Permissão alterada!');
         return redirect()->route('users.index');
