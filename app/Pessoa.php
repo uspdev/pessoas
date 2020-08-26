@@ -48,12 +48,17 @@ class Pessoa extends Model
 
         $endereco = PessoaReplicado::obterEndereco($this->codpes);
         // Formata endereço
-        $endereco = "
+        if ($endereco) {
+            $endereco = "
             {$endereco['nomtiplgr']} {$endereco['epflgr']} ,
             {$endereco['numlgr']} {$endereco['cpllgr']} -
             {$endereco['nombro']} - {$endereco['cidloc']}  -
             {$endereco['sglest']} - CEP: {$endereco['codendptl']}
         ";
+        } else {
+            $endereco = 'Não encontrado';
+        }
+
         $dump = PessoaReplicado::dump($this->codpes);
 
         return [
