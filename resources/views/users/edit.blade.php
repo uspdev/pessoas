@@ -7,7 +7,7 @@
 
 @section('content')
 
-<form method="post" class="form-inline" action="/users/{{$users->id}}"> 
+<form method="post" class="form-inline" action="{{ url('/users') }}/{{$users->id}}"> 
 {{ csrf_field() }}
 {{ method_field('PUT') }}
 
