@@ -12,7 +12,7 @@
 
 @include('alerts')
 
-<form action="/pessoas/{{$codpes}}" method="POST">
+<form action="{{ action('PessoaController@update', $codpes) }}" method="POST">
 @csrf
 @method('patch')
 @include('pessoas.partials.form')
