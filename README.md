@@ -1,7 +1,7 @@
 # Motivação
 
 Nas unidades, muitos setores precisam acessar os dados mínimos de alunos, funcionários e docentes,
-esses dados são replicados e as consultas estão abstraídas no projeto [replicado](https://github.com/uspdev/replicado). 
+esses dados são replicados e as consultas estão abstraídas no projeto [replicado](https://github.com/uspdev/replicado. 
 
 Esse projeto, consiste em uma interface web para tornar o acesso a esses dados mais fácil, para os setores/pessoas que tem essa permissão.
 
@@ -36,12 +36,7 @@ Gerar a chave do laravel
 
     php artisan key:generate
 
-Publicar os assets
-
-    php artisan vendor:publish --provider="Uspdev\UspTheme\ServiceProvider" --tag=assets --force
-
-
-Você pode rodar em testes usando o servidor embitido
+Você pode rodar em testes usando o servidor embutido
 
     php artisan serve
 
