@@ -16,6 +16,19 @@
             <li class='list-group-item py-1'>{{ $pessoa->codpes }}</li>
         </ul>
         <br />
+        <div class="font-weight-bold"> Gênero</div>
+        <ul class="list-group">
+            <li class='list-group-item py-1'>
+                @if ($pessoa->replicado()['sexpes'] === "M")
+                Masculino
+                @elseif ($pessoa->replicado()['sexpes'] === "F")
+                Feminino
+                @else
+                Não informado
+                @endif
+            </li>
+        </ul>
+        <br />
         <div class="font-weight-bold"> Documentos</div>
         <ul class="list-group">
             <li class='list-group-item py-1'>CPF: {{ $pessoa->replicado()['numcpf']}}</li>
