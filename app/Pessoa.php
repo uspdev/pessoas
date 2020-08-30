@@ -64,6 +64,7 @@ class Pessoa extends Model
         return [
             'nompes'    => $dump['nompes'],
             'numcpf'    => $dump['numcpf'],
+            'sexpes'    => $dump['sexpes'],
             'telefones' => PessoaReplicado::telefones($this->codpes),
             'emails'    => PessoaReplicado::emails($this->codpes),
             'vinculos'  => PessoaReplicado::vinculos($this->codpes),
