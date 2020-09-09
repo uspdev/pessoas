@@ -1,7 +1,5 @@
 @extends('laravel-usp-theme::master')
 
-@section('title', 'Dashboard')
-
 @section('content_header')
 @stop
 

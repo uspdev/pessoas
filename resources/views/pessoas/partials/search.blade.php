@@ -1,5 +1,3 @@
-
-
 @section('javascripts_bottom')
     <script src="{{asset('/js/search.js')}}"></script>
 @endsection

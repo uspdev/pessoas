@@ -1,7 +1,5 @@
 @extends('laravel-usp-theme::master')
 
-@section('title', '')
-
 @section('content_header')
 
 @section('javascripts_head')
