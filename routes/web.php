@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'indexController@index');
+Route::get('/', 'IndexController@index');
 
 Route::get('login', 'Auth\LoginController@redirectToProvider')->name('login');
 Route::get('callback', 'Auth\LoginController@handleProviderCallback');
