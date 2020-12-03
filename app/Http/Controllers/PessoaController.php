@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests\PessoaRequest;
-use App\Pessoa;
+use App\Models\Pessoa;
 use App\Utils;
 use App\Utils\ReplicadoUtils;
 

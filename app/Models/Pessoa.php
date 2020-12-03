@@ -1,12 +1,14 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Uspdev\Replicado\Pessoa as PessoaReplicado;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Pessoa extends Model
 {
+    use HasFactory;
     protected $guarded = ['id'];
 
     public function getDataNascimentoAttribute($value)

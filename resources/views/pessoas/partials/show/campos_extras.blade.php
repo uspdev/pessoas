@@ -7,7 +7,7 @@
     em diversas situações nas quais essas informações não podem ser inseridas para pessoa em questão
     na base da USP ou quando essa informação está errada e precisa ser usada localmente até que
     seja então corrigida.
-    <br> <a href="{{ action('PessoaController@edit', $pessoa->codpes) }}" class="btn btn-info"> Editar campos locais </a> <br>
+    <br> <a href="{{ action([App\Http\Controllers\PessoaController::class, 'edit'], $pessoa->codpes) }}" class="btn btn-info"> Editar campos locais </a> <br>
       
         <br />
 

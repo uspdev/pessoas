@@ -12,6 +12,7 @@ mais fácil, para os setores/pessoas que tem essa permissão.
 
 ## Requisitos
 
+* php 7.3
 * Um banco de dados local 
 * Um token do oauth
 * Acesso ao replicado
@@ -26,9 +27,9 @@ Instalar as dependências do composer
 
     composer install
     
-Copiar o .env.example para .env e editar o necessário\
-OBS1. na url do oauth_consumidor deve finalizar com "/callback"\
-OBS2. deve-se autorizar o usuário em "SENHAUNICA_ADMINS"
+Copiar o .env.example para .env e editar o necessário
+
+    cp .env.example .env
 
 Rodar o migration
 
@@ -42,6 +43,19 @@ Você pode rodar em testes usando o servidor embutido
 
     php artisan serve
 
-Ou publicar em produção utilizando seu servidor favorito (ex. Apache). Nesse caso lembre de dar permissão de escrita na pasta ```storage``` para o usuário que roda o processo do servidor, normalmente o ```www-data```.
+## Ambiente de produção
+
+Use seu servidor favorito (ex. Apache) para publicar em produção. 
+
+Nesse caso lembre de dar permissão de escrita na pasta ```storage``` para o usuário que roda o processo do servidor, normalmente o ```www-data```. É possivel também usar o módulo do apache2 mpm_itk para alterar o usuário do virtualhost.
 
     chown www-data:www-data storage/ -R
+
+Configure no .env
+
+    APP_ENV=production
+    APP_DEBUG=false
+
+Rode o composer sem o dev
+
+    composer install --no-dev

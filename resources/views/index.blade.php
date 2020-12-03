@@ -1,12 +1,9 @@
 @extends('laravel-usp-theme::master')
 
-@section('content_header')
-@stop
-
 @section('content')
 @include('alerts')
 @auth
-<div>Olá <b>{{ Auth::user()->name }}!</b></div>
+<div>Olá <b>{{ Auth()->user()->name }}!</b></div>
 @else
 <div><b>Faça o <a href="login">Login</a> com a senha única para acessar esse sistema.</b></div>
 @endauth
@@ -21,4 +18,4 @@ mais fácil, para os setores/pessoas que tem essa permissão.
 @include('pessoas.partials.search')
 @endcan('admin')
 
-@stop
+@endsection
