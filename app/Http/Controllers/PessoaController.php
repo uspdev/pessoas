@@ -11,50 +11,64 @@ use App\Utils\ReplicadoUtils;
 
 class PessoaController extends Controller
 {
-    public function __construct()
+    public function index(Request $request)
     {
-        $this->middleware('auth');
-    }
+        # Caso 1: Nenhuma busca feita ainda, só mostramos o formulário
+        if(empty($request->codpes) && empty($request->nompes)){
+            return view('pessoas.index');
+        }
 
-    public function search(Request $request){
         $this->authorize('admin');
-        return view('pessoas.search');
-    }
-
-    public function store(Request $request){
-        $this->authorize('admin');
-
-        /* 1 - identificamos o número USP - busca por nome ou busca por codpes*/
-        if(!empty($request->codpes)){
-            $codpes = $request->codpes;
-        } else if(!empty($request->by_codpes)){
-            $codpes = $request->by_codpes;
-        } else {
-            $request->session()->flash('alert-danger', 'Pessoa não encontrada');
+        # Caso 2: Busca apenas por nome ou número USP e não por ambos
+        if(!empty($request->codpes) && !empty($request->nompes)){
+            $request->session()->flash('alert-danger', 'Busca apenas por nome ou número USP e não por ambos');
             return redirect('/'); 
         }
 
-        /* 2- Verificamos se a pessoa existe no replicado */
-        if(empty(\Uspdev\Replicado\Pessoa::dump($codpes))){
-            $request->session()->flash('alert-danger', 'Pessoa não encontrada');
-            return redirect('/');
+        # Caso 3: Se a busca tiver codpes, vamos priorizá-lo
+        if(!empty($request->codpes)){
+            $request->validate([
+                'codpes' => 'required|integer',
+            ]);
+            /* Verificamos se a pessoa existe no replicado */
+            if(empty(\Uspdev\Replicado\Pessoa::dump($request->codpes))){
+                $request->session()->flash('alert-danger', 'Pessoa não encontrada');
+                return redirect('/');
+            }
+            return redirect("/pessoas/{$request->codpes}");
         }
 
-        /* 3 - se existe no replicado, cadastramos localmente */
-        $pessoa = Pessoa::where('codpes',$codpes)->first();
-        if(!$pessoa){
-            $pessoa = new Pessoa;
-            $pessoa->codpes = $codpes;
-            $pessoa->save();
+        # Caso 4: Se a busca tiver nompes, vamos montar uma lista de possíveis candidatos
+        if(!empty($request->nompes)){
+            $pessoas = \Uspdev\Replicado\Pessoa::procurarPorNome($request->nompes, true, false);
+            if(empty($pessoas)){
+                $request->session()->flash('alert-danger', 'Nenhum pessoa encontrada');
+            }
+            return view('pessoas.index',[
+                'pessoas' => $pessoas 
+            ]);
         }
 
-        return redirect("/pessoas/{$codpes}");
     }
 
     public function show(Request $request, $codpes)
     {
         $this->authorize('admin');
+
+        /* Verificamos se a pessoa existe no replicado */
+        if(empty(\Uspdev\Replicado\Pessoa::dump($codpes))){
+            $request->session()->flash('alert-danger', 'Pessoa não encontrada');
+            return redirect('/');
+        }
+
+        /* Se existe no replicado, cadastramos localmente */
         $pessoa = Pessoa::where('codpes',$codpes)->first();
+        if(!$pessoa){
+            $pessoa = new Pessoa;
+            $pessoa->codpes = $request->codpes;
+            $pessoa->save();
+        }
+        
         return view('pessoas.show')->with('pessoa',$pessoa);
     }
 
@@ -75,15 +89,6 @@ class PessoaController extends Controller
         $pessoa->update($request->validated());
         $request->session()->flash('alert-info', 'Dados editados com sucesso!');
         return redirect("/pessoas/{$codpes}");
-    }
-
-    public function partenome(Request $request)
-    {
-        $this->authorize('admin');
-        if($request->term) {
-            $pessoa = \Uspdev\Replicado\Pessoa::nome($request->term);
-        }
-        return response($pessoa);
     }
 
 }

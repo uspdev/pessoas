@@ -9,11 +9,6 @@ return [
     'login_url' => 'login',
     'menu' => [
         [
-            'text' => 'Busca',
-            'url'  =>  'search',
-            'can'  => 'admin'
-        ],
-        [
             'text' => 'Pessoas Autorizadas',
             'url'  => 'users',
             'can'  => 'admin'
