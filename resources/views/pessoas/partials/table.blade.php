@@ -10,7 +10,7 @@
       @foreach($pessoas as $pessoa)
       <tr>
         <th scope="row">{{$pessoa['codpes']}}</th>
-        <td><a href="/pessoas/{{$pessoa['codpes']}}">{{$pessoa['nompes']}}</a></td>
+        <td><a href="pessoas/{{$pessoa['codpes']}}">{{$pessoa['nompes']}}</a></td>
       </tr>
       @endforeach
 
