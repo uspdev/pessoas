@@ -1,18 +1,33 @@
-<table class="table">
-  <thead class="thead-light">
+@section('styles')
+    <link rel="stylesheet" href="{{asset('/css/datatable.css')}}">
+@endsection
+
+@section('javascripts_bottom')
+    <script src="{{asset('/js/datatable.js')}}"></script>
+@endsection
+
+<hr>
+
+<table id="pessoas" class="table table-bordered table-striped table-hover responsive">
+  <thead>
     <tr>
-      <th scope="col">Número USP</th>
-      <th scope="col">Nome</th>
+      <th>Número USP</th>
+      <th>Nome</th>
+      <th>Vínculos ativos</th>
+      <th>E-mail</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      @foreach($pessoas as $pessoa)
+      @foreach($pessoas as $index => $pessoa)
       <tr>
-        <th scope="row">{{$pessoa['codpes']}}</th>
+        <td>{{$pessoa['codpes']}}</td>
         <td><a href="pessoas/{{$pessoa['codpes']}}">{{$pessoa['nompes']}}</a></td>
+        <td>{{trim(implode(', ', \Uspdev\Replicado\Pessoa::vinculos($pessoa['codpes'])))}}</td>
+        <td>{{\Uspdev\Replicado\Pessoa::email($pessoa['codpes'])}}</td>
       </tr>
       @endforeach
-
   </tbody>
 </table>
+
+
+
