@@ -14,6 +14,7 @@
                 {{-- Verificar se o código de unidade pode ser opicional no método Pessoa::tiposVinculos --}}
                 @foreach (Uspdev\Replicado\Pessoa::tiposVinculos(env('REPLICADO_CODUNDCLG')) as $vinculo)
                     <option value="{{$vinculo['tipvinext']}}">{{$vinculo['tipvinext']}} 
+                        {{-- Mostra a quantidade de pessoas --}}
                         ({{number_format(\Uspdev\Replicado\Pessoa::ativosVinculo($vinculo['tipvinext'], env('REPLICADO_CODUNDCLG'), 1)[0]['total'], 0, '', '.')}})</option>
                 @endforeach
             </select> 
