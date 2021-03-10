@@ -14,14 +14,23 @@ class PessoaController extends Controller
     public function index(Request $request)
     {
         # Caso 1: Nenhuma busca feita ainda, só mostramos o formulário
-        if(empty($request->codpes) && empty($request->nompes)){
+        if (empty($request->codpes) && empty($request->nompes) && empty($request->tipvinext) && empty($request->codset)) {
             return view('pessoas.index');
         }
 
         $this->authorize('admin');
-        # Caso 2: Busca apenas por nome ou número USP e não por ambos
-        if(!empty($request->codpes) && !empty($request->nompes)){
-            $request->session()->flash('alert-danger', 'Busca apenas por nome ou número USP e não por ambos');
+        # Caso 2: Busca apenas por um campo
+        $campos = ['codpes','nompes','tipvinext','codset'];
+        $contaQuantosCamposPreenchidos = 0;
+        foreach ($campos as $campo) {
+            if (!empty($request[$campo])) {
+                $contaQuantosCamposPreenchidos++;
+            }
+        }
+
+        // Só busca se apenas um campo for preenchido
+        if ($contaQuantosCamposPreenchidos > 1) {
+            $request->session()->flash('alert-danger', 'Busca apenas por nº USP, ou por Nome, ou por Vínculo, ou por Setor e não por ambos');
             return redirect('/'); 
         }
 
@@ -42,13 +51,35 @@ class PessoaController extends Controller
         if(!empty($request->nompes)){
             $pessoas = \Uspdev\Replicado\Pessoa::procurarPorNome($request->nompes, true, false);
             if(empty($pessoas)){
-                $request->session()->flash('alert-danger', 'Nenhum pessoa encontrada');
+                $request->session()->flash('alert-danger', 'Nenhuma pessoa encontrada');
             }
             return view('pessoas.index',[
                 'pessoas' => $pessoas 
             ]);
         }
 
+        # Caso 5: Se a busca tiver vínculo, lista as pessoas do tipo de vínculo
+        if (!empty($request->tipvinext)) {
+            // Verificar se o código de unidade pode ser opicional no método Pessoa::ativosVinculos
+            $pessoas = \Uspdev\Replicado\Pessoa::ativosVinculo($request->tipvinext, env('REPLICADO_CODUNDCLG'));
+            if(empty($pessoas)){
+                $request->session()->flash('alert-danger', 'Nenhuma pessoa encontrada');
+            }
+            return view('pessoas.index',[
+                'pessoas' => $pessoas 
+            ]);
+        }        
+
+        # Caso 6: Se a busca tiver setor, lista as pessoas do setor
+        if (!empty($request->codset)) {
+            $pessoas = \Uspdev\Replicado\Pessoa::servidoresAtivosSetor($request->codset);
+            if(empty($pessoas)){
+                $request->session()->flash('alert-danger', 'Nenhuma pessoa encontrada');
+            }
+            return view('pessoas.index',[
+                'pessoas' => $pessoas 
+            ]);
+        }
     }
 
     public function show(Request $request, $codpes)
