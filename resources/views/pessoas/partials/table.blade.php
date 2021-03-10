@@ -1,14 +1,16 @@
 @section('styles')
+    @parent
     <link rel="stylesheet" href="{{asset('/css/datatable.css')}}">
 @endsection
 
 @section('javascripts_bottom')
+    @parent
     <script src="{{asset('/js/datatable.js')}}"></script>
 @endsection
 
 <hr>
 
-<table id="pessoas" class="table table-bordered table-striped table-hover responsive">
+<table class="datatable-pessoas table table-bordered table-striped table-hover responsive">
   <thead>
     <tr>
       <th>Número USP</th>

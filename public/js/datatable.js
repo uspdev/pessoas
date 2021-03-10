@@ -1,6 +1,6 @@
 $(document).ready(function() {    
-    //DataTables
-    $('#pessoas').DataTable({
+    // DataTables
+    $('.datatable-pessoas').DataTable({
         dom: 'fBi'
         , order: ['1', 'asc']
         , language: {
