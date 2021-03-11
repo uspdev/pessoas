@@ -72,7 +72,8 @@ class PessoaController extends Controller
 
         # Caso 6: Se a busca tiver setor, lista as pessoas do setor
         if (!empty($request->codset)) {
-            $pessoas = \Uspdev\Replicado\Pessoa::servidoresAtivosSetor($request->codset);
+            $aposentados = ($request->docente_aposentado == null) ? 1 : 0;
+            $pessoas = \Uspdev\Replicado\Pessoa::listarServidoresSetor($request->codset, $aposentados);
             if(empty($pessoas)){
                 $request->session()->flash('alert-danger', 'Nenhuma pessoa encontrada');
             }
