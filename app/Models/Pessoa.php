@@ -71,6 +71,7 @@ class Pessoa extends Model
             'emails'    => PessoaReplicado::emails($this->codpes),
             'vinculos'  => PessoaReplicado::vinculos($this->codpes),
             'endereco'  => $endereco,
+            'ramal'     => PessoaReplicado::obterRamalUsp($this->codpes),
         ];
     }
 }
