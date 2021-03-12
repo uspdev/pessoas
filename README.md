@@ -16,6 +16,7 @@ mais fácil, para os setores/pessoas que tem essa permissão.
 * Um banco de dados local 
 * Um token do oauth
 * Acesso ao replicado
+* Token do Wsfoto (opcional)
 
 ## Deploy
 

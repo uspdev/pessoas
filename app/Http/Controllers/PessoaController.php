@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Http\Requests\PessoaRequest;
 use App\Models\Pessoa;
-use App\Utils;
-use App\Utils\ReplicadoUtils;
+use Illuminate\Http\Request;
 
 class PessoaController extends Controller
 {
@@ -20,7 +17,7 @@ class PessoaController extends Controller
 
         $this->authorize('admin');
         # Caso 2: Busca apenas por um campo
-        $campos = ['codpes','nompes','tipvinext','codset'];
+        $campos = ['codpes', 'nompes', 'tipvinext', 'codset'];
         $contaQuantosCamposPreenchidos = 0;
         foreach ($campos as $campo) {
             if (!empty($request[$campo])) {
@@ -31,16 +28,16 @@ class PessoaController extends Controller
         // Só busca se apenas um campo for preenchido
         if ($contaQuantosCamposPreenchidos > 1) {
             $request->session()->flash('alert-danger', 'Busca apenas por nº USP, ou por Nome, ou por Vínculo, ou por Setor e não por ambos');
-            return redirect('/'); 
+            return redirect('/');
         }
 
         # Caso 3: Se a busca tiver codpes, vamos priorizá-lo
-        if(!empty($request->codpes)){
+        if (!empty($request->codpes)) {
             $request->validate([
                 'codpes' => 'required|integer',
             ]);
             /* Verificamos se a pessoa existe no replicado */
-            if(empty(\Uspdev\Replicado\Pessoa::dump($request->codpes))){
+            if (empty(\Uspdev\Replicado\Pessoa::dump($request->codpes))) {
                 $request->session()->flash('alert-danger', 'Pessoa não encontrada');
                 return redirect('/');
             }
@@ -48,13 +45,13 @@ class PessoaController extends Controller
         }
 
         # Caso 4: Se a busca tiver nompes, vamos montar uma lista de possíveis candidatos
-        if(!empty($request->nompes)){
+        if (!empty($request->nompes)) {
             $pessoas = \Uspdev\Replicado\Pessoa::procurarPorNome($request->nompes, true, false);
-            if(empty($pessoas)){
+            if (empty($pessoas)) {
                 $request->session()->flash('alert-danger', 'Nenhuma pessoa encontrada');
             }
-            return view('pessoas.index',[
-                'pessoas' => $pessoas 
+            return view('pessoas.index', [
+                'pessoas' => $pessoas,
             ]);
         }
 
@@ -62,13 +59,13 @@ class PessoaController extends Controller
         if (!empty($request->tipvinext)) {
             // Verificar se o código de unidade pode ser opicional no método Pessoa::ativosVinculos
             $pessoas = \Uspdev\Replicado\Pessoa::ativosVinculo($request->tipvinext, env('REPLICADO_CODUNDCLG'));
-            if(empty($pessoas)){
+            if (empty($pessoas)) {
                 $request->session()->flash('alert-danger', 'Nenhuma pessoa encontrada');
             }
-            return view('pessoas.index',[
-                'pessoas' => $pessoas 
+            return view('pessoas.index', [
+                'pessoas' => $pessoas,
             ]);
-        }        
+        }
 
         # Caso 6: Se a busca tiver setor, lista as pessoas do setor
         if (!empty($request->codset)) {
@@ -77,8 +74,8 @@ class PessoaController extends Controller
             if(empty($pessoas)){
                 $request->session()->flash('alert-danger', 'Nenhuma pessoa encontrada');
             }
-            return view('pessoas.index',[
-                'pessoas' => $pessoas 
+            return view('pessoas.index', [
+                'pessoas' => $pessoas,
             ]);
         }
     }
@@ -88,40 +85,41 @@ class PessoaController extends Controller
         $this->authorize('admin');
 
         /* Verificamos se a pessoa existe no replicado */
-        if(empty(\Uspdev\Replicado\Pessoa::dump($codpes))){
+        if (empty(\Uspdev\Replicado\Pessoa::dump($codpes))) {
             $request->session()->flash('alert-danger', 'Pessoa não encontrada');
             return redirect('/');
         }
 
         /* Se existe no replicado, cadastramos localmente */
-        $pessoa = Pessoa::where('codpes',$codpes)->first();
-        if(!$pessoa){
+        $pessoa = Pessoa::where('codpes', $codpes)->first();
+        if (!$pessoa) {
             $pessoa = new Pessoa;
             $pessoa->codpes = $request->codpes;
             $pessoa->save();
         }
-        
-        return view('pessoas.show')->with('pessoa',$pessoa);
+
+        $foto = \Uspdev\Wsfoto::obter($codpes);
+
+        return view('pessoas.show', compact('pessoa', 'foto'));
     }
 
     public function edit($codpes)
-    {   
+    {
         $this->authorize('admin');
-        $pessoa = Pessoa::where('codpes',$codpes)->first();
+        $pessoa = Pessoa::where('codpes', $codpes)->first();
         return view('pessoas.edit')->with([
             'codpes' => $codpes,
-            'pessoa' => $pessoa
-            ]);
+            'pessoa' => $pessoa,
+        ]);
     }
 
     public function update(PessoaRequest $request, $codpes)
     {
         $this->authorize('admin');
-        $pessoa = Pessoa::where('codpes',$codpes)->first();
+        $pessoa = Pessoa::where('codpes', $codpes)->first();
         $pessoa->update($request->validated());
         $request->session()->flash('alert-info', 'Dados editados com sucesso!');
         return redirect("/pessoas/{$codpes}");
     }
 
 }
-
