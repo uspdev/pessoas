@@ -60,3 +60,23 @@ Configure no .env
 Rode o composer sem o dev
 
     composer install --no-dev
+
+## Projetos utilizados
+
+github: [uspdev/replicado](https://github.com/uspdev/replicado)
+
+github: [uspdev/senhaunica-socialite](https://github.com/uspdev/senhaunica-socialite)
+
+github: [uspdev/wsfoto](https://github.com/uspdev/wsfoto)
+
+github: [uspdev/laravel-usp-theme](https://github.com/uspdev/laravel-usp-theme)
+
+## Contribuindo com o projeto
+
+### Passos iniciais
+
+Siga o guia no site do [uspdev](https://uspdev.github.io/contribua)
+
+### Padrões de Projeto
+
+Utilizamos a [PSR-2](https://www.php-fig.org/psr/psr-2/) para padrões de projeto. Ajuste seu editor favorito para a especificação.
