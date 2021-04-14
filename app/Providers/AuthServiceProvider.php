@@ -2,10 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -29,14 +28,17 @@ class AuthServiceProvider extends ServiceProvider
 
         # admin
         Gate::define('admin', function ($user) {
-            if($user->role == 'admin') return true;
+            if ($user->role == 'admin') {
+                return true;
+            }
+
             $admins = explode(',', trim(config('pessoas.senhaunica_admins')));
             return in_array($user->codpes, $admins);
         });
 
         # authorized or admin for permissions
         Gate::define('authorized', function ($user) {
-            if($user->role == 'authorized') {
+            if ($user->role == 'authorized' || $user->role == 'admin') {
                 return true;
             }
         });
