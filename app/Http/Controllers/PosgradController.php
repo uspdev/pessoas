@@ -14,6 +14,8 @@ class PosgradController extends Controller
     {
         $this->authorize('admin');
 
+        $programas = SELF::listarProgramas();
+        
         # tratando POST
         if (isset($request->codcur)) {
             if ($request->codcur != 0) {
@@ -24,7 +26,6 @@ class PosgradController extends Controller
             session(['codcur' => $request->codcur]);
         }
 
-        $programas = SELF::listarProgramas();
         $alunos = session('codcur') ? json_decode(json_encode(Posgraduacao::alunosPrograma(18, session('codcur')))) : '';
 
         return view('posgrad.index', compact('programas', 'alunos'));
