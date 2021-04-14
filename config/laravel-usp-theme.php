@@ -7,11 +7,19 @@ return [
     'logout_method' => 'POST',
     'logout_url' => 'logout',
     'login_url' => 'login',
+    'right_menu' => [
+        [
+            'text' => '<i class="fas fa-cogs"></i> Pessoas Autorizadas',
+            'url' => 'users',
+            'can' => 'admin',
+        ],
+    ],
     'menu' => [
         [
-            'text' => 'Pessoas Autorizadas',
-            'url'  => 'users',
-            'can'  => 'admin'
+            'text' => 'Pós graduação',
+            'url' => 'posgrad',
+            'can' => 'admin',
         ],
-    ]
+
+    ],
 ];

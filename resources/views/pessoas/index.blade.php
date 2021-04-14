@@ -19,13 +19,7 @@ mais fácil, para os setores/pessoas que tem essa permissão.
 @can('admin')
 @include('pessoas.partials.search')
 <br>
-@if(isset($pessoas))
-  @include('pessoas.partials.table')
-@endif
+@includewhen(isset($pessoas),'pessoas.partials.table')
 @endcan('admin')
 
 @endsection
-
-
-
-
