@@ -25,8 +25,8 @@ class PosgradController extends Controller
             }
             session(['codcur' => $request->codcur]);
         }
-
-        $alunos = session('codcur') ? json_decode(json_encode(Posgraduacao::alunosPrograma(18, session('codcur')))) : '';
+        
+        $alunos = session('codcur') ? json_decode(json_encode(Posgraduacao::alunosPrograma(env('REPLICADO_CODUNDCLG'), session('codcur')))) : '';
 
         return view('posgrad.index', compact('programas', 'alunos'));
     }
