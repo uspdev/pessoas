@@ -9,7 +9,7 @@
 @endsection
 
 <div class="row">
-    <form>
+    <form action="{{ config('app.url') }}">
         <div class="form-row">
             <div class="col input-group mb-3">
                 <input type="text" class="form-control" aria-label="Nº USP" aria-describedby="inputGroup-sizing-sm"
