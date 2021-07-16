@@ -22,3 +22,6 @@ Route::post('posgrad', [PosgradController::class, 'index']);
 
 # model User
 Route::resource('users', UserController::class);
+
+# Logs  
+Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->middleware('can:admin');
