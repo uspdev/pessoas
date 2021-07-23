@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
-use Uspdev\Replicado\Posgraduacao;
 use Uspdev\Replicado\DB;
+use Uspdev\Replicado\Posgraduacao;
 
 class PosgradController extends Controller
 {
@@ -14,37 +14,20 @@ class PosgradController extends Controller
     {
         $this->authorize('admin');
 
-        $programas = SELF::listarProgramas();
-        
+        \UspTheme::activeUrl('posgrad');
+        $programas = Posgraduacao::listarProgramas();
+
         # tratando POST
         if (isset($request->codcur)) {
-            if ($request->codcur != 0) {
-                $request->validate([
-                    'codcur' => ['integer', Rule::in(Arr::pluck($programas, 'codcur'))],
-                ]);
-            }
+            $request->validate([
+                'codcur' => ['nullable', Rule::in(Arr::pluck($programas, 'codcur'))],
+            ]);
             session(['codcur' => $request->codcur]);
         }
-        
-        $alunos = session('codcur') ? json_decode(json_encode(Posgraduacao::alunosPrograma(env('REPLICADO_CODUNDCLG'), session('codcur')))) : '';
+
+        // vamos obter a lista de alunos do programa
+        $alunos = session('codcur') ? json_decode(json_encode(Posgraduacao::alunosPrograma(env('REPLICADO_CODUNDCLG'), session('codcur')))) : [];
 
         return view('posgrad.index', compact('programas', 'alunos'));
-    }
-
-    // Deve ir para o replicado\Posgraduacao
-    public static function listarProgramas()
-    {
-        $codundclg = getenv('REPLICADO_CODUNDCLG');
-
-        $query = "SELECT C.codcur, NC.nomcur
-        FROM CURSO C
-        INNER JOIN NOMECURSO NC ON C.codcur = NC.codcur
-        WHERE (C.codclg IN ({$codundclg}))
-            AND (C.tipcur = 'POS')
-            AND (C.dtainiccp IS NOT NULL)
-            AND (NC.dtafimcur IS NULL)
-        ORDER BY NC.nomcur ASC";
-
-        return \Uspdev\Replicado\DB::fetchAll($query);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Uspdev\Replicado\Pessoa as PessoaReplicado;
+use Uspdev\Replicado\Posgraduacao;
 
 class Pessoa extends Model
 {
@@ -21,7 +22,6 @@ class Pessoa extends Model
         if (!empty($value)) {
             $this->attributes['data_nascimento'] = implode('-', array_reverse(explode('/', $value)));
         }
-
     }
 
     public function getValidadeVistoAttribute($value)
@@ -29,7 +29,6 @@ class Pessoa extends Model
         if (!empty($value)) {
             return implode('/', array_reverse(explode('-', $value)));
         }
-
     }
 
     public function setValidadeVistoAttribute($value)
@@ -37,7 +36,6 @@ class Pessoa extends Model
         if (!empty($value)) {
             $this->attributes['validade_visto'] = implode('-', array_reverse(explode('/', $value)));
         }
-
     }
 
     public function getCpfAttribute($value)
@@ -45,7 +43,6 @@ class Pessoa extends Model
         if (!empty($value)) {
             return substr($value, 0, 3) . '.' . substr($value, 3, 3) . '.' . substr($value, 6, 3) . '-' . substr($value, 9, 2);
         }
-
     }
 
     public function setCpfAttribute($value)
@@ -53,7 +50,6 @@ class Pessoa extends Model
         if (!empty($value)) {
             $this->attributes['cpf'] = preg_replace("/[^0-9]/", "", $value);
         }
-
     }
 
     public function replicado()
@@ -105,34 +101,6 @@ class Pessoa extends Model
     }
 
     /**
-     * deve ir para o replicado\Posgraduacao
-     * pode ir para pessoa com o nome obterVinculoAtivoPos
-     * Obtém dados de um vínculo ativo de pós graduação
-     *
-     * @param Integer $codpes Número USP
-     * @return Array
-     * @author Masaki K Neto, 4/2021
-     */
-    public static function obterVinculoAtivo(int $codpes)
-    {
-        $query = "SELECT p.nompes as nompesori, r.codpes as codpesori,
-                    n.nomare,
-                    nc.nomcur,
-                    v.*
-                  FROM VINCULOPESSOAUSP v
-                  JOIN R39PGMORIDOC r ON (v.codpes = r.codpespgm AND r.dtafimort IS NULL) --obter codpes orientador
-                  JOIN PESSOA p ON (p.codpes = r.codpes) --obter nome orientador
-                  JOIN AREA a ON (a.codare = v.codare) --obter codcur
-                  JOIN NOMEAREA n ON (v.codare = n.codare and n.dtafimare IS NULL) --obter nomeare
-                  JOIN NOMECURSO nc on (a.codcur = nc.codcur AND nc.dtafimcur IS NULL) --obter nomecur
-                  WHERE v.codpes = :codpes
-                    AND v.tipvin = 'ALUNOPOS' AND v.sitatl = 'A'";
-
-        $param['codpes'] = $codpes;
-        return \Uspdev\Replicado\DB::fetch($query, $param);
-    }
-
-    /**
      * Deve ir para o replicado\Pessoa
      * Retorna dados básicos de vínculos ativos de determinada pessoa (codpes) FROM
      *
@@ -162,13 +130,14 @@ class Pessoa extends Model
     {
         switch ($vinculo['tipvin']) {
             case 'ALUNOPOS':
-                $pg = SELF::obterVinculoAtivo($this->codpes);
-                return $vinculo['tipvinext']
-                . ', programa: ' . $pg['nomcur']
-                . ', área: ' . $pg['nomare']
-                . ', nível: ' . $pg['nivpgm']
-                . ', orientador: <a href="pessoas/' . $pg['codpesori'] . '">' . $pg['nompesori'] . '</a>'
-                . ', ingresso: ' . date('d/m/Y', strtotime($vinculo['dtainivin']));
+                if ($pg = Posgraduacao::obterVinculoAtivo($this->codpes)) {
+                    return $vinculo['tipvinext']
+                    . ', programa: ' . $pg['nomcur']
+                    . ', área: ' . $pg['nomare']
+                    . ', nível: ' . $pg['nivpgm']
+                    . ', orientador: <a href="pessoas/' . $pg['codpesori'] . '">' . $pg['nompesori'] . '</a>'
+                    . ', ingresso: ' . date('d/m/Y', strtotime($vinculo['dtainivin']));
+                }
                 break;
             //case 'SERVIDOR':
             //    break;
