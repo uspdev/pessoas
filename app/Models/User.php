@@ -8,7 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-
+    use \Spatie\Permission\Traits\HasRoles;
+    use \Uspdev\SenhaunicaSocialite\Traits\HasSenhaunica;
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -27,10 +29,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public static function roles(){
-        return [
-            'admin',
-            'authorized'    
-        ];
-    }
+    // public static function roles(){
+    //     return [
+    //         'admin',
+    //         'authorized'    
+    //     ];
+    // }
 }

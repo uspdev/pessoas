@@ -26,21 +26,5 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        # admin
-        Gate::define('admin', function ($user) {
-            if ($user->role == 'admin') {
-                return true;
-            }
-
-            $admins = explode(',', trim(config('pessoas.senhaunica_admins')));
-            return in_array($user->codpes, $admins);
-        });
-
-        # authorized or admin for permissions
-        Gate::define('authorized', function ($user) {
-            if ($user->role == 'authorized' || $user->role == 'admin') {
-                return true;
-            }
-        });
     }
 }
