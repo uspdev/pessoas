@@ -9,9 +9,7 @@ return [
     'login_url' => 'login',
     'right_menu' => [
         [
-            'text' => '<i class="fas fa-cogs"></i> Pessoas Autorizadas',
-            'url' => 'users',
-            'can' => 'admin',
+            'key' => 'senhaunica-socialite',
         ],
         [
             'text' => '<i class="fas fa-hard-hat"></i>',

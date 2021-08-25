@@ -20,7 +20,7 @@
         "uspdev/laravel-usp-theme": "^2.0",
         "uspdev/laravel-usp-validators": "^1.0",
         "uspdev/replicado": "^1.5",
-        "uspdev/senhaunica-socialite": "4.0.0-rc.5",
+        "uspdev/senhaunica-socialite": "^4.0",
         "uspdev/wsfoto": "^2.0"
     },
     "require-dev": {

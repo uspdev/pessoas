@@ -29,10 +29,4 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    // public static function roles(){
-    //     return [
-    //         'admin',
-    //         'authorized'    
-    //     ];
-    // }
 }
