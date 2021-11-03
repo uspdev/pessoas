@@ -23,7 +23,7 @@
       @foreach($pessoas as $index => $pessoa)
       <tr>
         <td>{{$pessoa['codpes']}}</td>
-        <td><a href="pessoas/{{$pessoa['codpes']}}">{{$pessoa['nompes']}}</a></td>
+        <td><a href="pessoas/{{$pessoa['codpes']}}">{{ $pessoa['nompesttd'] }}</a></td>
         <td>{{trim(implode(', ', \Uspdev\Replicado\Pessoa::vinculos($pessoa['codpes'])))}}</td>
         <td>{{\Uspdev\Replicado\Pessoa::email($pessoa['codpes'])}}</td>
       </tr>
