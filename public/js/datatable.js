@@ -1,6 +1,6 @@
-$(document).ready(function() {    
+$(document).ready(function() {
     // DataTables
-    $('.datatable-pessoas').DataTable({
+    var table = $('.datatable-pessoas').DataTable({
         dom: 'fBi'
         , order: ['1', 'asc']
         , language: {
@@ -22,4 +22,13 @@ $(document).ready(function() {
             , 'csvHtml5'
         ]
     });
-}); 
+
+    // Esconder e mostrar colunas
+    $('a.toggle-vis').on('click', function (e) {
+        e.preventDefault();
+        // Get the column API object
+        var column = table.column($(this).attr('data-column'));
+        // Toggle the visibility
+        column.visible(! column.visible());
+    });
+});
