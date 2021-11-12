@@ -59,7 +59,7 @@ class PessoaController extends Controller
         if (!empty($request->tipvinext)) {
             // Verificar se o código de unidade pode ser opicional no método Pessoa::ativosVinculos
             if ($request->tipvinext == 'Servidor' or $request->tipvinext == 'Docente' or $request->tipvinext == 'Docente Aposentado') {
-                $pessoas = \Uspdev\Replicado\Pessoa::listarMaisInformacoesServidores($request->tipvinext, env('REPLICADO_CODUNDCLG'), 0);
+                $pessoas = \Uspdev\Replicado\Pessoa::listarMaisInformacoesServidores($request->tipvinext);
             } else {
                 $pessoas = \Uspdev\Replicado\Pessoa::ativosVinculo($request->tipvinext, env('REPLICADO_CODUNDCLG'));
             }
