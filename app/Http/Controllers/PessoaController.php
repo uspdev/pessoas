@@ -58,7 +58,11 @@ class PessoaController extends Controller
         # Caso 5: Se a busca tiver vínculo, lista as pessoas do tipo de vínculo
         if (!empty($request->tipvinext)) {
             // Verificar se o código de unidade pode ser opicional no método Pessoa::ativosVinculos
-            $pessoas = \Uspdev\Replicado\Pessoa::ativosVinculo($request->tipvinext, env('REPLICADO_CODUNDCLG'));
+            if ($request->tipvinext == 'Servidor' or $request->tipvinext == 'Docente' or $request->tipvinext == 'Docente Aposentado') {
+                $pessoas = \Uspdev\Replicado\Pessoa::listarMaisInformacoesServidores($request->tipvinext);
+            } else {
+                $pessoas = \Uspdev\Replicado\Pessoa::ativosVinculo($request->tipvinext, env('REPLICADO_CODUNDCLG'));
+            }
             if (empty($pessoas)) {
                 $request->session()->flash('alert-danger', 'Nenhuma pessoa encontrada');
             }

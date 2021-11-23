@@ -13,3 +13,10 @@ yarn-error.log
 .env
 
 public/vendor
+
+# init lando
+.lando.yml
+# lando dockerfile php extensions
+Dockerfile.custom
+# lando php.ini
+php.ini
