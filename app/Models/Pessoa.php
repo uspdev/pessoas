@@ -82,8 +82,15 @@ class Pessoa extends Model
             $genero = 'Não informado';
         }
 
+        $cpf = $dump['numcpf'];
+        $len = strlen($cpf);
+        while($len < 11){
+            $cpf = "0".$cpf;
+            $len++;
+        }
+        $cpf = $this->getCpfAttribute($cpf);
         $documentos = "
-            CPF: {$dump['numcpf']},
+            CPF: {$cpf},
             {$dump['tipdocidf']}: {$dump['numdocfmt']} {$dump['sglorgexdidf']}/{$dump['sglest']}
             ";
 
