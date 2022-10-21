@@ -14,16 +14,17 @@
     <a class="toggle-vis" data-column="8">Função</a> |
     <a class="toggle-vis" data-column="9">Idade função</a> |
     <a class="toggle-vis" data-column="10">Tel. USP</a> |
-    <a class="toggle-vis" data-column="11">E-mail principal</a> |
-    <a class="toggle-vis" data-column="12">E-mail(s) alternativo(s)</a> |
-    <a class="toggle-vis" data-column="13">Lattes</a> |
-    <a class="toggle-vis" data-column="14">Escolaridade</a> |
-    <a class="toggle-vis" data-column="15">Formação</a> |
-    <a class="toggle-vis" data-column="16">Classe</a> |
-    <a class="toggle-vis" data-column="17">Nível</a> |
-    <a class="toggle-vis" data-column="18">Jornada</a> |
-    <a class="toggle-vis" data-column="19">Mérito</a> |
-    <a class="toggle-vis" data-column="20">Designação</a>
+    <a class="toggle-vis" data-column="11">Tel.</a> |
+    <a class="toggle-vis" data-column="12">E-mail principal</a> |
+    <a class="toggle-vis" data-column="13">E-mail(s) alternativo(s)</a> |
+    <a class="toggle-vis" data-column="14">Lattes</a> |
+    <a class="toggle-vis" data-column="15">Escolaridade</a> |
+    <a class="toggle-vis" data-column="16">Formação</a> |
+    <a class="toggle-vis" data-column="17">Classe</a> |
+    <a class="toggle-vis" data-column="18">Nível</a> |
+    <a class="toggle-vis" data-column="19">Jornada</a> |
+    <a class="toggle-vis" data-column="20">Mérito</a> |
+    <a class="toggle-vis" data-column="21">Designação</a>
   </div>
   <table id="servidor" class="datatable-pessoas table table-bordered table-striped table-hover responsive">
     <thead>
@@ -39,6 +40,7 @@
         <th>Função</th>
         <th>Idade função</th>
         <th>Tel. USP</th>
+        <th>Tel.</th>
         <th>E-mail principal</th>
         <th>E-mail(s) alternativo(s)</th>
         <th>Lattes</th>
@@ -65,6 +67,13 @@
           <td>{{ $pessoa['nomfnc'] }}</td>
           <td>{{ \Carbon\Carbon::parse($pessoa['dtainisitfun'])->diff(\Carbon\Carbon::now())->format('%y') }}</td>
           <td>{{ $pessoa['numtelfmt'] }}</td>
+          <td>
+            @foreach (\Uspdev\Replicado\Pessoa::telefones($pessoa['codpes']) as $tel)
+              @if ($tel != \Uspdev\Replicado\Pessoa::telefones($pessoa['codpes']))
+                {{ str_replace(' ', '', $tel) }}<br />
+              @endif
+            @endforeach
+          </td>
           <td>{{ \Uspdev\Replicado\Pessoa::email($pessoa['codpes']) }}</td>
           <td>
             @foreach (\Uspdev\Replicado\Pessoa::emails($pessoa['codpes']) as $email)

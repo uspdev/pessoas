@@ -21,7 +21,12 @@
                 <div class="font-weight-bold"> E-mails</div>
                 <ul class="list-group">
                     @foreach ($pessoa->replicado()['emails'] as $email)
-                    <li class='list-group-item'>{{ $email }}</li>
+                        <li class='list-group-item'>
+                            {{ $email }}
+                            @if (\Uspdev\Replicado\Pessoa::email($pessoa->codpes) == $email)
+                                <span class="badge badge-info" title="E-mail principal USP"><i class="fas fa-envelope"></i> USP</span>
+                            @endif
+                        </li>
                     @endforeach
                 </ul>
                 <br />
