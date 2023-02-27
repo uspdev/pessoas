@@ -75,7 +75,7 @@ class PessoaController extends Controller
         if (!empty($request->codset)) {
             $aposentados = ($request->docente_aposentado == null) ? 1 : 0;
             $pessoas = \Uspdev\Replicado\Pessoa::listarServidoresSetor($request->codset, $aposentados);
-            if(empty($pessoas)){
+            if (empty($pessoas)) {
                 $request->session()->flash('alert-danger', 'Nenhuma pessoa encontrada');
             }
             return view('pessoas.index', [
