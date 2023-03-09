@@ -24,10 +24,21 @@ class Pessoa extends PessoaReplicado
         return $result;
     }
 
+    public static function listarVinculosFormatado($codpes) {
+        if ($vinculos = Pessoa::listarVinculos($codpes, $ativos = true)) {
+            $tipoJornada = $vinculos[0]['tipjor'];
+            $nomeAbreviadoSetor = $vinculos[0]['nomabvset'];
+        } else {
+            $tipoJornada = '-';
+            $nomeAbreviadoSetor = '-';
+        }
+        return [$tipoJornada, $nomeAbreviadoSetor];
+    }
+
     public static function procurarServidorPorNome($nome)
     {
-        foreach (Pessoa::procurarPorNome($nome) as $pessoa) {
-            if ($pessoa['tipvin'] == 'SERVIDOR') {
+        foreach (PessoaReplicado::procurarPorNome($nome, false, true) as $pessoa) {
+            if (isset($pessoa['tipvin']) && $pessoa['tipvin'] == 'SERVIDOR') {
                 return $pessoa;
             }
         }

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Replicado\Lattes;
 use App\Replicado\Pessoa;
 use Illuminate\Http\Request;
-use Uspdev\Replicado\Lattes;
 
 class GraduacaoController extends Controller
 {
@@ -20,51 +20,24 @@ class GraduacaoController extends Controller
             $nomes = explode(PHP_EOL, $nomes);
             $nomes = array_unique($nomes);
             $nomes = array_filter($nomes);
-            sort($nomes);
 
             foreach ($nomes as $nome) {
-
                 if ($pessoaReplicado = Pessoa::procurarServidorPorNome($nome)) {
-
                     $pessoa['unidade'] = $pessoaReplicado['sglclgund'];
                     $pessoa['nome'] = $nome;
-
                     $pessoa['codpes'] = $pessoaReplicado['codpes'];
                     $pessoa['lattes'] = Lattes::id($pessoa['codpes']);
-
                     $pessoa['nomeFuncao'] = $pessoaReplicado['nomfnc'];
-                    $pessoa['regime'] = '';
-
-                    if ($vinculos = Pessoa::listarVinculos($pessoa['codpes'], $ativos = true)) {
-                        $pessoa['tipoJornada'] = $vinculos[0]['tipjor'];
-                        $pessoa['departamento'] = $vinculos[0]['nomabvset'];
-                    } else {
-                        $pessoa['tipoJornada'] = '-';
-                        $pessoa['departamento'] = '-';
-                    }
-
-                    if ($formacao = Lattes::retornarFormacaoAcademica($pessoa['codpes'])) {
-                        unset($formacao['GRADUACAO']);
-                        $pessoa['formacao'] = ucwords(strtolower(implode(', ',array_keys($formacao))));
-                    }
-
-
-                    if ($pessoa['codpes'] == 62834) {
-                        // dd($pessoaReplicado, $vinculos);
-
-                    }
+                    list($pessoa['tipoJornada'], $pessoa['departamento']) = Pessoa::listarVinculosFormatado($pessoa['codpes']);
+                    $pessoa['formacao'] = Lattes::retornarFormacaoAcademicaFormatado($pessoa['codpes']);
 
                     $pessoas[] = $pessoa;
-                }
-                else {
-                    $naoEncontrados[] = $nome;
+                } else {
+                    $naoEncontrados[] = $nome; // . ' (' . Uteis::fonetico($nome, $debug = true) . ')';
                 }
             }
-
-            // dd($request->nomes, $nomes, $pessoas);
         }
 
-        // $pessoas = [];
         return view('grad.index', ['pessoas' => $pessoas, 'nomes' => $request->nomes, 'naoEncontrados' => $naoEncontrados]);
     }
 }
