@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\PosgradController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\GraduacaoController;
 
 Route::get('/', [PessoaController::class, 'index']);
 
@@ -16,5 +15,8 @@ Route::patch('pessoas/{codpes}', [PessoaController::class, 'update']);
 Route::get('posgrad', [PosgradController::class, 'index']);
 Route::post('posgrad', [PosgradController::class, 'index']);
 
-# Logs  
-Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->middleware('can:admin');
+Route::get('posgrad/{codcur}', [PosgradController::class, 'show']);
+
+# Graduação
+Route::get('graduacao', [GraduacaoController::class, 'index']);
+Route::post('graduacao', [GraduacaoController::class, 'index']);
