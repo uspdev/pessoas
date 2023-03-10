@@ -12,8 +12,8 @@
   </form>
 
   @if ($naoEncontrados)
-  <hr>
-  <div class="h4">Não encontrados</div>
+    <hr>
+    <div class="h4">Não encontrados</div>
     @foreach ($naoEncontrados as $nome)
       {{ $nome }}<br>
     @endforeach
@@ -29,10 +29,17 @@
           <th>Depto</th>
           <th>No. USP</th>
           <th>Nome</th>
-          <th>Lattes</th>
           <th>Nome Função</th>
           <th>Tipo Jornada</th>
-          <th>Formação (Lattes)</th>
+          <th>Lattes</th>
+          <th>Orcid</th>
+          <th>Data atual. Lattes</th>
+          <th>Graduação</th>
+          <th>Mestrado</th>
+          <th>Doutorado</th>
+          <th>Livre docencia</th>
+          <th>Pós-doutorado</th>
+          <th>Especialista</th>
         </tr>
       </thead>
       <tbody>
@@ -42,14 +49,25 @@
             <td>{{ $pessoa['departamento'] }}</td>
             <td>{{ $pessoa['codpes'] }}</td>
             <td>{{ $pessoa['nome'] }}</td>
+            <td>{{ $pessoa['nomeFuncao'] }}</td>
+            <td>{{ $pessoa['tipoJornada'] }}</td>
             <td>
               <a href="https://lattes.cnpq.br/{{ $pessoa['lattes'] }}" target="lattes">
                 {{ $pessoa['lattes'] }}
               </a>
             </td>
-            <td>{{ $pessoa['nomeFuncao'] }}</td>
-            <td>{{ $pessoa['tipoJornada'] }}</td>
-            <td>{{ $pessoa['formacao'] }}</td>
+            <td>
+              <a href="{{ $pessoa['orcid_id'] }}" target="orcid">
+                {{ str_replace('https://orcid.org/', '', $pessoa['orcid_id']) }}
+              </a>
+            </td>
+            <td>{{ $pessoa['dtaultalt'] ?? '-' }}</td>
+            <td>{{ $pessoa['graduacao'] ?? '-' }}</td>
+            <td>{{ $pessoa['mestrado'] ?? '-' }}</td>
+            <td>{{ $pessoa['doutorado'] ?? '-' }}</td>
+            <td>{{ $pessoa['livre-docencia'] ?? '-' }}</td>
+            <td>{{ $pessoa['pos-doutorado'] ?? '-' }}</td>
+            <td>{{ $pessoa['especializacao'] ?? '-' }}</td>
           </tr>
         @endforeach
       </tbody>
@@ -74,11 +92,7 @@
     jQuery(function() {
       var table = $('.datatable-pessoas').DataTable({
         dom: 'fBi',
-        order: [
-          [0, 'asc'],
-          [1, 'asc'],
-          [3, 'asc']
-        ],
+        order: [],
         language: {
           url: 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json'
         },
@@ -96,7 +110,13 @@
         buttons: [
           'excelHtml5', 'csvHtml5'
         ]
-      });
+      })
+
+      table.order([
+        [0, 'asc'],
+        [1, 'asc'],
+        [3, 'asc']
+      ]).draw()
     })
   </script>
 @endsection
