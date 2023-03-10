@@ -33,10 +33,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('graduacao', function ($user) {
             return $user->hasPermissionTo('graduacao', 'app');
         });
-    
+
         Gate::define('posgraduacao', function ($user) {
             return $user->hasPermissionTo('posgraduacao', 'app');
         });
-    }
     }
 }
