@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\ServiceProvider;
+use Spatie\Permission\Models\Permission;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,11 +17,10 @@ class AppServiceProvider extends ServiceProvider
     {
         // mariadb suport
         Schema::defaultStringLength(191);
-        
-        // aplica forceHttps
-        if (config('app.forceHttps')) {
-            \URL::forceScheme('https');
-        }
+
+        Permission::firstOrCreate(['guard_name' => 'app', 'name' => 'pessoas']);
+        Permission::firstOrCreate(['guard_name' => 'app', 'name' => 'graduacao']);
+        Permission::firstOrCreate(['guard_name' => 'app', 'name' => 'posgraduacao']);
     }
 
     /**
