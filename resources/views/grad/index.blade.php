@@ -2,7 +2,7 @@
 
 @section('content')
 
-  <form method="POST" action="graduacao">
+  <form method="POST" action="graduacao/relatorio/nomes">
     @csrf
     <div class="form-group">
       <label for="exampleFormControlTextarea1" class="h4">Nomes (1 por linha)</label>
@@ -49,6 +49,7 @@
             <td>{{ $pessoa['departamento'] }}</td>
             <td>{{ $pessoa['codpes'] }}</td>
             <td>{{ $pessoa['nome'] }}</td>
+            {{-- <td><a href="pessoas/{{ $pessoa['codpes'] }}">{{ $pessoa['nome'] }}</a></td> --}}
             <td>{{ $pessoa['nomeFuncao'] }}</td>
             <td>{{ $pessoa['tipoJornada'] }}</td>
             <td>
