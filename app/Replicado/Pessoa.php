@@ -10,6 +10,7 @@ class Pessoa extends PessoaReplicado
 
     public static function listarVinculos(Int $codpes, $ativos = false)
     {
+        $ativosQuery = '';
         if ($ativos) {
             $ativosQuery = "AND sitatl = 'A' AND tipvin='SERVIDOR'";
         }
@@ -37,7 +38,7 @@ class Pessoa extends PessoaReplicado
 
     public static function procurarServidorPorNome($nome)
     {
-        foreach (PessoaReplicado::procurarPorNome($nome, false, true) as $pessoa) {
+        foreach (PessoaReplicado::procurarPorNome($nome, $fonetico = true, true) as $pessoa) {
             if (isset($pessoa['tipvin']) && $pessoa['tipvin'] == 'SERVIDOR') {
                 return $pessoa;
             }

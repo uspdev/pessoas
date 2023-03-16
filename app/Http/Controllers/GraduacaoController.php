@@ -9,13 +9,10 @@ use Illuminate\Http\Request;
 
 class GraduacaoController extends Controller
 {
-    public function index(Request $request)
+    public function relatorioPorNomes(Request $request)
     {
+        $this->authorize('graduacao');
 
-        // $cursos = Graduacao::listarCursosHabilitacoes();
-        // dd($cursos);
-
-        $this->authorize('admin');
         $pessoas = [];
         $naoEncontrados = [];
 
@@ -30,7 +27,7 @@ class GraduacaoController extends Controller
                 if ($pessoaReplicado = Pessoa::procurarServidorPorNome($nome)) {
                     $pessoa = [];
                     $pessoa['unidade'] = $pessoaReplicado['sglclgund'];
-                    $pessoa['nome'] = $nome;
+                    $pessoa['nome'] = $pessoaReplicado['nompesttd'];
                     $pessoa['codpes'] = $pessoaReplicado['codpes'];
                     $pessoa['lattes'] = Lattes::id($pessoa['codpes']);
                     $pessoa['nomeFuncao'] = $pessoaReplicado['nomfnc'];

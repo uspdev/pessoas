@@ -18,5 +18,7 @@ Route::post('posgrad', [PosgradController::class, 'index']);
 Route::get('posgrad/{codcur}', [PosgradController::class, 'show']);
 
 # Graduação
-Route::get('graduacao', [GraduacaoController::class, 'index']);
-Route::post('graduacao', [GraduacaoController::class, 'index']);
+Route::get('graduacao/relatorio/nomes', [GraduacaoController::class, 'relatorioPorNomes'])->name('graduacao.relatorio.porNomes');
+Route::post('graduacao/relatorio/nomes', [GraduacaoController::class, 'relatorioPorNomes'])->name('graduacao.relatorio.porNomes.post');
+
+Route::get('graduacao/relatorios', [GraduacaoController::class, 'relatorio']);
