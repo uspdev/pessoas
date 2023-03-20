@@ -4,7 +4,7 @@ $menu = [
     [
         'text' => 'Pós graduação',
         'url' => 'posgrad',
-        'can' => 'posgrad',
+        'can' => 'posgraduacao',
     ],
     [
         'key' => 'posgrad',
