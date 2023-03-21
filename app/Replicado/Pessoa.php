@@ -9,7 +9,7 @@ class Pessoa extends PessoaReplicado
 {
     /**
      * Retorna os vinculos encerrados de VINCULOPESSOAUSP e respectivo setor
-     * 
+     *
      * Talvez precise limitar por unidade
      *
      * @param Int $codpes
@@ -31,7 +31,7 @@ class Pessoa extends PessoaReplicado
     }
 
     /**
-     * Lista os dados de vinculos ativos da pessoa de LOCALIZAPESSOA
+     * Lista os dados de vinculos ativos da pessoa de VINCULOPESSOAUSP
      *
      * Não limita por unidade pois a tabela possui dados de outras unidades.
      * Pode não incluir designações
@@ -45,11 +45,14 @@ class Pessoa extends PessoaReplicado
     public static function listarVinculosAtivos($codpes, $designados = true)
     {
         $queryDesignados = $designados ? '' : 'AND tipdsg is NULL';
-        $query = "SELECT *
-            FROM LOCALIZAPESSOA
-            WHERE codpes = convert(int,:codpes)
+
+        $query = "SELECT S.nomabvset, S.nomset, V.*
+            FROM VINCULOPESSOAUSP V
+                LEFT JOIN SETOR S ON S.codset = V.codset
+            WHERE codpes = convert(INT, :codpes)
+                AND sitatl = 'A'
                 $queryDesignados
-            ORDER BY dtainivin";
+            ORDER BY dtafimvin";
 
         $param['codpes'] = $codpes;
 
