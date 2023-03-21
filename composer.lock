@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e46a5b0c6c1643da0d23d590d60600a8",
+    "content-hash": "d3dedc9735c301ae0198a9cbdb752536",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1246,16 +1246,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "2.4.3",
+            "version": "2.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "67c26b443f348a51926030c83481b85718457d3d"
+                "reference": "3cf1b6d4f0c820a2cf8bcaec39fc698f3443b5cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/67c26b443f348a51926030c83481b85718457d3d",
-                "reference": "67c26b443f348a51926030c83481b85718457d3d",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/3cf1b6d4f0c820a2cf8bcaec39fc698f3443b5cf",
+                "reference": "3cf1b6d4f0c820a2cf8bcaec39fc698f3443b5cf",
                 "shasum": ""
             },
             "require": {
@@ -1345,7 +1345,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.4.3"
+                "source": "https://github.com/guzzle/psr7/tree/2.4.4"
             },
             "funding": [
                 {
@@ -1361,7 +1361,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-10-26T14:07:24+00:00"
+            "time": "2023-03-09T13:19:02+00:00"
         },
         {
             "name": "laravel/framework",
@@ -6295,16 +6295,16 @@
         },
         {
             "name": "uspdev/replicado",
-            "version": "1.16.3",
+            "version": "1.16.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uspdev/replicado.git",
-                "reference": "713e98fc7aab642c53281b32ee26424d56d217e6"
+                "reference": "def4ce94514424db679906ab1b6ad5f640b2afc2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uspdev/replicado/zipball/713e98fc7aab642c53281b32ee26424d56d217e6",
-                "reference": "713e98fc7aab642c53281b32ee26424d56d217e6",
+                "url": "https://api.github.com/repos/uspdev/replicado/zipball/def4ce94514424db679906ab1b6ad5f640b2afc2",
+                "reference": "def4ce94514424db679906ab1b6ad5f640b2afc2",
                 "shasum": ""
             },
             "require": {
@@ -6338,22 +6338,22 @@
             "homepage": "https://github.com/uspdev/replicado",
             "support": {
                 "issues": "https://github.com/uspdev/replicado/issues",
-                "source": "https://github.com/uspdev/replicado/tree/1.16.3"
+                "source": "https://github.com/uspdev/replicado/tree/1.16.4"
             },
-            "time": "2023-03-01T11:40:49+00:00"
+            "time": "2023-03-20T17:18:59+00:00"
         },
         {
             "name": "uspdev/senhaunica-socialite",
-            "version": "4.3.4",
+            "version": "dev-permissions",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uspdev/senhaunica-socialite.git",
-                "reference": "20d3c17cb0e43dc9d6f0fa6e8579d9be9375b049"
+                "reference": "d5355717a43e03e69c9cef9043a6ce355f5ed990"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uspdev/senhaunica-socialite/zipball/20d3c17cb0e43dc9d6f0fa6e8579d9be9375b049",
-                "reference": "20d3c17cb0e43dc9d6f0fa6e8579d9be9375b049",
+                "url": "https://api.github.com/repos/uspdev/senhaunica-socialite/zipball/d5355717a43e03e69c9cef9043a6ce355f5ed990",
+                "reference": "d5355717a43e03e69c9cef9043a6ce355f5ed990",
                 "shasum": ""
             },
             "require": {
@@ -6394,9 +6394,52 @@
             "homepage": "https://github.com/uspdev/senhaunica-socialite",
             "support": {
                 "issues": "https://github.com/uspdev/senhaunica-socialite/issues",
-                "source": "https://github.com/uspdev/senhaunica-socialite/tree/4.3.4"
+                "source": "https://github.com/uspdev/senhaunica-socialite/tree/permissions"
             },
-            "time": "2022-11-28T18:36:02+00:00"
+            "time": "2023-03-20T14:13:18+00:00"
+        },
+        {
+            "name": "uspdev/utils",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/uspdev/utils.git",
+                "reference": "ce9190d666daeb898d2d3a8944cd11f85e9ea5b8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/uspdev/utils/zipball/ce9190d666daeb898d2d3a8944cd11f85e9ea5b8",
+                "reference": "ce9190d666daeb898d2d3a8944cd11f85e9ea5b8",
+                "shasum": ""
+            },
+            "require": {
+                "nesbot/carbon": "^2.48"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.5 || ^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Uspdev\\Utils\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Thiago Gomes Veríssimo",
+                    "email": "verissimotgv@gmail.com"
+                }
+            ],
+            "description": "Diversos métodos estáticos em PHP para as coisas mais úteis ou inúteis...",
+            "support": {
+                "issues": "https://github.com/uspdev/utils/issues",
+                "source": "https://github.com/uspdev/utils/tree/1.1.0"
+            },
+            "time": "2023-03-20T18:54:24+00:00"
         },
         {
             "name": "uspdev/wsfoto",
@@ -8877,7 +8920,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "uspdev/senhaunica-socialite": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
