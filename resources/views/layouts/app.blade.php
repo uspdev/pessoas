@@ -1,13 +1,19 @@
 @extends('laravel-usp-theme::master')
 
 @section('title')
-  @parent 
+  @parent
 @endsection
 
 @section('styles')
   @parent
   <style>
-    /*seus estilos*/
+    .card-header-sticky {
+      position: -webkit-sticky;
+      position: sticky !important;
+      top: 0;
+      z-index: 100;
+      background-color: #F0F0F0;
+    }
   </style>
 @endsection
 
