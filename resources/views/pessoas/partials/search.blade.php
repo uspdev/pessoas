@@ -13,7 +13,7 @@
         <div class="form-row">
             <div class="col input-group mb-3">
                 <input type="text" class="form-control" aria-label="Nº USP" aria-describedby="inputGroup-sizing-sm"
-                    id="codpes" name="codpes" value="{{old('codpes', request()->codpes)}}" placeholder="Nº USP">
+                    id="codpes" name="codpes" value="{{old('codpes')}}" placeholder="Nº USP">
             </div>
             <div class="col input-group mb-3">
                 <input type="text" class="form-control" aria-label="Nome" aria-describedby="inputGroup-sizing-sm"
