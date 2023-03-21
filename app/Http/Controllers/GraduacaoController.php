@@ -24,7 +24,8 @@ class GraduacaoController extends Controller
             $nomes = array_filter($nomes);
 
             foreach ($nomes as $nome) {
-                if ($pessoaReplicado = Pessoa::procurarServidorPorNome($nome)) {
+                // vamos procurar 1o por nome exato e depois por fonetico
+                if ($pessoaReplicado = Pessoa::procurarServidorPorNome($nome, $fonetico = false) ?? Pessoa::procurarServidorPorNome($nome, $fonetico = true)) {
                     $pessoa = [];
                     $pessoa['unidade'] = $pessoaReplicado['sglclgund'];
                     $pessoa['nome'] = $pessoaReplicado['nompesttd'];
@@ -33,13 +34,13 @@ class GraduacaoController extends Controller
                     $pessoa['nomeFuncao'] = $pessoaReplicado['nomfnc'];
                     $pessoa['dtaultalt'] = Lattes::retornarDataUltimaAlteracao($pessoa['codpes']);
                     $pessoa['orcid_id'] = Lattes::retornarOrcidId($pessoa['codpes']);
-                    
-                    list($pessoa['tipoJornada'], $pessoa['departamento']) = Pessoa::listarVinculosFormatado($pessoa['codpes']);
-                    $pessoa = array_merge($pessoa, Lattes::obterFormacaoAcademicaFormatado($pessoa['codpes']));
+                    $pessoa['tipoJornada'] = Pessoa::retornarTipoJornada($pessoa['codpes']);
+                    $pessoa['departamento'] = Pessoa::retornarSetor($pessoa['codpes']);
+                    $pessoa = array_merge($pessoa, Lattes::retornarFormacaoAcademicaFormatado($pessoa['codpes']));
 
                     $pessoas[] = $pessoa;
                 } else {
-                    $naoEncontrados[] = $nome; // . ' (' . Uteis::fonetico($nome, $debug = true) . ')';
+                    $naoEncontrados[] = $nome;
                 }
             }
         }

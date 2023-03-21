@@ -15,7 +15,7 @@ class PessoaController extends Controller
             return view('pessoas.index');
         }
 
-        $this->authorize('admin');
+        $this->authorize('pessoas');
         # Caso 2: Busca apenas por um campo
         $campos = ['codpes', 'nompes', 'tipvinext', 'codset'];
         $contaQuantosCamposPreenchidos = 0;
@@ -86,8 +86,7 @@ class PessoaController extends Controller
 
     public function show(Request $request, $codpes)
     {
-        $this->authorize('admin');
-
+        $this->authorize('pessoas');
         /* Verificamos se a pessoa existe no replicado */
         if (empty(\Uspdev\Replicado\Pessoa::dump($codpes))) {
             $request->session()->flash('alert-danger', 'Pessoa não encontrada');
@@ -109,7 +108,7 @@ class PessoaController extends Controller
 
     public function edit($codpes)
     {
-        $this->authorize('admin');
+        $this->authorize('pessoas');
         $pessoa = Pessoa::where('codpes', $codpes)->first();
         return view('pessoas.edit')->with([
             'codpes' => $codpes,
@@ -119,7 +118,10 @@ class PessoaController extends Controller
 
     public function update(PessoaRequest $request, $codpes)
     {
-        $this->authorize('admin');
+        $this->authorize('pessoas');
+
+        // dd($request->validated());
+
         $pessoa = Pessoa::where('codpes', $codpes)->first();
         $pessoa->update($request->validated());
         $request->session()->flash('alert-info', 'Dados editados com sucesso!');

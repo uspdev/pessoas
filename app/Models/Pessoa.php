@@ -2,10 +2,14 @@
 
 namespace App\Models;
 
+use App\Replicado\Graduacao;
+use App\Replicado\Lattes;
+use App\Replicado\Pessoa as PessoaReplicado;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Uspdev\Replicado\Pessoa as PessoaReplicado;
 use Uspdev\Replicado\Posgraduacao;
+use Uspdev\Replicado\Uteis;
+use Uspdev\Utils\Generic;
 
 class Pessoa extends Model
 {
@@ -48,24 +52,12 @@ class Pessoa extends Model
     public function setCpfAttribute($value)
     {
         if (!empty($value)) {
-            $this->attributes['cpf'] = preg_replace("/[^0-9]/", "", $value);
+            $this->attributes['cpf'] = preg_replace('/[^0-9]/', '', $value);
         }
     }
 
     public function replicado()
     {
-        // Formata endereço
-        if ($endereco = PessoaReplicado::obterEndereco($this->codpes)) {
-            $endereco = "
-                {$endereco['nomtiplgr']} {$endereco['epflgr']} ,
-                {$endereco['numlgr']} {$endereco['cpllgr']} -
-                {$endereco['nombro']} - {$endereco['cidloc']}  -
-                {$endereco['sglest']} - CEP: {$endereco['codendptl']}
-            ";
-        } else {
-            $endereco = 'Não encontrado';
-        }
-
         $dump = PessoaReplicado::dump($this->codpes);
 
         if ($dump['nompes'] != $dump['nompesttd']) {
@@ -76,23 +68,14 @@ class Pessoa extends Model
 
         if ($dump['sexpes'] == 'M') {
             $genero = 'Masculino';
-        } elseif ($dump['sexpes'] == "F") {
+        } elseif ($dump['sexpes'] == 'F') {
             $genero = 'Feminino';
         } else {
             $genero = 'Não informado';
         }
 
-        $cpf = $dump['numcpf'];
-        $len = strlen($cpf);
-        while($len < 11){
-            $cpf = "0".$cpf;
-            $len++;
-        }
-        $cpf = $this->getCpfAttribute($cpf);
-        $documentos = "
-            CPF: {$cpf},
-            {$dump['tipdocidf']}: {$dump['numdocfmt']} {$dump['sglorgexdidf']}/{$dump['sglest']}
-            ";
+        $documentos[] = "CPF: " . Generic::formatarCpf($dump['numcpf']);
+        $documentos[] = "{$dump['tipdocidf']}: {$dump['numdocfmt']} {$dump['sglorgexdidf']}/{$dump['sglest']}";
 
         return [
             'nome' => $nome,
@@ -101,27 +84,17 @@ class Pessoa extends Model
             'genero' => $genero,
             'telefones' => PessoaReplicado::telefones($this->codpes),
             'emails' => PessoaReplicado::emails($this->codpes),
-            'vinculos' => SELF::listarVinculosAtivos($this->codpes),
-            'endereco' => $endereco,
+            'vinculosAtivos' => PessoaReplicado::listarVinculosAtivos($this->codpes),
+            'vinculosEncerrados' => PessoaReplicado::listarVinculosEncerrados($this->codpes),
+            'endereco' => PessoaReplicado::retornarEnderecoFormatado($this->codpes),
             'ramal' => PessoaReplicado::obterRamalUsp($this->codpes),
+            'lattes' => ($lattes = Lattes::id($this->codpes))
+            ? 'Lattes: <a href="https://lattes.cnpq.br/' . $lattes . '" target="_lattes">' . $lattes . '</a>'
+            : 'Lattes: -',
+            'orcid' => ($orcid = Lattes::retornarOrcidID($this->codpes))
+            ? 'Orcid: <a href="' . $orcid . '" target="_orcid">' . str_replace('https://orcid.org/', '', $orcid) . '</a>'
+            : 'Orcid: -',
         ];
-    }
-
-    /**
-     * Deve ir para o replicado\Pessoa
-     * Retorna dados básicos de vínculos ativos de determinada pessoa (codpes) FROM
-     *
-     * @param Int $codpes Número USP da pessoa
-     * @return Collection todos os vinculos ativos no formato array de arrays
-     * @author Masaki K Neto, em 4/2021
-     */
-    public static function listarVinculosAtivos(int $codpes)
-    {
-        $query = "SELECT * FROM LOCALIZAPESSOA
-                  WHERE codpes = convert(int,:codpes)";
-        $param['codpes'] = $codpes;
-
-        return \Uspdev\Replicado\DB::fetchAll($query, $param);
     }
 
     /**
@@ -135,39 +108,47 @@ class Pessoa extends Model
      */
     public function vinculoFormatado($vinculo)
     {
+        $ret = '';
+        if (!empty($vinculo['tipvin'])) {
+            $ret = $ret . $vinculo['tipvin'];
+        }
+
+        if (!empty($vinculo['tipvinext']) && $vinculo['tipvinext'] != 'Servidor') {
+            $ret .= ' <i class="fas fa-angle-right"></i> ' . $vinculo['tipvinext'];
+        }
+
         switch ($vinculo['tipvin']) {
             case 'ALUNOPOS':
                 if ($pg = Posgraduacao::obterVinculoAtivo($this->codpes)) {
-                    return $vinculo['tipvinext']
-                    . ', programa: ' . $pg['nomcur']
-                    . ', área: ' . $pg['nomare']
-                    . ', nível: ' . $pg['nivpgm']
-                    . ', orientador: <a href="pessoas/' . $pg['codpesori'] . '">' . $pg['nompesori'] . '</a>'
-                    . ', ingresso: ' . date('d/m/Y', strtotime($vinculo['dtainivin']));
+                    $ret .= ' | programa: ' . $pg['nomcur'] . ', área: ' . $pg['nomare'] . ', nível: ' . $pg['nivpgm'] . ', orientador: <a href="pessoas/' . $pg['codpesori'] . '">' . $pg['nompesori'] . '</a>';
                 }
                 break;
-            //case 'SERVIDOR':
-            //    break;
+            case 'ALUNOGR':
+                if ($gr = Graduacao::obterCursoAtivo($this->codpes)) {
+                    $ret .= ' | curso: ' . $gr['nomcur'] . ', hab: ' . $gr['nomhab']; // . ', área: ' . $pg['nomare'] . ', nível: ' . $pg['nivpgm'] . ', orientador: <a href="pessoas/' . $pg['codpesori'] . '">' . $pg['nompesori'] . '</a>' . ', ingresso: ' . date('d/m/Y', strtotime($vinculo['dtainivin']));
+                }
+                break;
+            case 'SERVIDOR':
             default:
-                $ret = '';
-
-                if (!empty($vinculo['tipvinext'])) {
-                    $ret = $ret . $vinculo['tipvinext'];
-                }
-
                 if (!empty($vinculo['nomfnc'])) {
-                    $ret = $ret . " - " . $vinculo['nomfnc'];
+                    $ret .= ' | ' . $vinculo['nomfnc'];
                 }
 
-                if (!empty($vinculo['nomset'])) {
-                    $ret = $ret . " - " . $vinculo['nomset'];
+                if (!empty($vinculo['nomabvset'])) {
+                    $ret .= ' - (' . $vinculo['nomabvset'] . ') ' . $vinculo['nomset'];
                 }
 
                 if (!empty($vinculo['sglclgund'])) {
-                    $ret = $ret . " - " . $vinculo['sglclgund'];
+                    $ret = $ret . ' - ' . $vinculo['sglclgund'];
                 }
-
-                return $ret;
         }
+
+        if (empty($vinculo['dtafimvin'])) {
+            $ret .= '<br /> Início: ' . Uteis::data_mes($vinculo['dtainivin']);
+        } else {
+            $ret .= '<br /> Período: ' . Uteis::data_mes($vinculo['dtainivin']) . ' a ' . Uteis::data_mes($vinculo['dtafimvin']);
+        }
+
+        return $ret;
     }
 }

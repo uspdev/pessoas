@@ -13,9 +13,9 @@
 
   <br /><br />
 
-  @can('admin')
+  @can('pessoas')
     @include('pessoas.partials.search')
     <br>
     @includewhen(isset($pessoas), 'pessoas.partials.table')
-  @endcan('admin')
+  @endcan
 @endsection
