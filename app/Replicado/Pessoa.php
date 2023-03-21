@@ -57,6 +57,23 @@ class Pessoa extends PessoaReplicado
         return DB::fetchAll($query, $param);
     }
 
+    public static function listarVinculos(Int $codpes, $ativos = false)
+    {
+        $ativosQuery = '';
+        if ($ativos) {
+            $ativosQuery = "AND sitatl = 'A' AND tipvin='SERVIDOR'";
+        }
+        $query = "SELECT S.nomabvset, S.nomset, * FROM VINCULOPESSOAUSP V
+            LEFT JOIN SETOR S ON S.codset = V.codset
+            WHERE codpes = convert(INT, :codpes)
+            $ativosQuery
+            ";
+        $param['codpes'] = $codpes;
+        $result = DB::fetchAll($query, $param);
+
+        return $result;
+    }
+
     /**
      *
      */
