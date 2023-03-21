@@ -98,7 +98,7 @@ class Pessoa extends Model
     }
 
     /**
-     * Formata o vinculo da pessoa para ser apresentado
+     * Formata o vinculo da pessoa para ser apresentado, tanto ativos quanto finalizados
      *
      * Para cada tipo de vinculo mostra os dados necessários
      *

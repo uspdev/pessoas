@@ -8,16 +8,16 @@ use Uspdev\Replicado\Pessoa as PessoaReplicado;
 class Pessoa extends PessoaReplicado
 {
     /**
-     * Retorna os vinculos de VINCULOPESSOAUSP
+     * Retorna os vinculos encerrados de VINCULOPESSOAUSP e respectivo setor
+     * 
+     * Talvez precise limitar por unidade
      *
-     * Por padrão traz os vinculos encerrados
+     * @param Int $codpes
+     * @return Array
+     * @author Masaki K Neto, em 21/3/2023
      */
     public static function listarVinculosEncerrados(int $codpes)
     {
-        // $ativosQuery = '';
-        // if ($ativos) {
-        //     $ativosQuery = "AND sitatl = 'A' AND tipvin='SERVIDOR'";
-        // }
         $query = "SELECT S.nomabvset, S.nomset, V.*
             FROM VINCULOPESSOAUSP V
                 LEFT JOIN SETOR S ON S.codset = V.codset
@@ -31,9 +31,8 @@ class Pessoa extends PessoaReplicado
     }
 
     /**
-     * Lista os dados de vinculos ativos da pessoa
+     * Lista os dados de vinculos ativos da pessoa de LOCALIZAPESSOA
      *
-     * Retorna os dados de LOCALIZAPESSOA.
      * Não limita por unidade pois a tabela possui dados de outras unidades.
      * Pode não incluir designações
      *
@@ -57,29 +56,12 @@ class Pessoa extends PessoaReplicado
         return DB::fetchAll($query, $param);
     }
 
-    public static function listarVinculos(Int $codpes, $ativos = false)
-    {
-        $ativosQuery = '';
-        if ($ativos) {
-            $ativosQuery = "AND sitatl = 'A' AND tipvin='SERVIDOR'";
-        }
-        $query = "SELECT S.nomabvset, S.nomset, * FROM VINCULOPESSOAUSP V
-            LEFT JOIN SETOR S ON S.codset = V.codset
-            WHERE codpes = convert(INT, :codpes)
-            $ativosQuery
-            ";
-        $param['codpes'] = $codpes;
-        $result = DB::fetchAll($query, $param);
-
-        return $result;
-    }
-
     /**
      *
      */
     public static function retornarTipoJornada($codpes)
     {
-        if ($vinculos = Pessoa::listarVinculos($codpes, $ativos = true)) {
+        if ($vinculos = Pessoa::listarVinculosAtivos($codpes)) {
             $tipoJornada = $vinculos[0]['tipjor'];
         } else {
             $tipoJornada = '-';
@@ -92,7 +74,7 @@ class Pessoa extends PessoaReplicado
      */
     public static function retornarSetor($codpes)
     {
-        if ($vinculos = Pessoa::listarVinculos($codpes, $ativos = true)) {
+        if ($vinculos = Pessoa::listarVinculosAtivos($codpes)) {
             $nomeAbreviadoSetor = $vinculos[0]['nomabvset'];
         } else {
             $nomeAbreviadoSetor = '-';
