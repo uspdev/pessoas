@@ -8,7 +8,10 @@ use Uspdev\Replicado\Uteis;
 
 class Lattes extends LattesReplicado
 {
-    public static function obterFormacaoAcademicaFormatado($codpes)
+    /**
+     * Retorna array contendo os títulos (graduacao, mestrado ...) na chave e o ano de conclusão no valor
+     */
+    public static function retornarFormacaoAcademicaFormatado($codpes)
     {
         $ret = [];
         if ($formacao = Lattes::retornarFormacaoAcademica($codpes)) {
@@ -19,6 +22,9 @@ class Lattes extends LattesReplicado
         return $ret;
     }
 
+    /**
+     * Auxiliar para retornarFormacaoAcademicaFormatado()
+     */
     protected static function retornarTitulosFormatado($titulos)
     {
         $ret = '';
@@ -38,10 +44,10 @@ class Lattes extends LattesReplicado
 
     /**
      * Retorna data da última alteração fornecida pelo CNPq.
-     * 
-     * Indica a data da última atualização nos dados do LATTES para esta pessoa 
+     *
+     * Indica a data da última atualização nos dados do LATTES para esta pessoa
      * (detectada pelo 'robô' do CurriculumCPNQ no site do LATTES).
-     * 
+     *
      * @param Int $codpes
      * @return String formatado em dd/mm/yyyy
      * @author Masaki K Neto, em 10/3/3023
