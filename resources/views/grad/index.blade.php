@@ -49,7 +49,6 @@
             <td>{{ $pessoa['departamento'] }}</td>
             <td>{{ $pessoa['codpes'] }}</td>
             <td>{{ $pessoa['nome'] }}</td>
-            {{-- <td><a href="pessoas/{{ $pessoa['codpes'] }}">{{ $pessoa['nome'] }}</a></td> --}}
             <td>{{ $pessoa['nomeFuncao'] }}</td>
             <td>{{ $pessoa['tipoJornada'] }}</td>
             <td>
