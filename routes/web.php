@@ -21,4 +21,5 @@ Route::get('posgrad/{codcur}', [PosgradController::class, 'show']);
 Route::get('graduacao/relatorio/nomes', [GraduacaoController::class, 'relatorioPorNomes'])->name('graduacao.relatorio.porNomes');
 Route::post('graduacao/relatorio/nomes', [GraduacaoController::class, 'relatorioPorNomes'])->name('graduacao.relatorio.porNomes.post');
 
-Route::get('graduacao/relatorios', [GraduacaoController::class, 'relatorio']);
+Route::get('graduacao/cursos', [GraduacaoController::class, 'cursos']);
+Route::get('graduacao/cursos/{codcur}/disciplinas', [GraduacaoController::class, 'disciplinas']);

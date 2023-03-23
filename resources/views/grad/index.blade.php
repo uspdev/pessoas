@@ -22,7 +22,7 @@
   @if ($pessoas)
     <hr>
     <div class="h4 mt-3">Resultados</div>
-    <table class="table table-bordered table-hover table-sm datatable-pessoas">
+    <table class="table table-bordered table-hover table-sm datatable-simples">
       <thead>
         <tr>
           <th>Unidade</th>
@@ -76,47 +76,3 @@
 
 @endsection
 
-@section('styles')
-  @parent
-  <style>
-    .dataTables_filter {
-      float: left !important;
-      padding-right: 10px;
-    }
-  </style>
-@endsection
-
-@section('javascripts_bottom')
-  @parent
-  <script>
-    jQuery(function() {
-      var table = $('.datatable-pessoas').DataTable({
-        dom: 'fBi',
-        order: [],
-        language: {
-          url: 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json'
-        },
-        paging: false,
-        lengthChange: false,
-        searching: true,
-        ordering: true,
-        info: true,
-        autoWidth: true,
-        lengthMenu: [
-          [10, 25, 50, 100, -1],
-          ['10 linhas', '25 linhas', '50 linhas', '100 linhas', 'Mostar todos']
-        ],
-        pageLength: -1,
-        buttons: [
-          'excelHtml5', 'csvHtml5'
-        ]
-      })
-
-      table.order([
-        [0, 'asc'],
-        [1, 'asc'],
-        [3, 'asc']
-      ]).draw()
-    })
-  </script>
-@endsection

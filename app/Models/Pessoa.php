@@ -91,6 +91,7 @@ class Pessoa extends Model
             'lattes' => ($lattes = Lattes::id($this->codpes))
             ? 'Lattes: <a href="https://lattes.cnpq.br/' . $lattes . '" target="_lattes">' . $lattes . '</a>'
             : 'Lattes: -',
+            'lattesAtualizacao' => Lattes::retornarDataUltimaAlteracao($this->codpes),
             'orcid' => ($orcid = Lattes::retornarOrcidID($this->codpes))
             ? 'Orcid: <a href="' . $orcid . '" target="_orcid">' . str_replace('https://orcid.org/', '', $orcid) . '</a>'
             : 'Orcid: -',
@@ -124,12 +125,16 @@ class Pessoa extends Model
                 }
                 break;
             case 'ALUNOGR':
-                if ($gr = Graduacao::obterCursoAtivo($this->codpes)) {
-                    $ret .= ' | curso: ' . $gr['nomcur'] . ', hab: ' . $gr['nomhab']; // . ', área: ' . $pg['nomare'] . ', nível: ' . $pg['nivpgm'] . ', orientador: <a href="pessoas/' . $pg['codpesori'] . '">' . $pg['nompesori'] . '</a>' . ', ingresso: ' . date('d/m/Y', strtotime($vinculo['dtainivin']));
+                if ($gr = Graduacao::obterCursoAtivoUnidades($this->codpes)) {
+                    $ret .= ' | ' . $gr['sglund'] . ' | curso: ' . $gr['nomcur'] . ', hab: ' . $gr['nomhab']; // . ', área: ' . $pg['nomare'] . ', nível: ' . $pg['nivpgm'] . ', orientador: <a href="pessoas/' . $pg['codpesori'] . '">' . $pg['nompesori'] . '</a>' . ', ingresso: ' . date('d/m/Y', strtotime($vinculo['dtainivin']));
                 }
                 break;
             case 'SERVIDOR':
             default:
+                if (!empty($vinculo['nomcaa'])) {
+                    $ret .= ' | '.$vinculo['nomcaa'];
+                }
+                
                 if (!empty($vinculo['nomfnc'])) {
                     $ret .= ' | ' . $vinculo['nomfnc'];
                 }

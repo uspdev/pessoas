@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Replicado\Graduacao;
 use App\Replicado\Lattes;
 use App\Replicado\Pessoa;
+use Uspdev\Replicado\Uteis;
+use App\Replicado\Graduacao;
 use Illuminate\Http\Request;
 
 class GraduacaoController extends Controller
@@ -48,13 +49,27 @@ class GraduacaoController extends Controller
         return view('grad.index', ['pessoas' => $pessoas, 'nomes' => $request->nomes, 'naoEncontrados' => $naoEncontrados]);
     }
 
-    public function relatorio()
+    public function cursos()
     {
         $this->authorize('graduacao');
+        \UspTheme::activeUrl('graduacao/cursos');
+
 
         $cursos = Graduacao::listarCursosHabilitacoes();
-        // dd($cursos[0]);
+        $u = New Uteis;
 
-        return view('grad.relatorios', compact('cursos'));
+        return view('grad.cursos', compact('cursos', 'u'));
+    }
+
+    public function disciplinas(Request $request, $codcur)
+    {
+        $codhab = $request->codhab;
+        foreach (Graduacao::listarCursosHabilitacoes() as $curso) {
+            if ($curso['codcur'] == $codcur && $curso['codhab'] == $codhab) {
+                break;
+            }
+        }
+        $disciplinas = Graduacao::listarDisciplinasCurriculo($codcur, $codhab, 'C');
+        return view('grad.disciplinas', compact('disciplinas', 'curso'));
     }
 }

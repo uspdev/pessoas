@@ -1,7 +1,7 @@
 <div class="card">
   <div class="card-header h4 card-header-sticky">
-    <b>Dados sistemas USP <i class="fas fa-angle-right"></i>
-      {{ $pessoa->codpes }} - <i>{{ $pessoa->replicado()['nome'] }}</i></b>
+    Dados USP <i class="fas fa-angle-right"></i>
+    <b>{{ $pessoa->codpes }} - <i>{{ $pessoa->replicado()['nome'] }}</i></b>
   </div>
   <div class="card-body">
     <div class="row">
@@ -45,10 +45,26 @@
         </div>
 
         <div class="my-3">
-          <div class="font-weight-bold">Lattes</div>
+          <div class="font-weight-bold">Lattes
+            <span class="badge badge-info">atualizado em
+              {{ $pessoa->replicado()['lattesAtualizacao'] }}</span>
+          </div>
           <ul class="list-group">
             <li class="list-group-item py-1">{!! $pessoa->replicado()['lattes'] !!}</li>
             <li class="list-group-item py-1">{!! $pessoa->replicado()['orcid'] !!}</li>
+          </ul>
+        </div>
+
+        <div class="my-3">
+          <div class="font-weight-bold">Vínculos encerrados</div>
+          <ul class="list-group">
+            @forelse($pessoa->replicado()['vinculosEncerrados'] as $vinculo)
+              <li class="list-group-item list-group-item-action py-1">
+                {!! $pessoa->vinculoFormatado($vinculo) !!}
+              </li>
+            @empty
+              <li class="list-group-item py-1">-</li>
+            @endforelse
           </ul>
         </div>
 
@@ -78,8 +94,8 @@
         <div class="my-3">
           <div class="font-weight-bold">Documentos</div>
           <ul class="list-group">
-            @foreach($pessoa->replicado()['documentos'] as $documento)
-            <li class="list-group-item list-group-item-action py-1">{{ $documento }}</li>
+            @foreach ($pessoa->replicado()['documentos'] as $documento)
+              <li class="list-group-item list-group-item-action py-1">{{ $documento }}</li>
             @endforeach
           </ul>
         </div>
@@ -95,21 +111,6 @@
           <div class="font-weight-bold">Endereço</div>
           <ul class="list-group">
             <li class="list-group-item py-1">{{ $pessoa->replicado()['endereco'] }} </li>
-          </ul>
-        </div>
-
-        <div class="my-3">
-          <div class="font-weight-bold">Vínculos encerrados</div>
-          <ul class="list-group">
-            @forelse($pessoa->replicado()['vinculosEncerrados'] as $vinculo)
-            <li class="list-group-item list-group-item-action py-1">
-              {!! $pessoa->vinculoFormatado($vinculo) !!}
-              
-              {{-- {{ $vinculo['tipvin'] }}-{{ $vinculo['dtainivin'] }}-{{ $vinculo['dtafimvin'] }} --}}
-            </li>
-            @empty
-            <li class="list-group-item py-1">-</li>
-            @endforelse
           </ul>
         </div>
 

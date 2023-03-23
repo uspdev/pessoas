@@ -32,6 +32,8 @@ class Pessoa extends PessoaReplicado
 
     /**
      * Lista os dados de vinculos ativos da pessoa de VINCULOPESSOAUSP
+     * 
+     * O método no replicado usa localizapessoa, que parece melhor que esse
      *
      * Não limita por unidade pois a tabela possui dados de outras unidades.
      * Pode não incluir designações
@@ -42,22 +44,22 @@ class Pessoa extends PessoaReplicado
      * @author Masaki K Neto, em 14/3/2022
      * @author Masaki K Neto, modificado em 14/3/2023
      */
-    public static function listarVinculosAtivos($codpes, $designados = true)
-    {
-        $queryDesignados = $designados ? '' : 'AND tipdsg is NULL';
+    // public static function listarVinculosAtivos($codpes, $designados = true)
+    // {
+    //     $queryDesignados = $designados ? '' : 'AND tipdsg is NULL';
 
-        $query = "SELECT S.nomabvset, S.nomset, V.*
-            FROM VINCULOPESSOAUSP V
-                LEFT JOIN SETOR S ON S.codset = V.codset
-            WHERE codpes = convert(INT, :codpes)
-                AND sitatl = 'A'
-                $queryDesignados
-            ORDER BY dtafimvin";
+    //     $query = "SELECT S.nomabvset, S.nomset, V.*
+    //         FROM VINCULOPESSOAUSP V
+    //             LEFT JOIN SETOR S ON S.codset = V.codset
+    //         WHERE codpes = convert(INT, :codpes)
+    //             AND sitatl = 'A'
+    //             $queryDesignados
+    //         ORDER BY dtafimvin";
 
-        $param['codpes'] = $codpes;
+    //     $param['codpes'] = $codpes;
 
-        return DB::fetchAll($query, $param);
-    }
+    //     return DB::fetchAll($query, $param);
+    // }
 
     /**
      *
