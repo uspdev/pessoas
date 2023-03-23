@@ -44,29 +44,29 @@ class Pessoa extends PessoaReplicado
      * @author Masaki K Neto, em 14/3/2022
      * @author Masaki K Neto, modificado em 14/3/2023
      */
-    // public static function listarVinculosAtivos($codpes, $designados = true)
-    // {
-    //     $queryDesignados = $designados ? '' : 'AND tipdsg is NULL';
+    public static function listarVinculosAtivosDeVinculo($codpes, $designados = true)
+    {
+        $queryDesignados = $designados ? '' : 'AND tipdsg is NULL';
 
-    //     $query = "SELECT S.nomabvset, S.nomset, V.*
-    //         FROM VINCULOPESSOAUSP V
-    //             LEFT JOIN SETOR S ON S.codset = V.codset
-    //         WHERE codpes = convert(INT, :codpes)
-    //             AND sitatl = 'A'
-    //             $queryDesignados
-    //         ORDER BY dtafimvin";
+        $query = "SELECT S.nomabvset, S.nomset, V.*
+            FROM VINCULOPESSOAUSP V
+                LEFT JOIN SETOR S ON S.codset = V.codset
+            WHERE codpes = convert(INT, :codpes)
+                AND sitatl = 'A'
+                $queryDesignados
+            ORDER BY dtafimvin";
 
-    //     $param['codpes'] = $codpes;
+        $param['codpes'] = $codpes;
 
-    //     return DB::fetchAll($query, $param);
-    // }
+        return DB::fetchAll($query, $param);
+    }
 
     /**
      *
      */
     public static function retornarTipoJornada($codpes)
     {
-        if ($vinculos = Pessoa::listarVinculosAtivos($codpes)) {
+        if ($vinculos = Pessoa::listarVinculosAtivosDeVinculo($codpes)) {
             $tipoJornada = $vinculos[0]['tipjor'];
         } else {
             $tipoJornada = '-';
@@ -79,7 +79,7 @@ class Pessoa extends PessoaReplicado
      */
     public static function retornarSetor($codpes)
     {
-        if ($vinculos = Pessoa::listarVinculosAtivos($codpes)) {
+        if ($vinculos = Pessoa::listarVinculosAtivosDeVinculo($codpes)) {
             $nomeAbreviadoSetor = $vinculos[0]['nomabvset'];
         } else {
             $nomeAbreviadoSetor = '-';
