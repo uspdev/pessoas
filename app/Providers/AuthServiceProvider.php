@@ -26,8 +26,22 @@ class AuthServiceProvider extends ServiceProvider
     {
         // $this->registerPolicies();
 
-        Gate::define('pessoas', function ($user) {
-            return $user->hasPermissionTo('pessoas', 'app');
+        // Gate::define('role.pessoas', function ($user) {
+        //     return $user->hasRole('pessoas', 'app');
+        // });
+
+        Gate::define('pessoas.basico', function ($user) {
+            return $user->hasPermissionTo('pessoas.basico', 'app')
+            || $user->hasPermissionTo('pessoas.avancado', 'app')
+            || $user->hasPermissionTo('pessoas.complementar', 'app');
+        });
+
+        Gate::define('pessoas.complementar', function ($user) {
+            return $user->hasPermissionTo('pessoas.complementar', 'app');
+        });
+
+        Gate::define('pessoas.avancado', function ($user) {
+            return $user->hasPermissionTo('pessoas.avancado', 'app');
         });
 
         Gate::define('graduacao', function ($user) {

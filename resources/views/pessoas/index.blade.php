@@ -13,9 +13,9 @@
 
   <br /><br />
 
-  @can('pessoas')
+  @can('pessoas.basico')
     @include('pessoas.partials.search')
     <br>
-    @includewhen(isset($pessoas), 'pessoas.partials.table')
+    @includeWhen(isset($pessoas), 'pessoas.partials.table')
   @endcan
 @endsection

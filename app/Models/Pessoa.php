@@ -56,46 +56,80 @@ class Pessoa extends Model
         }
     }
 
-    public function replicado()
+    /**
+     * Retorna dados replicados de acordo com $campo
+     * 
+     * @param String $campo
+     * @return Mixed
+     */
+    public function replicado(String $campo)
     {
-        $dump = PessoaReplicado::dump($this->codpes);
-
-        if ($dump['nompes'] != $dump['nompesttd']) {
-            $nome = $dump['nompesttd'] . '(' . $dump['nompes'] . ')';
-        } else {
-            $nome = $dump['nompes'];
+        switch ($campo) {
+            case 'nome':
+                $dump = PessoaReplicado::dump($this->codpes);
+                if ($dump['nompes'] != $dump['nompesttd']) {
+                    $nome = $dump['nompesttd'] . '(' . $dump['nompes'] . ')';
+                } else {
+                    $nome = $dump['nompes'];
+                }
+                return $nome;
+                break;
+            case 'documentos':
+                $dump = PessoaReplicado::dump($this->codpes);
+                $documentos[] = "CPF: " . Generic::formatarCpf($dump['numcpf']);
+                $documentos[] = "{$dump['tipdocidf']}: {$dump['numdocfmt']} {$dump['sglorgexdidf']}/{$dump['sglest']}";
+                return $documentos;
+                break;
+            case 'nasc':
+                $dump = PessoaReplicado::dump($this->codpes);
+                return \Carbon\Carbon::parse($dump['dtanas'])->format('d/m/Y');
+                break;
+            case 'genero':
+                $dump = PessoaReplicado::dump($this->codpes);
+                if ($dump['sexpes'] == 'M') {
+                    $genero = 'Masculino';
+                } elseif ($dump['sexpes'] == 'F') {
+                    $genero = 'Feminino';
+                } else {
+                    $genero = 'Não informado';
+                }
+                return $genero;
+                break;
+            case 'telefones':
+                return PessoaReplicado::telefones($this->codpes);
+                break;
+            case 'emails':
+                return PessoaReplicado::emails($this->codpes);
+                break;
+            case 'vinculosAtivos':
+                $vinculos = [];
+                foreach (PessoaReplicado::listarVinculosAtivos($this->codpes) as $v) {
+                    $vinculos[] = $this->vinculoFormatado($v);
+                }
+                return $vinculos;
+                break;
+            case 'vinculosEncerrados':
+                return PessoaReplicado::listarVinculosEncerrados($this->codpes);
+                break;
+            case 'endereco':return PessoaReplicado::retornarEnderecoFormatado($this->codpes);
+                break;
+            case 'ramal':
+                return PessoaReplicado::obterRamalUsp($this->codpes);
+                break;
+            case 'lattes':
+                return ($lattes = Lattes::id($this->codpes))
+                ? 'Lattes: <a href="https://lattes.cnpq.br/' . $lattes . '" target="_lattes">' . $lattes . '</a>'
+                : 'Lattes: -';
+                break;
+            case 'lattesAtualizacao':
+                return Lattes::retornarDataUltimaAlteracao($this->codpes);
+                break;
+            case 'orcid':
+                return ($orcid = Lattes::retornarOrcidID($this->codpes))
+                ? 'Orcid: <a href="' . $orcid . '" target="_orcid">' . str_replace('https://orcid.org/', '', $orcid) . '</a>'
+                : 'Orcid: -';
+                break;
         }
-
-        if ($dump['sexpes'] == 'M') {
-            $genero = 'Masculino';
-        } elseif ($dump['sexpes'] == 'F') {
-            $genero = 'Feminino';
-        } else {
-            $genero = 'Não informado';
-        }
-
-        $documentos[] = "CPF: " . Generic::formatarCpf($dump['numcpf']);
-        $documentos[] = "{$dump['tipdocidf']}: {$dump['numdocfmt']} {$dump['sglorgexdidf']}/{$dump['sglest']}";
-
-        return [
-            'nome' => $nome,
-            'documentos' => $documentos,
-            'nasc' => \Carbon\Carbon::parse($dump['dtanas'])->format('d/m/Y'),
-            'genero' => $genero,
-            'telefones' => PessoaReplicado::telefones($this->codpes),
-            'emails' => PessoaReplicado::emails($this->codpes),
-            'vinculosAtivos' => PessoaReplicado::listarVinculosAtivos($this->codpes),
-            'vinculosEncerrados' => PessoaReplicado::listarVinculosEncerrados($this->codpes),
-            'endereco' => PessoaReplicado::retornarEnderecoFormatado($this->codpes),
-            'ramal' => PessoaReplicado::obterRamalUsp($this->codpes),
-            'lattes' => ($lattes = Lattes::id($this->codpes))
-            ? 'Lattes: <a href="https://lattes.cnpq.br/' . $lattes . '" target="_lattes">' . $lattes . '</a>'
-            : 'Lattes: -',
-            'lattesAtualizacao' => Lattes::retornarDataUltimaAlteracao($this->codpes),
-            'orcid' => ($orcid = Lattes::retornarOrcidID($this->codpes))
-            ? 'Orcid: <a href="' . $orcid . '" target="_orcid">' . str_replace('https://orcid.org/', '', $orcid) . '</a>'
-            : 'Orcid: -',
-        ];
     }
 
     /**
@@ -114,10 +148,6 @@ class Pessoa extends Model
             $ret = $ret . $vinculo['tipvin'];
         }
 
-        if (!empty($vinculo['tipvinext']) && $vinculo['tipvinext'] != 'Servidor') {
-            $ret .= ' <i class="fas fa-angle-right"></i> ' . $vinculo['tipvinext'];
-        }
-
         switch ($vinculo['tipvin']) {
             case 'ALUNOPOS':
                 if ($pg = Posgraduacao::obterVinculoAtivo($this->codpes)) {
@@ -131,10 +161,13 @@ class Pessoa extends Model
                 break;
             case 'SERVIDOR':
             default:
-                if (!empty($vinculo['nomcaa'])) {
-                    $ret .= ' | '.$vinculo['nomcaa'];
+                if (!empty($vinculo['tipvinext']) && $vinculo['tipvinext'] != 'Servidor') {
+                    $ret .= ' <i class="fas fa-angle-right"></i> ' . $vinculo['tipvinext'];
                 }
-                
+                if (!empty($vinculo['nomcaa'])) {
+                    $ret .= ' | ' . $vinculo['nomcaa'];
+                }
+
                 if (!empty($vinculo['nomfnc'])) {
                     $ret .= ' | ' . $vinculo['nomfnc'];
                 }

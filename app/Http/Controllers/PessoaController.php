@@ -10,12 +10,13 @@ class PessoaController extends Controller
 {
     public function index(Request $request)
     {
+        $this->authorize('pessoas.basico');
+
         # Caso 1: Nenhuma busca feita ainda, só mostramos o formulário
         if (empty($request->codpes) && empty($request->nompes) && empty($request->tipvinext) && empty($request->codset)) {
             return view('pessoas.index');
         }
 
-        $this->authorize('pessoas');
         # Caso 2: Busca apenas por um campo
         $campos = ['codpes', 'nompes', 'tipvinext', 'codset'];
         $contaQuantosCamposPreenchidos = 0;
@@ -86,7 +87,7 @@ class PessoaController extends Controller
 
     public function show(Request $request, $codpes)
     {
-        $this->authorize('pessoas');
+        $this->authorize('pessoas.basico');
         /* Verificamos se a pessoa existe no replicado */
         if (empty(\Uspdev\Replicado\Pessoa::dump($codpes))) {
             $request->session()->flash('alert-danger', 'Pessoa não encontrada');

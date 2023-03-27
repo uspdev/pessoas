@@ -4,5 +4,5 @@
   @include('pessoas.partials.search')
   @include('pessoas.partials.show.replicado')
   <br>
-  @include('pessoas.partials.show.campos_extras')
+  @includeWhen(Gate::check('pessoas.complementar'),'pessoas.partials.show.campos_extras')
 @stop
