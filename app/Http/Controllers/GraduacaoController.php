@@ -13,6 +13,7 @@ class GraduacaoController extends Controller
     public function relatorioPorNomes(Request $request)
     {
         $this->authorize('graduacao');
+        \UspTheme::activeUrl('graduacao/relatorio/nomes');
 
         $pessoas = [];
         $naoEncontrados = [];
@@ -63,6 +64,9 @@ class GraduacaoController extends Controller
 
     public function disciplinas(Request $request, $codcur)
     {
+        $this->authorize('graduacao');
+        \UspTheme::activeUrl('graduacao/cursos');
+        
         $codhab = $request->codhab;
         foreach (Graduacao::listarCursosHabilitacoes() as $curso) {
             if ($curso['codcur'] == $codcur && $curso['codhab'] == $codhab) {
