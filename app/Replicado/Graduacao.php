@@ -10,7 +10,11 @@ use Uspdev\Replicado\Replicado as Config;
 class Graduacao extends GraduacaoReplicado
 {
 
-    // descrição de cada tipoObrigatoriedade da tabela GRADECURRICULAR
+    /**
+     * tipoObrigatoriedade da tabela GRADECURRICULAR
+     * 
+     * Conforme descrito na documentação
+     */
     public static $tipobg = [
         'O' => 'Obrigatória',
         'E' => 'Eletiva',
@@ -18,6 +22,27 @@ class Graduacao extends GraduacaoReplicado
         'L' => 'Optativa livre',
         'F' => 'Facultativa',
         'C' => 'Complementar',
+    ];
+
+    /**
+     * tipoHabilitacao da tabela HABILITACAOGR
+     * 
+     * Os tipos foram obtidos consultando o BD da EESC e 
+     * os que tem ?? não são descirtos na documentação
+     */
+    public static $tiphab = [
+        'B' => 'Grau principal exclusivo',
+        'G' => 'Grau principal com sequência opcional',
+        'H' => 'H ??',
+        'I' => 'I ??',
+        'J' => 'J ??',
+        'L' => 'L ??',
+        'M' => 'M ??',
+        'N' => 'N ??',
+        'O' => 'O ??',
+        'P' => 'P ??',
+        'S' => 'S ??',
+        'U' => 'Núcleo básico ou geral',
     ];
 
     /**
@@ -30,9 +55,10 @@ class Graduacao extends GraduacaoReplicado
      */
     public static function listarCursosHabilitacoes()
     {
-        $query = " SELECT CC.codpesdct codpescoord, CC.dtainicdn, CC.dtafimcdn, P.nompes nompescoord, C.*, H.* FROM CURSOGR C
+        $query = " SELECT CC.codpesdct codpescoord, CC.dtainicdn, CC.dtafimcdn, P.nompes nompescoord,
+            C.*, H.* FROM CURSOGR C
             INNER JOIN HABILITACAOGR H ON C.codcur = H.codcur
-            INNER JOIN CURSOGRCOORDENADOR CC ON CC.codcur = C.codcur AND CC.codhab = H.codhab 
+            INNER JOIN CURSOGRCOORDENADOR CC ON CC.codcur = C.codcur AND CC.codhab = H.codhab
             INNER JOIN PESSOA P ON P.codpes = CC.codpesdct
             WHERE C.codclg IN (__codundclgs__)
                 AND CC.dtafimcdn > GETDATE() -- mandato vigente do coordenador

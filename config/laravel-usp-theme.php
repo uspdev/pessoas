@@ -19,7 +19,7 @@ $menu = [
             [
                 'text' => 'Cursos',
                 'url' => 'graduacao/cursos',
-                'can' => 'admin',
+                'can' => 'graduacao',
             ],
         ],
         'can' => 'graduacao',

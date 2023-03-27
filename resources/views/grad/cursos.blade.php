@@ -13,6 +13,8 @@
         <th>Habilitação</th>
         <th>Coordenador</th>
         <th>Período</th>
+        <th>Tipo Habilitação</th>
+        <th>Total vagas curso</th>
       </tr>
     </thead>
     <tbody>
@@ -31,7 +33,8 @@
             ({{ $u->data_mes($curso['dtainicdn']) }} a {{ $u->data_mes($curso['dtafimcdn']) }})
           </td>
           <td>{{ $curso['perhab'] }}</td>
-          {{-- <td>{{ $curso['totvag'] }}</td> --}}
+          <td>{{ App\Replicado\Graduacao::$tiphab[$curso['tiphab']] }}</td>
+          <td class="text-center">{{ $curso['totvag'] }}</td>
         </tr>
       @endforeach
     </tbody>
