@@ -18,6 +18,24 @@
   </style>
 @endsection
 
+@section('javascripts_bottom')
+  @parent
+  <script>
+    jQuery(function() {
+      // spinner para ser adicionado em botão de submit de form
+      $('.btn-spinner').on('click', function() {
+        $(this).prop("disabled", true);
+        // add spinner to button
+        $(this).html(
+          `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Carregando...`
+        );
+        $(this).closest('form').submit()
+      })
+
+    })
+  </script>
+@endsection
+
 {{-- datatables  --}}
 @section('javascripts_bottom')
   @parent
@@ -27,7 +45,7 @@
        * Datatables, botoes excel e csv, sem paginação,
        * topo em 1 linha, alinhado esquerda
        * @author Masaki K Neto, em 23/3/2023
-      */
+       */
       var dtSimples = $('.datatable-simples').DataTable({
         dom: '<"row"<"col-md-12 form-inline"<"mr-2"f>B<"ml-3"i>>>t',
         order: [],

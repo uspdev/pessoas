@@ -5,13 +5,13 @@
     Cursos
   </h4>
 
-
   <table class="table datatable-simples table-sm table-hover">
     <thead>
       <tr>
+        <th></th>
         <th>Curso</th>
         <th>Habilitação</th>
-        <th>Coordenador</th>
+        {{-- <th>Coordenador</th> --}}
         <th>Período</th>
         <th>Tipo Habilitação</th>
         <th>Total vagas curso</th>
@@ -19,19 +19,22 @@
     </thead>
     <tbody>
       @foreach ($cursos as $curso)
-        {{-- @dd($curso) --}}
         <tr>
           <td>
-            <a href="graduacao/cursos/{{ $curso['codcur'] }}/disciplinas?codhab={{ $curso['codhab'] }}">
-              ({{ $curso['codcur'] }})
-              {{ $curso['nomcur'] }}
-            </a>
+            <a class="btn btn-sm btn-outline-primary"
+              href="{{ route('graduacao.gradeCurricular', [$curso['codcur'], $curso['codhab']]) }}">Grade</a>
+            <a class="btn btn-sm btn-outline-primary"
+              href="{{ route('graduacao.turmas', [$curso['codcur'], $curso['codhab']]) }}">Turmas</a>
+          </td>
+          <td>
+            ({{ $curso['codcur'] }})
+            {{ $curso['nomcur'] }}
           </td>
           <td>({{ $curso['codhab'] }}) {{ $curso['nomhab'] }}</td>
-          <td>
+          {{-- <td>
             <a href="pessoas/{{ $curso['codpescoord'] }}">{{ $curso['nompescoord'] }}</a>
             ({{ $u->data_mes($curso['dtainicdn']) }} a {{ $u->data_mes($curso['dtafimcdn']) }})
-          </td>
+          </td> --}}
           <td>{{ $curso['perhab'] }}</td>
           <td>{{ App\Replicado\Graduacao::$tiphab[$curso['tiphab']] }}</td>
           <td class="text-center">{{ $curso['totvag'] }}</td>

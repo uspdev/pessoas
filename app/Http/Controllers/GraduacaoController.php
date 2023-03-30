@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Replicado\Graduacao;
 use App\Replicado\Lattes;
 use App\Replicado\Pessoa;
-use Uspdev\Replicado\Uteis;
-use App\Replicado\Graduacao;
 use Illuminate\Http\Request;
+use Uspdev\Replicado\Uteis;
 
 class GraduacaoController extends Controller
 {
@@ -20,10 +20,11 @@ class GraduacaoController extends Controller
 
         if ($request->nomes) {
             $nomes = $request->nomes;
-            $nomes = str_replace("\r", '', $nomes);
+            $nomes = str_replace("\r", '', $nomes); // remove carriage return, mantém new line
             $nomes = explode(PHP_EOL, $nomes);
-            $nomes = array_unique($nomes);
-            $nomes = array_filter($nomes);
+            $nomes = array_filter($nomes); // remove elementos empty()
+            $nomes = array_map('trim', $nomes);
+            $nomes = array_unique($nomes); // sem repetidos
 
             foreach ($nomes as $nome) {
                 // vamos procurar 1o por nome exato e depois por fonetico
@@ -47,7 +48,11 @@ class GraduacaoController extends Controller
             }
         }
 
-        return view('grad.index', ['pessoas' => $pessoas, 'nomes' => $request->nomes, 'naoEncontrados' => $naoEncontrados]);
+        return view('grad.index', [
+            'pessoas' => $pessoas,
+            'nomes' => $request->nomes,
+            'naoEncontrados' => $naoEncontrados,
+        ]);
     }
 
     public function cursos()
@@ -55,25 +60,82 @@ class GraduacaoController extends Controller
         $this->authorize('graduacao');
         \UspTheme::activeUrl('graduacao/cursos');
 
-
         $cursos = Graduacao::listarCursosHabilitacoes();
         $u = New Uteis;
 
         return view('grad.cursos', compact('cursos', 'u'));
     }
 
-    public function disciplinas(Request $request, $codcur)
+    public function gradeCurricular(Request $request, int $codcur, int $codhab)
     {
         $this->authorize('graduacao');
         \UspTheme::activeUrl('graduacao/cursos');
-        
-        $codhab = $request->codhab;
+
         foreach (Graduacao::listarCursosHabilitacoes() as $curso) {
             if ($curso['codcur'] == $codcur && $curso['codhab'] == $codhab) {
                 break;
             }
         }
-        $disciplinas = Graduacao::listarDisciplinasCurriculo($codcur, $codhab, 'C');
-        return view('grad.disciplinas', compact('disciplinas', 'curso'));
+
+        $disciplinas = Graduacao::listarDisciplinasCurriculo($codcur, $codhab);
+        $disciplinas = collect($disciplinas)->sortBy(['numsemidl', ['tipobg', 'desc']]);
+
+        return view('grad.grade-curricular', compact('disciplinas', 'curso'));
+    }
+
+    public function turmas(Request $request, int $codcur, int $codhab)
+    {
+        $this->authorize('graduacao');
+        \UspTheme::activeUrl('graduacao/cursos');
+
+        $semestres = ['20232', '20231', '20222', '20221', '20212', '20211'];
+        $semestreFim = date('Y') . (date('m') < 7 ? 1 : 2);
+        $semestreFim = $request->semestreFim ? $request->semestreFim : $semestreFim;
+
+        $semestreIni = $semestres[array_search($semestreFim, $semestres)+1];
+        $semestreIni = $request->semestreIni ? $request->semestreIni : $semestreIni;
+
+        foreach (Graduacao::listarCursosHabilitacoes() as $curso) {
+            if ($curso['codcur'] == $codcur && $curso['codhab'] == $codhab) {
+                break;
+            }
+        }
+
+        $keyIni = array_search($semestreIni, $semestres);
+        $keyFim = array_search($semestreFim, $semestres);
+        if ($keyFim > $keyIni) {
+            $tmp = $keyIni;
+            $keyIni = $keyFim;
+            $keyFim = $tmp;
+        }
+        $turmas = [];
+        for ($i = $keyFim; $i <= $keyIni; $i++) {
+            $turmas = array_merge($turmas, Graduacao::listarTurmas($codcur, $codhab, $semestres[$i]));
+        }
+        $nomes = [];
+        $AtivDidaticas = [];
+        foreach ($turmas as &$turma) {
+            $turma['ministrantes'] = Graduacao::listarMinistrante($turma);
+            $turma['ativDidaticas'] = Graduacao::listarAtivDidaticas($turma);
+            if ($turma['ativDidaticas']) {
+                $nomes = array_merge($nomes, $turma['ativDidaticas']);
+            } else {
+                $nomes = array_merge($nomes, $turma['ministrantes']);
+            }
+        }
+        $nomes = array_column($nomes, 'nompes');
+        $nomes = array_unique($nomes); // sem repetidos
+        $nomes = implode(PHP_EOL, $nomes);
+
+        return view('grad.turmas', [
+            // 'codtur' => $codtur,
+            'semestreFim' => $semestreFim,
+            'semestreIni' => $semestreIni,
+            'curso' => $curso,
+            'turmas' => $turmas,
+            'graduacao' => Graduacao::class,
+            'turmaSelect' => $semestres,
+            'nomes' => $nomes,
+        ]);
     }
 }

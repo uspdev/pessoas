@@ -11,18 +11,18 @@ $menu = [
     ],
     [
         'text' => 'Graduação',
+        'can' => 'graduacao',
         'submenu' => [
-            [
-                'text' => 'Relatório por nomes',
-                'url' => 'graduacao/relatorio/nomes',
-            ],
             [
                 'text' => 'Cursos',
                 'url' => 'graduacao/cursos',
                 'can' => 'graduacao',
+            ], [
+                'text' => 'Relatório por nomes',
+                'url' => 'graduacao/relatorio/nomes',
+                'can' => 'graduacao',
             ],
         ],
-        'can' => 'graduacao',
     ],
 ];
 $right_menu = [

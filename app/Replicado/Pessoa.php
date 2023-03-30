@@ -42,7 +42,7 @@ class Pessoa extends PessoaReplicado
      * @param $designados Se false não retorna designados
      * @return Array
      * @author Masaki K Neto, em 14/3/2022
-     * @author Masaki K Neto, modificado em 14/3/2023
+     * @author Masaki K Neto, modificado em 30/3/2023
      */
     public static function listarVinculosAtivosDeVinculo($codpes, $designados = true)
     {
@@ -50,7 +50,7 @@ class Pessoa extends PessoaReplicado
 
         $query = "SELECT S.nomabvset, S.nomset, V.*
             FROM VINCULOPESSOAUSP V
-                LEFT JOIN SETOR S ON S.codset = V.codset
+                INNER JOIN SETOR S ON S.codset = V.codset
             WHERE codpes = convert(INT, :codpes)
                 AND sitatl = 'A'
                 $queryDesignados
