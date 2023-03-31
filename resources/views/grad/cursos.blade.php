@@ -5,7 +5,7 @@
     Cursos
   </h4>
 
-  <table class="table datatable-simples table-sm table-hover">
+  <table class="table table-sm table-hover datatable-simples">
     <thead>
       <tr>
         <th></th>
@@ -23,7 +23,7 @@
           <td>
             <a class="btn btn-sm btn-outline-primary"
               href="{{ route('graduacao.gradeCurricular', [$curso['codcur'], $curso['codhab']]) }}">Grade</a>
-            <a class="btn btn-sm btn-outline-primary"
+            <a class="btn btn-sm btn-outline-primary spinner"
               href="{{ route('graduacao.turmas', [$curso['codcur'], $curso['codhab']]) }}">Turmas</a>
           </td>
           <td>
