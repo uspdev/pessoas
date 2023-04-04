@@ -77,7 +77,7 @@ class GraduacaoController extends Controller
             }
         }
 
-        $disciplinas = Graduacao::listarDisciplinasCurriculo($codcur, $codhab);
+        $disciplinas = Graduacao::listarGradeCurricular($codcur, $codhab);
         $disciplinas = collect($disciplinas)->sortBy(['numsemidl', ['tipobg', 'desc']]);
 
         return view('grad.grade-curricular', compact('disciplinas', 'curso'));
@@ -125,6 +125,7 @@ class GraduacaoController extends Controller
         }
         $nomes = array_column($nomes, 'nompes');
         $nomes = array_unique($nomes); // sem repetidos
+        $nomesCount = count($nomes);
         $nomes = implode(PHP_EOL, $nomes);
 
         return view('grad.turmas', [
@@ -136,6 +137,7 @@ class GraduacaoController extends Controller
             'graduacao' => Graduacao::class,
             'turmaSelect' => $semestres,
             'nomes' => $nomes,
+            'nomesCount' => $nomesCount,
         ]);
     }
 }

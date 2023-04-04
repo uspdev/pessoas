@@ -111,6 +111,8 @@ class Graduacao extends GraduacaoReplicado
     }
 
     /**
+     * Obtém o curso ativo de um aluno de graduação, procurando em todas as unidades disponíveis na replicação
+     * 
      * Modificado de obterCursoAtivo para incluir a sigla da unidade e procurar em qualquer unidade
      *
      */
@@ -145,7 +147,7 @@ class Graduacao extends GraduacaoReplicado
      * @param Int $codhab
      * @return Array(coddis, nomdis, verdis, numsemidl, tipobg)
      */
-    public static function listarDisciplinasCurriculo($codcur, $codhab)
+    public static function listarGradeCurricular($codcur, $codhab)
     {
         // estava dando erro no TOP na FFLCH. Então tirei o top e incuí
         // o dtafimcrl para pegar o ativo.
@@ -180,7 +182,7 @@ class Graduacao extends GraduacaoReplicado
      */
     public static function listarTurmas(int $codcur, int $codhab, $semestre)
     {
-        $listaCoddis = array_column(self::listarDisciplinasCurriculo($codcur, $codhab), 'coddis');
+        $listaCoddis = array_column(self::listarGradeCurricular($codcur, $codhab), 'coddis');
         $strCoddis = implode("','", $listaCoddis);
 
         // turmas baseadas em habilturma

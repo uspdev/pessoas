@@ -7,7 +7,9 @@
     <form method="POST" action="{{ route('graduacao.relatorio.porNomes.post') }}">
       @csrf
       <input type="hidden" name="nomes" value="{!! $nomes !!}">
-      <button class="btn btn-outline-info btn-spinner" type="submit">Relatório por nomes</button>
+      <button class="btn btn-outline-info btn-spinner" type="submit" title="{{ $nomesCount }} nomes não repetidos">
+        Relatório por nomes <span class="badge badge-pill badge-primary">{{ $nomesCount }}</span>
+      </button>
     </form>
 
     <div class="border border-primary rounded ml-3" style="padding-top: 7px;">
