@@ -6349,12 +6349,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/uspdev/senhaunica-socialite.git",
-                "reference": "6ea1efd4e1aae65b22aadbb08cf596c9a02c7034"
+                "reference": "440fb78ff3dac259eb46715d362e350bd9bc02f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uspdev/senhaunica-socialite/zipball/6ea1efd4e1aae65b22aadbb08cf596c9a02c7034",
-                "reference": "6ea1efd4e1aae65b22aadbb08cf596c9a02c7034",
+                "url": "https://api.github.com/repos/uspdev/senhaunica-socialite/zipball/440fb78ff3dac259eb46715d362e350bd9bc02f0",
+                "reference": "440fb78ff3dac259eb46715d362e350bd9bc02f0",
                 "shasum": ""
             },
             "require": {
@@ -6397,7 +6397,7 @@
                 "issues": "https://github.com/uspdev/senhaunica-socialite/issues",
                 "source": "https://github.com/uspdev/senhaunica-socialite/tree/permissions"
             },
-            "time": "2023-04-11T19:16:10+00:00"
+            "time": "2023-04-12T10:42:34+00:00"
         },
         {
             "name": "uspdev/utils",
