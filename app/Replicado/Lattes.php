@@ -84,8 +84,11 @@ class Lattes extends LattesReplicado
         $client = new Client();
         $response = $client->request('GET', $curriculoUrl . $id, ['allow_redirects' => false]);
         $headers = $response->getHeader('Location');
+
         parse_str($headers[0], $parsedUrl);
-        $idk = $parsedUrl['id'];
+        // dd($id, $response, $headers[0], $parsedUrl);
+
+        $idk = $parsedUrl['id'] ?? null;
 
         $foto = file_get_contents($fotoUrl . $idk);
         if ($saveLocation) {

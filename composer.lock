@@ -2895,21 +2895,21 @@
         },
         {
             "name": "psr/http-client",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-client.git",
-                "reference": "2dfb5f6c5eff0e91e20e913f8c5452ed95b86621"
+                "reference": "0955afe48220520692d2d09f7ab7e0f93ffd6a31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-client/zipball/2dfb5f6c5eff0e91e20e913f8c5452ed95b86621",
-                "reference": "2dfb5f6c5eff0e91e20e913f8c5452ed95b86621",
+                "url": "https://api.github.com/repos/php-fig/http-client/zipball/0955afe48220520692d2d09f7ab7e0f93ffd6a31",
+                "reference": "0955afe48220520692d2d09f7ab7e0f93ffd6a31",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.0 || ^8.0",
-                "psr/http-message": "^1.0"
+                "psr/http-message": "^1.0 || ^2.0"
             },
             "type": "library",
             "extra": {
@@ -2929,7 +2929,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
+                    "homepage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Common interface for HTTP clients",
@@ -2941,27 +2941,27 @@
                 "psr-18"
             ],
             "support": {
-                "source": "https://github.com/php-fig/http-client/tree/master"
+                "source": "https://github.com/php-fig/http-client/tree/1.0.2"
             },
-            "time": "2020-06-29T06:28:15+00:00"
+            "time": "2023-04-10T20:12:12+00:00"
         },
         {
             "name": "psr/http-factory",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-factory.git",
-                "reference": "12ac7fcd07e5b077433f5f2bee95b3a771bf61be"
+                "reference": "e616d01114759c4c489f93b099585439f795fe35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/12ac7fcd07e5b077433f5f2bee95b3a771bf61be",
-                "reference": "12ac7fcd07e5b077433f5f2bee95b3a771bf61be",
+                "url": "https://api.github.com/repos/php-fig/http-factory/zipball/e616d01114759c4c489f93b099585439f795fe35",
+                "reference": "e616d01114759c4c489f93b099585439f795fe35",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.0.0",
-                "psr/http-message": "^1.0"
+                "psr/http-message": "^1.0 || ^2.0"
             },
             "type": "library",
             "extra": {
@@ -2981,7 +2981,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
+                    "homepage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Common interfaces for PSR-7 HTTP message factories",
@@ -2996,9 +2996,9 @@
                 "response"
             ],
             "support": {
-                "source": "https://github.com/php-fig/http-factory/tree/master"
+                "source": "https://github.com/php-fig/http-factory/tree/1.0.2"
             },
-            "time": "2019-04-30T12:38:16+00:00"
+            "time": "2023-04-10T20:10:41+00:00"
         },
         {
             "name": "psr/http-message",
@@ -3156,16 +3156,16 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.11.14",
+            "version": "v0.11.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "8c2e264def7a8263a68ef6f0b55ce90b77d41e17"
+                "reference": "5350ce0ec8ecf2c5b5cf554cd2496f97b444af85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/8c2e264def7a8263a68ef6f0b55ce90b77d41e17",
-                "reference": "8c2e264def7a8263a68ef6f0b55ce90b77d41e17",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/5350ce0ec8ecf2c5b5cf554cd2496f97b444af85",
+                "reference": "5350ce0ec8ecf2c5b5cf554cd2496f97b444af85",
                 "shasum": ""
             },
             "require": {
@@ -3226,9 +3226,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.11.14"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.11.15"
             },
-            "time": "2023-03-28T03:41:01+00:00"
+            "time": "2023-04-07T21:57:09+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -6100,21 +6100,22 @@
         },
         {
             "name": "uspdev/laravel-tools",
-            "version": "1.2.6",
+            "version": "1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uspdev/laravel-tools.git",
-                "reference": "f7f859b807af32e09bb575d7283892174ec0e48c"
+                "reference": "8d299d3cf64f8c60fd7f2eb9f1cd507032e504c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uspdev/laravel-tools/zipball/f7f859b807af32e09bb575d7283892174ec0e48c",
-                "reference": "f7f859b807af32e09bb575d7283892174ec0e48c",
+                "url": "https://api.github.com/repos/uspdev/laravel-tools/zipball/8d299d3cf64f8c60fd7f2eb9f1cd507032e504c0",
+                "reference": "8d299d3cf64f8c60fd7f2eb9f1cd507032e504c0",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.3",
-                "rap2hpoutre/laravel-log-viewer": "^2.2"
+                "rap2hpoutre/laravel-log-viewer": "^2.2",
+                "ybr-nx/laravel-mariadb": "^1.0"
             },
             "type": "library",
             "extra": {
@@ -6145,9 +6146,9 @@
             "description": "Coleção de ferramentas para incrementar o Laravel",
             "support": {
                 "issues": "https://github.com/uspdev/laravel-tools/issues",
-                "source": "https://github.com/uspdev/laravel-tools/tree/1.2.6"
+                "source": "https://github.com/uspdev/laravel-tools/tree/1.3.0"
             },
-            "time": "2022-12-23T13:48:01+00:00"
+            "time": "2023-04-11T17:36:23+00:00"
         },
         {
             "name": "uspdev/laravel-usp-faker",
@@ -6198,16 +6199,16 @@
         },
         {
             "name": "uspdev/laravel-usp-theme",
-            "version": "2.6.1",
+            "version": "2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uspdev/laravel-usp-theme.git",
-                "reference": "555b84d7c4af9c06fd585dcc49992e7c7d335cb9"
+                "reference": "78d5ccf2ca799b9cd2bc15fa7d366d9ac5ec3bfa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uspdev/laravel-usp-theme/zipball/555b84d7c4af9c06fd585dcc49992e7c7d335cb9",
-                "reference": "555b84d7c4af9c06fd585dcc49992e7c7d335cb9",
+                "url": "https://api.github.com/repos/uspdev/laravel-usp-theme/zipball/78d5ccf2ca799b9cd2bc15fa7d366d9ac5ec3bfa",
+                "reference": "78d5ccf2ca799b9cd2bc15fa7d366d9ac5ec3bfa",
                 "shasum": ""
             },
             "type": "library",
@@ -6242,9 +6243,9 @@
             "description": "usp theme for laravel",
             "support": {
                 "issues": "https://github.com/uspdev/laravel-usp-theme/issues",
-                "source": "https://github.com/uspdev/laravel-usp-theme/tree/2.6.1"
+                "source": "https://github.com/uspdev/laravel-usp-theme/tree/2.7.1"
             },
-            "time": "2022-11-30T17:39:32+00:00"
+            "time": "2023-04-11T15:02:55+00:00"
         },
         {
             "name": "uspdev/laravel-usp-validators",
@@ -6348,12 +6349,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/uspdev/senhaunica-socialite.git",
-                "reference": "d5355717a43e03e69c9cef9043a6ce355f5ed990"
+                "reference": "6ea1efd4e1aae65b22aadbb08cf596c9a02c7034"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uspdev/senhaunica-socialite/zipball/d5355717a43e03e69c9cef9043a6ce355f5ed990",
-                "reference": "d5355717a43e03e69c9cef9043a6ce355f5ed990",
+                "url": "https://api.github.com/repos/uspdev/senhaunica-socialite/zipball/6ea1efd4e1aae65b22aadbb08cf596c9a02c7034",
+                "reference": "6ea1efd4e1aae65b22aadbb08cf596c9a02c7034",
                 "shasum": ""
             },
             "require": {
@@ -6396,7 +6397,7 @@
                 "issues": "https://github.com/uspdev/senhaunica-socialite/issues",
                 "source": "https://github.com/uspdev/senhaunica-socialite/tree/permissions"
             },
-            "time": "2023-03-20T14:13:18+00:00"
+            "time": "2023-04-11T19:16:10+00:00"
         },
         {
             "name": "uspdev/utils",
@@ -6695,6 +6696,59 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.11.0"
             },
             "time": "2022-06-03T18:03:27+00:00"
+        },
+        {
+            "name": "ybr-nx/laravel-mariadb",
+            "version": "1.0.20",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ybr-nx/laravel-mariadb.git",
+                "reference": "1dd893432237e28d5d43d1de110be925602dd37d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ybr-nx/laravel-mariadb/zipball/1dd893432237e28d5d43d1de110be925602dd37d",
+                "reference": "1dd893432237e28d5d43d1de110be925602dd37d",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": ">=5.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "YbrNX\\MariaDB\\MariaDBServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "YbrNX\\MariaDB\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "EUPL-1.2"
+            ],
+            "authors": [
+                {
+                    "name": "Ingmar Aasoja",
+                    "email": "ingmar@aasoja.ee"
+                }
+            ],
+            "description": "Add MariaDB JSON select support to Laravel",
+            "keywords": [
+                "database",
+                "json",
+                "laravel",
+                "mariadb"
+            ],
+            "support": {
+                "issues": "https://github.com/ybr-nx/laravel-mariadb/issues",
+                "source": "https://github.com/ybr-nx/laravel-mariadb/tree/1.0.20"
+            },
+            "time": "2019-09-11T05:18:47+00:00"
         }
     ],
     "packages-dev": [

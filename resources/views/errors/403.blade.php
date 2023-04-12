@@ -1,12 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-  <h2 class="text-danger">403</h2>
+@auth
+<div>Olá <b>{{ Auth()->user()->name }}!</b></div>
+@else
+<div><b>Faça o <a href="login">Login</a> com a senha única para acessar esse sistema.</b></div>
+@endauth
 
-  Não foi possível acessar esse recurso.<br>
-  @if (Auth::user())
-  <a href="">Voltar</a>
-  @else
-    Faça <a href="login">login</a> para acessar esse recurso.
-  @endif
+<br />
+Esse projeto, consiste em uma interface web para tornar o acesso aos dados mínimos de alunos, funcionários e docentes
+mais fácil, para os setores/pessoas que tem essa permissão.
+
+<br /><br />
 @endsection

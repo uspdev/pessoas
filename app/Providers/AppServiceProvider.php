@@ -19,16 +19,16 @@ class AppServiceProvider extends ServiceProvider
         // mariadb suport
         Schema::defaultStringLength(191);
 
-        Permission::firstOrCreate(['guard_name' => 'app', 'name' => 'pessoas.basico']);
-        Permission::firstOrCreate(['guard_name' => 'app', 'name' => 'pessoas.avancado']);
-        Permission::firstOrCreate(['guard_name' => 'app', 'name' => 'pessoas.complementar']);
+        Permission::firstOrCreate(['name' => 'pessoas.basico']);
+        Permission::firstOrCreate(['name' => 'pessoas.avancado']);
+        Permission::firstOrCreate(['name' => 'pessoas.complementar']);
 
         // criando role e tribuindo permissões a ela
-        $role = Role::firstOrCreate(['guard_name' => 'app', 'name' => 'pessoas']);
+        $role = Role::firstOrCreate(['name' => 'pessoas']);
         $role->givePermissionTo(['pessoas.basico','pessoas.avancado','pessoas.complementar']);
 
-        Permission::firstOrCreate(['guard_name' => 'app', 'name' => 'graduacao']);
-        Permission::firstOrCreate(['guard_name' => 'app', 'name' => 'posgraduacao']);
+        Permission::firstOrCreate(['name' => 'graduacao']);
+        Permission::firstOrCreate(['name' => 'posgraduacao']);
     }
 
     /**

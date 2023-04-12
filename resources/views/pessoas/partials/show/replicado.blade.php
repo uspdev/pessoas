@@ -73,9 +73,18 @@
       {{-- Coluna da direita - informações pessoais --}}
       <div class="col-md-6">
         <div class="float-right ml-2">
-          <div class="font-weight-bold">Foto USP</div>
-          <img src="data:image/png;base64, {{ $foto }}" alt="foto">
+          <div>
+            <div class="font-weight-bold">Foto USP</div>
+            <img src="data:image/png;base64, {{ $foto }}" width="160px" alt="foto">
+          </div>
+          @if($fotoLattes)
+          <div class="mt-3">
+            <div class="font-weight-bold">Foto Lattes</div>
+            <img src="data:image/png;base64, {{ $fotoLattes }}" width="160px" alt="foto">
+          </div>
+          @endif
         </div>
+
 
         <div class="mb-3">
           <div class="font-weight-bold">Genero</div>

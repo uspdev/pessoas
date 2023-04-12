@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PessoaRequest;
 use App\Models\Pessoa;
+use App\Replicado\Lattes;
 use Illuminate\Http\Request;
 
 class PessoaController extends Controller
@@ -102,9 +103,14 @@ class PessoaController extends Controller
             $pessoa->save();
         }
 
+        if (Lattes::id($pessoa->codpes)) {
+            $fotoLattes = base64_encode(Lattes::obterFoto(Lattes::id($pessoa->codpes)));
+        } else {
+            $fotoLattes = '';
+        }
         $foto = \Uspdev\Wsfoto::obter($codpes);
 
-        return view('pessoas.show', compact('pessoa', 'foto'));
+        return view('pessoas.show', compact('pessoa', 'foto', 'fotoLattes'));
     }
 
     public function edit($codpes)

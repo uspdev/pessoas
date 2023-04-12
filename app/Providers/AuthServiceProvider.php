@@ -31,25 +31,25 @@ class AuthServiceProvider extends ServiceProvider
         // });
 
         Gate::define('pessoas.basico', function ($user) {
-            return $user->hasPermissionTo('pessoas.basico', 'app')
-            || $user->hasPermissionTo('pessoas.avancado', 'app')
-            || $user->hasPermissionTo('pessoas.complementar', 'app');
+            return $user->hasPermissionTo('pessoas.basico')
+            || $user->hasPermissionTo('pessoas.avancado')
+            || $user->hasPermissionTo('pessoas.complementar');
         });
 
-        Gate::define('pessoas.complementar', function ($user) {
-            return $user->hasPermissionTo('pessoas.complementar', 'app');
-        });
+        // Gate::define('pessoas.complementar', function ($user) {
+        //     return $user->hasPermissionTo('pessoas.complementar', 'app');
+        // });
 
-        Gate::define('pessoas.avancado', function ($user) {
-            return $user->hasPermissionTo('pessoas.avancado', 'app');
-        });
+        // Gate::define('pessoas.avancado', function ($user) {
+        //     return $user->hasPermissionTo('pessoas.avancado', 'app');
+        // });
 
-        Gate::define('graduacao', function ($user) {
-            return $user->hasPermissionTo('graduacao', 'app');
-        });
+        // Gate::define('graduacao', function ($user) {
+        //     return $user->hasPermissionTo('graduacao', 'app');
+        // });
 
-        Gate::define('posgraduacao', function ($user) {
-            return $user->hasPermissionTo('posgraduacao', 'app');
-        });
+        // Gate::define('posgraduacao', function ($user) {
+        //     return $user->hasPermissionTo('posgraduacao', 'app');
+        // });
     }
 }

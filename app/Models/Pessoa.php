@@ -58,7 +58,7 @@ class Pessoa extends Model
 
     /**
      * Retorna dados replicados de acordo com $campo
-     * 
+     *
      * @param String $campo
      * @return Mixed
      */
@@ -155,7 +155,11 @@ class Pessoa extends Model
                 }
                 break;
             case 'ALUNOGR':
-                if ($gr = Graduacao::obterCursoAtivoUnidades($this->codpes)) {
+                $gr = Graduacao::obterCursoAtivoUnidades($this->codpes);
+                if (empty($gr)) {
+                    $gr = Graduacao::obterCursoFinalizadoUnidades($this->codpes);
+                }
+                if ($gr) {
                     $ret .= ' | ' . $gr['sglund'] . ' | curso: ' . $gr['nomcur'] . ', hab: ' . $gr['nomhab']; // . ', área: ' . $pg['nomare'] . ', nível: ' . $pg['nivpgm'] . ', orientador: <a href="pessoas/' . $pg['codpesori'] . '">' . $pg['nompesori'] . '</a>' . ', ingresso: ' . date('d/m/Y', strtotime($vinculo['dtainivin']));
                 }
                 break;
