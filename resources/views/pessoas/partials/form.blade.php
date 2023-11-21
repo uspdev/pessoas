@@ -33,6 +33,7 @@
                 <div class="form-group">
                     <label for="data_nascimento" class="required"><b>Data de nascimento: </b></label>
                     <input type="text" class="form-control datepicker data" id="data_nascimento" name="data_nascimento" value="{{old('data_nascimento',$pessoa->data_nascimento)}}">
+                    <small>dd/mm/yyyy</small>
                 </div>
             </div>   
 
@@ -68,6 +69,7 @@
                 <div class="form-group">
                     <label for="cpf" class="required"><b>CPF: </b></label>
                     <input type="text" class="form-control cpf" id="cpf" name="cpf" value="{{old('cpf',$pessoa->cpf)}}">
+                    <small>999.999.999-99<small>
                 </div>
             </div>
 
@@ -101,6 +103,7 @@
                 <div class="form-group">
                     <label for="validade_visto" class="required"><b>Data de validade do visto: </b></label>
                     <input type="text" class="form-control datepicker data" id="validade_visto" name="validade_visto" value="{{old('validade_visto',$pessoa->validade_visto)}}">
+                    <small>dd/mm/yyyy</small>
                 </div>
             </div>   
 
@@ -137,6 +140,7 @@
                 <div class="form-group">
                     <label for="cep" class="required"><b>CEP: </b></label>
                     <input type="text" class="form-control cep" id="cep" name="cep" value="{{old('cep',$pessoa->cep)}}">
+                    <small>99999-999 ou 99.999-999</small>
                 </div>
             </div>
 
@@ -182,13 +186,15 @@
                 <div class="form-group">
                     <label for="telefone" class="required"><b>Telefone: </b></label>
                     <input type="text" class="form-control telefone_com_ddd" id="telefone" name="telefone" value="{{old('telefone',$pessoa->telefone)}}">
-                </div>
+                    <small>(99)9999-9999</small>
+                </div>   
             </div>
 
             <div class="col-sm form-group">
                 <div class="form-group">
                     <label for="celular" class="required"><b>Celular: </b></label>
                     <input type="text" class="form-control celular_com_ddd" id="celular" name="celular" value="{{old('celular',$pessoa->celular)}}">
+                    <small>(99)99999-9999 ou (99)9999-9999 ou (99) 99999-9999 ou (99) 9999-9999</small>
                 </div>
             </div>
 
