@@ -69,7 +69,7 @@
                 <div class="form-group">
                     <label for="cpf" class="required"><b>CPF: </b></label>
                     <input type="text" class="form-control cpf" id="cpf" name="cpf" value="{{old('cpf',$pessoa->cpf)}}">
-                    <small>999.999.999-99<small>
+                    <small>999.999.999-99</small>
                 </div>
             </div>
 
