@@ -1,7 +1,6 @@
-@extends('laravel-usp-theme::master')
+@extends('layouts.app')
 
 @section('content')
-@include('alerts')
 <div class="form-inline">
     <span class="mr-3">Listar alunos por programa</span>
     <form method="post" action="posgrad">

@@ -4,18 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PessoaRequest;
 use App\Models\Pessoa;
+use App\Replicado\Lattes;
 use Illuminate\Http\Request;
 
 class PessoaController extends Controller
 {
     public function index(Request $request)
     {
+        $this->authorize('pessoas.basico');
+
         # Caso 1: Nenhuma busca feita ainda, só mostramos o formulário
         if (empty($request->codpes) && empty($request->nompes) && empty($request->tipvinext) && empty($request->codset)) {
             return view('pessoas.index');
         }
 
-        $this->authorize('admin');
         # Caso 2: Busca apenas por um campo
         $campos = ['codpes', 'nompes', 'tipvinext', 'codset'];
         $contaQuantosCamposPreenchidos = 0;
@@ -86,8 +88,7 @@ class PessoaController extends Controller
 
     public function show(Request $request, $codpes)
     {
-        $this->authorize('admin');
-
+        $this->authorize('pessoas.basico');
         /* Verificamos se a pessoa existe no replicado */
         if (empty(\Uspdev\Replicado\Pessoa::dump($codpes))) {
             $request->session()->flash('alert-danger', 'Pessoa não encontrada');
@@ -102,14 +103,19 @@ class PessoaController extends Controller
             $pessoa->save();
         }
 
+        if (config('pessoas.mostrarFotoLattes') && Lattes::id($pessoa->codpes)) {
+            $fotoLattes = base64_encode(Lattes::obterFoto(Lattes::id($pessoa->codpes)));
+        } else {
+            $fotoLattes = '';
+        }
         $foto = \Uspdev\Wsfoto::obter($codpes);
 
-        return view('pessoas.show', compact('pessoa', 'foto'));
+        return view('pessoas.show', compact('pessoa', 'foto', 'fotoLattes'));
     }
 
     public function edit($codpes)
     {
-        $this->authorize('admin');
+        $this->authorize('pessoas.complementar');
         $pessoa = Pessoa::where('codpes', $codpes)->first();
         return view('pessoas.edit')->with([
             'codpes' => $codpes,
@@ -119,11 +125,11 @@ class PessoaController extends Controller
 
     public function update(PessoaRequest $request, $codpes)
     {
-        $this->authorize('admin');
+        $this->authorize('pessoas.complementar');
         $pessoa = Pessoa::where('codpes', $codpes)->first();
         $pessoa->update($request->validated());
         $request->session()->flash('alert-info', 'Dados editados com sucesso!');
-        return redirect("/pessoas/{$codpes}");
+        return redirect(route('pessoas.show', $codpes));
     }
 
 }

@@ -1,14 +1,8 @@
-@extends('laravel-usp-theme::master')
+@extends('layouts.app')
 
 @section('content')
-@include('alerts')
-@include('pessoas.partials.search')
-@include('pessoas.partials.show.replicado')
-<br>
-@include('pessoas.partials.show.campos_extras')
+  @include('pessoas.partials.search')
+  @include('pessoas.partials.show.replicado')
+  <br>
+  @includeWhen(Gate::check('pessoas.complementar'),'pessoas.partials.show.campos_extras')
 @stop
-
-
-
-
-

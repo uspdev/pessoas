@@ -1,22 +1,21 @@
-@extends('laravel-usp-theme::master')
-
-@section('content_header')
-
-@section('javascripts_head')
-  <script src="{{asset('/js/camposExtras.js')}}"></script>
-@endsection('javascript_head')
+@extends('layouts.app')
 
 @section('content')
+  <form action="{{ route('pessoas.update', $pessoa->codpes) }}" method="POST">
+    @csrf
+    @method('patch')
+    <div class="card mb-3">
+      <div class="card-header h4 card-header-sticky">
+        <b>Campos extras <i class="fas fa-angle-right"></i>
+          {{ $pessoa->codpes }} - {{ $pessoa->name ?? $pessoa->replicado('nome') }}</b>
+          <a href="{{ route('pessoas.show', $codpes) }}" class="btn btn-sm btn-secondary">Cancelar</a>
+          <button type="submit" class="btn btn-sm btn-success">Salvar</button>
+      </div>
+      <div class="card-body">
+        @include('pessoas.partials.form')
+      </div>
+    </div>
+  </form>
+@endsection
 
-@include('alerts')
 
-<form action="{{ action([App\Http\Controllers\PessoaController::class, 'update'], $codpes) }}" method="POST">
-@csrf
-@method('patch')
-@include('pessoas.partials.form')
-<hr>
-
-</form>
-
-
-@stop
