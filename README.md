@@ -18,6 +18,24 @@ mais fácil, para os setores/pessoas que tem essa permissão.
 * Acesso ao replicado
 * Token do Wsfoto (opcional)
 
+## Atualização
+
+#### Versão 1.3.0 de 30/01/2024
+
+* Atualizado o senhaunica-socialite para usar permissions
+* Necessário atualizar o `.env` (ver `.env.example`)
+* Necessário atribuir permissões aos usuários existentes (`role pessoas`) mesmo para admins
+* Role pessoas é dividido em:
+  *  `basico`: principais informações do replicado
+  *  `avançado`: acrescenta vínculos encerrados, telefones e endereço
+  *  `complementar`: mostra/edita as informações complementares
+* Removido log do sistema para utilizar o do `laravel-tools`
+* Removido forcarHttps do código para usar o do laravel-tools
+* Utilização de **headerSticky** em vários cards
+* Apresentação da foto do lattes quando habilitado no env
+* Apresentação de vínculos encerrados (informações mínimas)
+* Utilizando mensagens flash do laravel-usp-theme
+
 ## Deploy
 
 Clonar o projeto
@@ -48,7 +66,7 @@ Você pode rodar em testes usando o servidor embutido
 
 Use seu servidor favorito (ex. Apache) para publicar em produção. 
 
-Nesse caso lembre de dar permissão de escrita na pasta ```storage``` para o usuário que roda o processo do servidor, normalmente o ```www-data```. É possivel também usar o módulo do apache2 mpm_itk para alterar o usuário do virtualhost.
+Nesse caso lembre de dar permissão de escrita na pasta `storage` para o usuário que roda o processo do servidor, normalmente o `www-data`. É possivel também usar o módulo do apache2 mpm_itk para alterar o usuário do virtualhost.
 
     chown www-data:www-data storage/ -R
 

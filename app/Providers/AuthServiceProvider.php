@@ -24,7 +24,11 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerPolicies();
+        Gate::define('pessoas.basico', function ($user) {
+            return $user->hasPermissionTo('pessoas.basico')
+            || $user->hasPermissionTo('pessoas.avancado')
+            || $user->hasPermissionTo('pessoas.complementar');
+        });
 
     }
 }
