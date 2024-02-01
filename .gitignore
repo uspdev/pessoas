@@ -14,6 +14,8 @@ yarn-error.log
 
 public/vendor
 
+version.txt
+
 # init lando
 .lando.yml
 # lando dockerfile php extensions
