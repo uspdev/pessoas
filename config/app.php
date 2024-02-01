@@ -16,13 +16,6 @@ return [
     'name' => env('APP_NAME', 'Laravel'),
 
     /*
-    | Força https mesmo configurando como http
-    | Necessário se a aplicação roda em HTTP mas está atrás de um proxy HTTPS
-    */
-
-    'forceHttps' => env('APP_FORCE_HTTPS', false),
-
-    /*
     |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
@@ -72,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'America/Sao_Paulo',
 
     /*
     |--------------------------------------------------------------------------
@@ -85,8 +78,9 @@ return [
     |
     */
 
-    'locale' => 'en',
-
+    'locale' => 'pt-BR',
+    'faker_locale' => 'pt-BR',
+    
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
