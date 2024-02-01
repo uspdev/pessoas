@@ -1,4 +1,4 @@
-  <table class="datatable-pessoas table table-bordered table-striped table-hover responsive">
+  <table class="table table-bordered table-striped table-hover datatable-simples dt-buttons dt-fixed-header">
     <thead>
       <tr>
         <th>Número USP</th>
