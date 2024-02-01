@@ -1,26 +1,16 @@
-@section('styles')
-  @parent
-  <link rel="stylesheet" href="{{ asset('/css/search.css') }}">
-@endsection
-
-@section('javascripts_bottom')
-  @parent
-  <script src="{{ asset('/js/select2.js') }}"></script>
-@endsection
-
 <div class="row">
   <form action="{{ config('app.url') }}">
-    <div class="form-row">
+    <div class="form-row ml-2">
       <div class="col input-group mb-3">
         <input type="text" class="form-control" aria-label="Nº USP" aria-describedby="inputGroup-sizing-sm"
           id="codpes" name="codpes" value="{{ old('codpes') }}" placeholder="Nº USP">
       </div>
       <div class="col input-group mb-3">
         <input type="text" class="form-control" aria-label="Nome" aria-describedby="inputGroup-sizing-sm"
-          id="codpes" name="nompes" value="{{ old('nompes', request()->nompes) }}" autocomplete="off"
+          id="nompes" name="nompes" value="{{ old('nompes', request()->nompes) }}" autocomplete="off"
           placeholder="ou Nome">
       </div>
-      
+
       @can('pessoas.avancado')
         <div class="col input-group mb-3">
           <select class="form-control" name="tipvinext">
@@ -63,7 +53,7 @@
       @endcan
 
     </div>
-    <div class="form-row">
+    <div class="form-row ml-2">
       <div class="col input-group mb-3">
         <span class="input-group-btn">
           <button type="submit" class="btn btn-success"> Buscar </button>
@@ -74,3 +64,15 @@
     </div>
   </form>
 </div>
+
+@section('javascripts_bottom')
+  @parent
+  <script>
+    $(document).ready(function() {
+      // Select2
+      $('.select2-setor').select2({
+        placeholder: 'ou Setor'
+      });
+    });
+  </script>
+@endsection
