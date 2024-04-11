@@ -64,22 +64,15 @@
 
         <div class="my-3">
           <div class="font-weight-bold">Titulações</div>
-          <table class="table table-bordered table-striped">
-            <tr>
-              <th>Ano</th>
-              <th>Titulação</th>
-              <th>Escolaridade</th>
-            </tr>
+          <ul class="list-group">
             @foreach (\Uspdev\Replicado\Pessoa::listarTitulacoes($pessoa->codpes) as $titulacao)
-            <tr>
-              <td>{{ substr($titulacao['dtatitpes'], 0, 4) ?? ' ' }}</td>
-              <td>{{ $titulacao['titpes'] ?? ' ' }}</td>
-              <td>{{ $titulacao['nomesc'] ?? ' ' }}</td>
-            </tr>
+              <li class="list-group-item list-group-item-action py-1">
+                {{ substr($titulacao['dtatitpes'], 0, 4) ?? ' ' }} - {{ $titulacao['titpes'] ?? ' ' }} -
+                {{ $titulacao['nomesc'] ?? ' ' }}
+              </li>
             @endforeach
-          </table>
+          </ul>
         </div>
-
       </div>
 
       {{-- Coluna da direita - informações pessoais --}}
