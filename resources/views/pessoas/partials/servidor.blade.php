@@ -13,13 +13,12 @@
   <a class="toggle-vis" data-column="12" role="button">E-mail principal</a> |
   <a class="toggle-vis" data-column="13" role="button">E-mail(s) alternativo(s)</a> |
   <a class="toggle-vis" data-column="14" role="button">Lattes</a> |
-  <a class="toggle-vis" data-column="15" role="button">Escolaridade</a> |
-  <a class="toggle-vis" data-column="16" role="button">Formação</a> |
-  <a class="toggle-vis" data-column="17" role="button">Classe</a> |
-  <a class="toggle-vis" data-column="18" role="button">Nível</a> |
-  <a class="toggle-vis" data-column="19" role="button">Jornada</a> |
-  <a class="toggle-vis" data-column="20" role="button">Mérito</a> |
-  <a class="toggle-vis" data-column="21" role="button">Designação</a>
+  <a class="toggle-vis" data-column="15" role="button">Titulações</a> |
+  <a class="toggle-vis" data-column="16" role="button">Classe</a> |
+  <a class="toggle-vis" data-column="17" role="button">Nível</a> |
+  <a class="toggle-vis" data-column="18" role="button">Jornada</a> |
+  <a class="toggle-vis" data-column="19" role="button">Mérito</a> |
+  <a class="toggle-vis" data-column="20" role="button">Designação</a>
 </div>
 
 <table id="servidor"
@@ -41,8 +40,7 @@
       <th>E-mail principal</th>
       <th>E-mail(s) alternativo(s)</th>
       <th>Lattes</th>
-      <th>Escolaridade</th>
-      <th>Formação</th>
+      <th>Titulações<br /> Ano | Titulação | Escolaridade</th>
       <th>Classe</th>
       <th>Nível</th>
       <th>Jornada</th>
@@ -78,14 +76,19 @@
               {{ $email }}
             @endif
           @endforeach
-        </td>
+        </td>      
         <td>
           @if ($pessoa['idfpescpq'] != '')
             <a href="http://lattes.cnpq.br/{{ $pessoa['idfpescpq'] }}" target="_blank">Lattes</a>
           @endif
         </td>
-        <td>{{ $pessoa['nomesc'] }}</td>
-        <td>{{ $pessoa['dscgrufor'] }}</td>
+        <td>
+          <ul>
+          @foreach (\Uspdev\Replicado\Pessoa::listarTitulacoes($pessoa['codpes']) as $titulacao)
+            <li>{{ substr($titulacao['dtatitpes'], 0, 4) ?? ' ' }} | {{ $titulacao['titpes'] ?? ' ' }} | {{ $titulacao['nomesc'] ?? ' ' }}</li>         
+          @endforeach
+          </ul>
+        </td>          
         <td>{{ $pessoa['nomabvcla'] }}</td>
         <td>{{ $pessoa['nivgrupvm'] }}</td>
         <td>{{ $pessoa['tipjor'] }}</td>

@@ -61,6 +61,25 @@
             <li class="list-group-item py-1">{!! $pessoa->replicado('orcid') !!}</li>
           </ul>
         </div>
+
+        <div class="my-3">
+          <div class="font-weight-bold">Titulações</div>
+          <table class="table table-bordered table-striped">
+            <tr>
+              <th>Ano</th>
+              <th>Titulação</th>
+              <th>Escolaridade</th>
+            </tr>
+            @foreach (\Uspdev\Replicado\Pessoa::listarTitulacoes($pessoa->codpes) as $titulacao)
+            <tr>
+              <td>{{ substr($titulacao['dtatitpes'], 0, 4) ?? ' ' }}</td>
+              <td>{{ $titulacao['titpes'] ?? ' ' }}</td>
+              <td>{{ $titulacao['nomesc'] ?? ' ' }}</td>
+            </tr>
+            @endforeach
+          </table>
+        </div>
+
       </div>
 
       {{-- Coluna da direita - informações pessoais --}}
