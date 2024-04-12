@@ -64,6 +64,7 @@
 
         <div class="my-3">
           <div class="font-weight-bold">Titulações</div>
+           <div class="small">As titulações dentro da USP são adicionadas automaticamente, as demais cada servidor pode adicionar no sistema MarteWeb.</div>
           <ul class="list-group">
             @foreach (\Uspdev\Replicado\Pessoa::listarTitulacoes($pessoa->codpes) as $titulacao)
               <li class="list-group-item list-group-item-action py-1">
