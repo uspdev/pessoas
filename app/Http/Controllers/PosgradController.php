@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Replicado\Pessoa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Validation\Rule;
@@ -26,6 +27,11 @@ class PosgradController extends Controller
 
         // vamos obter a lista de alunos do programa
         $alunos = session('codcur') ? json_decode(json_encode(Posgraduacao::alunosPrograma(env('REPLICADO_CODUNDCLG'), session('codcur')))) : [];
+
+        array_map(function($obj){
+            $obj->telefones = Pessoa::telefones($obj->codpes);
+            return $obj;
+        }, $alunos);
 
         return view('posgrad.index', compact('programas', 'alunos'));
     }
