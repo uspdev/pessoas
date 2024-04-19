@@ -24,14 +24,7 @@
             <td><a href="pessoas/{{ $aluno->codpes }}">{{ $aluno->nompes }}</a></td>
             <td>{{ $aluno->nivpgm }}</td>
             <td>{{ $aluno->codema }}</td>
-            @php
-                $telefones = "";
-                foreach($aluno->telefones as $telefone){
-                    $telefones .= $telefone . " / ";
-                }
-                $telefones = substr($telefones, 0, -3);
-            @endphp
-            <td>{{$telefones}}</td>
+            <td>{{implode(' / ', $aluno->telefones)}}</td>
             {{-- https://stackoverflow.com/questions/12003222/datatable-date-sorting-dd-mm-yyyy-issue --}}
             <td data-sort="{{ \Carbon\Carbon::parse($aluno->dtainivin )->format('Ymd') }}">{{ \Carbon\Carbon::parse($aluno->dtainivin )->format('d/m/Y') }}</td>
             <td>{{ $aluno->codare }}</td>
