@@ -3,6 +3,7 @@
 use App\Http\Controllers\DesignadoController;
 use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\PosgradController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PessoaController::class, 'index']);
 

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Replicado\Pessoa;
 
 class DesignadoController extends Controller
 {
@@ -13,6 +13,8 @@ class DesignadoController extends Controller
 
     public function index()
     {
-        return view('designados.index');
+        return view('designados.index')->with([
+            'designados' => Pessoa::listarDesignados()
+        ]);
     }
 }
