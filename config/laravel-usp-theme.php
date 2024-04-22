@@ -6,6 +6,11 @@ $menu = [
         'url' => 'posgrad',
         'can' => 'posgraduacao',
     ],
+    [
+        'text' => 'Designados',
+        'url' => 'designados',
+        'can' => 'pessoas.avancado',
+    ],
 ];
 $right_menu = [
     [
