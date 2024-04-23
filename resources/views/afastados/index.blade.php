@@ -1,0 +1,38 @@
+@extends('layouts.app')
+
+@section('content')
+    <h2>Lista de Servidores Afastados</h2>
+    <table class="table table-striped table-sm table-afastados">
+        <thead>
+            <th>N° USP</th>
+            <th>Nome</th>
+            <th>Setor</th>
+            <th>Motivo do Afastamento</th>
+            <th>Data de Início</th>
+            <th>Data de Término</th>
+        </thead>
+        <tbody>
+            @foreach ($afastados as $afastado)
+               <td>{{$afastado['codpes']}}</td> 
+               <td><a href="{{route('pessoas.show', $afastado['codpes'])}}"></a>{{$afastado['nompes']}}</td> 
+               <td>{{$afastado['nomabvset']}}</td> 
+               <td>{{$afastado['sitoco']}}</td> 
+               <td>{{$afastado['dtainisitoco']}}</td> 
+               <td>{{$afastado['dtafimsitoco']}}</td> 
+            @endforeach
+        </tbody>
+    </table>
+@endsection
+
+@section('javascripts_bottom')
+<script>
+    $(document).ready(function(){
+
+        new DataTable('.table-afastados', {
+            order: [[1, 'asc']],
+            iDisplayLength: 100
+        });
+
+    });
+</script>
+@endsection

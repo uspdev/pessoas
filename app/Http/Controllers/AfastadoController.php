@@ -11,6 +11,8 @@ class AfastadoController extends Controller
 	}
 
 	public function index() {
-		return "Afastados";
+		return view('afastados.index')->with([
+			'afastados' => array()
+		]);
 	}
 }
