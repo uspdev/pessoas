@@ -8,6 +8,8 @@
             <th>Nome</th>
             <th>Setor</th>
             <th>Motivo do Afastamento</th>
+            <th>E-mail</th>
+            <th>Telefones</th>
             <th>Data de Início</th>
             <th>Data de Término</th>
         </thead>
@@ -18,6 +20,8 @@
                <td><a href="{{route('pessoas.show', $afastado['codpes'])}}">{{$afastado['nompes']}}</a></td> 
                <td>{{$afastado['nomabvset']}}</td> 
                <td>{{$afastado['sitoco']}}</td> 
+               <td>{{$afastado['codema']}}</td> 
+               <td>{{implode(" / ", $afastado['telefones'])}}</td> 
                <td>{{date('d/m/Y', strtotime($afastado['dtainisitoco']))}}</td> 
                <td>{{date('d/m/Y', strtotime($afastado['dtafimsitoco']))}}</td> 
             </tr>
