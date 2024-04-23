@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DesignadoController;
+use App\Http\Controllers\AfastadoController;
 use App\Http\Controllers\PessoaController;
 use App\Http\Controllers\PosgradController;
 use Illuminate\Support\Facades\Route;
@@ -19,3 +20,5 @@ Route::post('posgrad', [PosgradController::class, 'index']);
 Route::get('posgrad/{codcur}', [PosgradController::class, 'show']);
 
 Route::get('designados', [DesignadoController::class, 'index'])->name('designados.index');
+
+Route::get('afastados', [AfastadoController::class, 'index'])->name('afastados.index');

@@ -11,6 +11,11 @@ $menu = [
         'url' => 'designados',
         'can' => 'pessoas.avancado',
     ],
+    [
+        'text' => 'Afastados',
+        'url' => 'afastados',
+        'can' => 'pessoas.avancado',
+    ],
 ];
 $right_menu = [
     [

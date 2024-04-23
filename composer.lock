@@ -6457,27 +6457,24 @@
         },
         {
             "name": "uspdev/replicado",
-            "version": "1.21.0",
+            "version": "1.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uspdev/replicado.git",
-                "reference": "3bc120cb6dc528dfd881cbf0f035b1876f39bd17"
+                "reference": "ec4be862fc9a805113a52101a91495b60e3f5947"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uspdev/replicado/zipball/3bc120cb6dc528dfd881cbf0f035b1876f39bd17",
-                "reference": "3bc120cb6dc528dfd881cbf0f035b1876f39bd17",
+                "url": "https://api.github.com/repos/uspdev/replicado/zipball/ec4be862fc9a805113a52101a91495b60e3f5947",
+                "reference": "ec4be862fc9a805113a52101a91495b60e3f5947",
                 "shasum": ""
             },
             "require": {
                 "ext-pdo_dblib": "*",
-                "illuminate/collections": "^8 || ^9 || ^10",
+                "illuminate/collections": "^8 || ^9 || ^10 || ^11",
                 "monolog/monolog": "^2 || ^3",
                 "php": ">=7.0",
                 "uspdev/cache": "^1"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^8.0 || ^9.0"
             },
             "type": "library",
             "autoload": {
@@ -6503,9 +6500,9 @@
             "homepage": "https://github.com/uspdev/replicado",
             "support": {
                 "issues": "https://github.com/uspdev/replicado/issues",
-                "source": "https://github.com/uspdev/replicado/tree/1.21.0"
+                "source": "https://github.com/uspdev/replicado/tree/1.22.0"
             },
-            "time": "2024-04-11T20:35:15+00:00"
+            "time": "2024-04-23T18:15:37+00:00"
         },
         {
             "name": "uspdev/senhaunica-socialite",
@@ -9219,5 +9216,5 @@
         "php": "^7.3"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
