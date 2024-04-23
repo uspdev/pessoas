@@ -13,12 +13,14 @@
         </thead>
         <tbody>
             @foreach ($afastados as $afastado)
+            <tr>
                <td>{{$afastado['codpes']}}</td> 
-               <td><a href="{{route('pessoas.show', $afastado['codpes'])}}"></a>{{$afastado['nompes']}}</td> 
+               <td><a href="{{route('pessoas.show', $afastado['codpes'])}}">{{$afastado['nompes']}}</a></td> 
                <td>{{$afastado['nomabvset']}}</td> 
                <td>{{$afastado['sitoco']}}</td> 
                <td>{{$afastado['dtainisitoco']}}</td> 
                <td>{{$afastado['dtafimsitoco']}}</td> 
+            </tr>
             @endforeach
         </tbody>
     </table>
