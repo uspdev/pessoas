@@ -18,8 +18,8 @@
                <td><a href="{{route('pessoas.show', $afastado['codpes'])}}">{{$afastado['nompes']}}</a></td> 
                <td>{{$afastado['nomabvset']}}</td> 
                <td>{{$afastado['sitoco']}}</td> 
-               <td>{{$afastado['dtainisitoco']}}</td> 
-               <td>{{$afastado['dtafimsitoco']}}</td> 
+               <td>{{date('d/m/Y', strtotime($afastado['dtainisitoco']))}}</td> 
+               <td>{{date('d/m/Y', strtotime($afastado['dtafimsitoco']))}}</td> 
             </tr>
             @endforeach
         </tbody>
