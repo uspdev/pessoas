@@ -5,6 +5,7 @@
         <th>Nome</th>
         <th>Vínculos ativos</th>
         <th>E-mail</th>
+        <th>Telefones</th>
       </tr>
     </thead>
     <tbody>
@@ -14,6 +15,7 @@
           <td><a href="pessoas/{{$pessoa['codpes']}}">{{ $pessoa['nompesttd'] }}</a></td>
           <td>{{trim(implode(', ', \Uspdev\Replicado\Pessoa::vinculos($pessoa['codpes'])))}}</td>
           <td>{{\Uspdev\Replicado\Pessoa::email($pessoa['codpes'])}}</td>
+          <td>{{implode(' / ', \Uspdev\Replicado\Pessoa::telefones($pessoa['codpes']))}}</td>
         </tr>
         @endforeach
     </tbody>
