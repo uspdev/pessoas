@@ -155,6 +155,22 @@
             </div>
           </div>
 
+          <div class="row">
+            <div class="col my-2">
+              <div class="font-weight-bold">Histórico funcional</div>
+              <ul class="list-group">
+                @forelse(\Uspdev\Replicado\Pessoa::listarHistoricoFuncional($pessoa->codpes) as $historico)
+                  <li class="list-group-item list-group-item-action py-1">
+                    {{ $historico['nomfnc'] }} | {{ $historico['nomset'] }} ({{ $historico['nomabvset'] }}) <br />
+                    Período: {{ Carbon\Carbon::parse($historico['dtainisitfun'])->format('d/m/Y') }} a {{ Carbon\Carbon::parse($historico['dtafimsitfun'])->format('d/m/Y') }}
+                  </li>
+                @empty
+                  <li class="list-group-item py-1">-</li>
+                @endforelse
+              </ul>
+            </div>
+          </div>
+
         @endcan
 
       </div>
