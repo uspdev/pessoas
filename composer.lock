@@ -6360,16 +6360,16 @@
         },
         {
             "name": "uspdev/laravel-usp-theme",
-            "version": "2.8.3",
+            "version": "2.8.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uspdev/laravel-usp-theme.git",
-                "reference": "8c83bec719a554b1c5bd1a8690849d44acb2b10a"
+                "reference": "e3f9a0940cafcee7d80605a10176e402ab74da1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uspdev/laravel-usp-theme/zipball/8c83bec719a554b1c5bd1a8690849d44acb2b10a",
-                "reference": "8c83bec719a554b1c5bd1a8690849d44acb2b10a",
+                "url": "https://api.github.com/repos/uspdev/laravel-usp-theme/zipball/e3f9a0940cafcee7d80605a10176e402ab74da1d",
+                "reference": "e3f9a0940cafcee7d80605a10176e402ab74da1d",
                 "shasum": ""
             },
             "type": "library",
@@ -6404,9 +6404,9 @@
             "description": "usp theme for laravel",
             "support": {
                 "issues": "https://github.com/uspdev/laravel-usp-theme/issues",
-                "source": "https://github.com/uspdev/laravel-usp-theme/tree/2.8.3"
+                "source": "https://github.com/uspdev/laravel-usp-theme/tree/2.8.5"
             },
-            "time": "2024-04-03T19:03:30+00:00"
+            "time": "2024-05-27T17:38:23+00:00"
         },
         {
             "name": "uspdev/laravel-usp-validators",
