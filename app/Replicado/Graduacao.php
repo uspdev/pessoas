@@ -147,7 +147,7 @@ class Graduacao extends GraduacaoReplicado
             INNER JOIN HABILITACAOGR H ON H.codhab = VS.codhab AND H.codcur = C.codcur
             INNER JOIN FUSAOCOLEGIADOUNIDADE F ON (F.codfusclgund = V.codclg)
             WHERE
-                P.codpes = :codpes
+                P.codpes = CONVERT(INT, :codpes)
         ";
         return DB::fetch($query, ['codpes' => $codpes]);
     }
