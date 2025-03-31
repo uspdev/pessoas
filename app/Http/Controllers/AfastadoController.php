@@ -23,6 +23,7 @@ class AfastadoController extends Controller
 			return $afastado;
 		}, $afastados);
 
+        \UspTheme::activeUrl('afastados');
 		return view('afastados.index')->with([
 			'afastados' => $afastados
 		]);
