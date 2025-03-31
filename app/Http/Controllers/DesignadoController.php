@@ -13,6 +13,7 @@ class DesignadoController extends Controller
 
     public function index()
     {
+        \UspTheme::activeUrl('designados');
         return view('designados.index')->with([
             'designados' => Pessoa::listarDesignados()
         ]);

@@ -41,6 +41,7 @@ class PosgradController extends Controller
 
         $orientadores = json_decode(json_encode(Posgraduacao::orientadores('18134')));
 
+        \UspTheme::activeUrl('posgrad');
         return view('posgrad.show', compact('orientadores'));
     }
 }

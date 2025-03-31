@@ -7000,27 +7000,27 @@
         },
         {
             "name": "uspdev/laravel-usp-theme",
-            "version": "2.8.7",
+            "version": "2.8.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uspdev/laravel-usp-theme.git",
-                "reference": "e4b3bcabec9a4c454ff7f2bc29f635e85a510c82"
+                "reference": "ee57f53cbf3fc95ad0ed68b5ab6d31cc64cd604e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uspdev/laravel-usp-theme/zipball/e4b3bcabec9a4c454ff7f2bc29f635e85a510c82",
-                "reference": "e4b3bcabec9a4c454ff7f2bc29f635e85a510c82",
+                "url": "https://api.github.com/repos/uspdev/laravel-usp-theme/zipball/ee57f53cbf3fc95ad0ed68b5ab6d31cc64cd604e",
+                "reference": "ee57f53cbf3fc95ad0ed68b5ab6d31cc64cd604e",
                 "shasum": ""
             },
             "type": "library",
             "extra": {
                 "laravel": {
-                    "providers": [
-                        "Uspdev\\UspTheme\\ServiceProvider"
-                    ],
                     "aliases": {
                         "UspTheme": "Uspdev\\UspTheme\\Facades\\UspTheme"
-                    }
+                    },
+                    "providers": [
+                        "Uspdev\\UspTheme\\ServiceProvider"
+                    ]
                 }
             },
             "autoload": {
@@ -7044,9 +7044,9 @@
             "description": "usp theme for laravel",
             "support": {
                 "issues": "https://github.com/uspdev/laravel-usp-theme/issues",
-                "source": "https://github.com/uspdev/laravel-usp-theme/tree/2.8.7"
+                "source": "https://github.com/uspdev/laravel-usp-theme/tree/2.8.14"
             },
-            "time": "2024-08-21T12:07:01+00:00"
+            "time": "2025-03-27T13:26:35+00:00"
         },
         {
             "name": "uspdev/laravel-usp-validators",

@@ -110,6 +110,7 @@ class PessoaController extends Controller
         }
         $foto = \Uspdev\Wsfoto::obter($codpes);
 
+        \UspTheme::activeUrl($pessoa->obterCategoria());
         return view('pessoas.show', compact('pessoa', 'foto', 'fotoLattes'));
     }
 
@@ -117,6 +118,7 @@ class PessoaController extends Controller
     {
         $this->authorize('pessoas.complementar');
         $pessoa = Pessoa::where('codpes', $codpes)->first();
+        \UspTheme::activeUrl($pessoa->obterCategoria());
         return view('pessoas.edit')->with([
             'codpes' => $codpes,
             'pessoa' => $pessoa,
@@ -128,6 +130,7 @@ class PessoaController extends Controller
         $this->authorize('pessoas.complementar');
         $pessoa = Pessoa::where('codpes', $codpes)->first();
         $pessoa->update($request->validated());
+        \UspTheme::activeUrl($pessoa->obterCategoria());
         $request->session()->flash('alert-info', 'Dados editados com sucesso!');
         return redirect(route('pessoas.show', $codpes));
     }
