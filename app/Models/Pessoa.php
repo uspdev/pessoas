@@ -208,12 +208,10 @@ class Pessoa extends Model
         elseif (in_array($this->codpes, array_column(PessoaReplicado::listarAfastados(), 'codpes')))
             return 'afastados';
 
-        else {
-            foreach (Posgraduacao::listarProgramas() as $programa)
-                if (in_array($this->codpes, array_column(Posgraduacao::alunosPrograma(env('REPLICADO_CODUNDCLG'), $programa['codcur']), 'codpes')))
-                    return 'posgrad';
+        elseif (Posgraduacao::verifica($this->codpes, env('REPLICADO_CODUNDCLG')))
+            return 'posgrad';
 
+        else
             return '';
-        }
     }
 }
