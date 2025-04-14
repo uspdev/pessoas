@@ -114,7 +114,10 @@ class Graduacao extends GraduacaoReplicado
      * Obtém o curso ativo de um aluno de graduação, procurando em todas as unidades disponíveis na replicação
      *
      * Modificado de obterCursoAtivo para incluir a sigla da unidade e procurar em qualquer unidade
-     *
+     * 
+     * @param int $codpes
+     * @return Array Dados do curso ativo ou vazio se não encontrado
+     * @author Masaki K Neto, em 14/4/2025, acrescentado F.sta_cg: bug - pode pegar curso de PG
      */
     public static function obterCursoAtivoUnidades($codpes)
     {
@@ -123,7 +126,7 @@ class Graduacao extends GraduacaoReplicado
         INNER JOIN VINCULOPESSOAUSP V ON (L.codpes = V.codpes) AND (L.codundclg = V.codclg)
         INNER JOIN CURSOGR C ON (V.codcurgrd = C.codcur)
         INNER JOIN HABILITACAOGR H ON (H.codhab = V.codhab)
-        INNER JOIN FUSAOCOLEGIADOUNIDADE F ON (F.codfusclgund = L.codundclg)
+        INNER JOIN FUSAOCOLEGIADOUNIDADE F ON (F.codoriclgund = L.codundclg AND F.sta_cg = 'X')
         WHERE (L.codpes = convert(int,:codpes))
             AND (L.tipvin = 'ALUNOGR')
             AND (V.codcurgrd = H.codcur AND V.codhab = H.codhab)
