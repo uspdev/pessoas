@@ -22,7 +22,7 @@ class Lattes extends LattesReplicado
      */
     public static function obterFoto($id, $saveLocation = null)
     {
-        $curriculoUrl = 'http://buscatextual.cnpq.br/buscatextual/cv?id=';
+        $curriculoUrl = 'https://buscatextual.cnpq.br/buscatextual/cv?id=';
         $fotoUrl = 'http://servicosweb.cnpq.br/wspessoa/servletrecuperafoto?tipo=1&id=';
 
         $client = new Client();
