@@ -22,3 +22,6 @@ version.txt
 Dockerfile.custom
 # lando php.ini
 php.ini
+
+# DDEV
+/.ddev
