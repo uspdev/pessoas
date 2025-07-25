@@ -9,16 +9,26 @@ mais fácil, para os setores/pessoas que tem essa permissão.
 
 ![Home screen](docs/home_screen.png)
 
+## Características
+
+* Busca por número USP, nome e diversos outros campos;
+* Lista de pós graduação, designados e afastados;
+* Possui campos extras em banco local;
+* usuário pode ter acesso completo (role pessoas) ou acesso restrito (permissões específicas);
 
 ## Requisitos
 
-* php 7.3
+* php 8.2
 * Um banco de dados local 
 * Um token do oauth
 * Acesso ao replicado
 * Token do Wsfoto (opcional)
 
 ## Atualização
+
+#### Versão 2.0.0 de 4/9/2024
+
+* Atualizado para Laravel 11
 
 #### Versão 1.3.0 de 30/01/2024
 
