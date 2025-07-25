@@ -149,7 +149,7 @@ class Pessoa extends Model
             $ret = $ret . $vinculo['tipvin'];
         }
 
-        switch ($vinculo['tipvin']) {
+        switch (trim($vinculo['tipvin'])) {
             case 'ALUNOPOS':
                 if ($pg = Posgraduacao::obterVinculoAtivo($this->codpes)) {
                     $ret .= ' | programa: ' . $pg['nomcur'] . ', área: ' . $pg['nomare'] . ', nível: ' . $pg['nivpgm'] . ', orientador: <a href="pessoas/' . $pg['codpesori'] . '">' . $pg['nompesori'] . '</a>';
