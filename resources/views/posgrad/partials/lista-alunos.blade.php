@@ -5,7 +5,7 @@
 
 </style>
 
-<table class="table table-sm table-stripped datatable-alunospg">
+<table class="table table-sm table-stripped datatable-simples dt-buttons dt-buttons-pdf dt-fixed-header dt-state-save">
     <thead>
         <tr>
             <th>nro USP</th>
@@ -33,26 +33,3 @@
     </tbody>
 </table>
 
-@section('javascripts_bottom')
-@parent
-<script>
-    $(function() {
-        oTable = $('.datatable-alunospg').DataTable({
-            dom: 'fBi'
-            , "paging": false
-            , "order": [
-                [1, "asc"]
-            ]
-            , language: {
-                url: 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json'
-            }
-            , "buttons": [
-                'excelHtml5'
-                , 'csvHtml5'
-            ]
-        });
-
-    });
-
-</script>
-@endsection
