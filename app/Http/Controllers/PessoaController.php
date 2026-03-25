@@ -100,7 +100,7 @@ class PessoaController extends Controller
         if (!$pessoa) {
             $pessoa = new Pessoa;
             $pessoa->codpes = $request->codpes;
-            $pessoa->save();
+            // $pessoa->save();
         }
 
         if (config('pessoas.mostrarFotoLattes') && Lattes::id($pessoa->codpes)) {
@@ -118,6 +118,11 @@ class PessoaController extends Controller
     {
         $this->authorize('pessoas.complementar');
         $pessoa = Pessoa::where('codpes', $codpes)->first();
+        if (!$pessoa) {
+            $pessoa = new Pessoa;
+            $pessoa->codpes = $codpes;
+        }
+
         \UspTheme::activeUrl($pessoa->obterCategoria());
         return view('pessoas.edit')->with([
             'codpes' => $codpes,
@@ -128,11 +133,17 @@ class PessoaController extends Controller
     public function update(PessoaRequest $request, $codpes)
     {
         $this->authorize('pessoas.complementar');
+        $validated = $request->validated();
+
         $pessoa = Pessoa::where('codpes', $codpes)->first();
-        $pessoa->update($request->validated());
-        \UspTheme::activeUrl($pessoa->obterCategoria());
+        if (!$pessoa) {
+            $pessoa = new Pessoa;
+            $pessoa->codpes = $codpes;
+        }
+        $pessoa->fill($validated);
+        $pessoa->save();
+        
         $request->session()->flash('alert-info', 'Dados editados com sucesso!');
         return redirect(route('pessoas.show', $codpes));
     }
-
 }
