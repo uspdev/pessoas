@@ -12,8 +12,6 @@ class PosgradController extends Controller
 {
     public function index(Request $request)
     {
-        $this->authorize('posgraduacao');
-
         \UspTheme::activeUrl('posgrad');
         $programas = Posgraduacao::listarProgramas();
 
@@ -26,7 +24,7 @@ class PosgradController extends Controller
         }
 
         // vamos obter a lista de alunos do programa
-        $alunos = session('codcur') ? json_decode(json_encode(Posgraduacao::alunosPrograma(env('REPLICADO_CODUNDCLG'), session('codcur')))) : [];
+        $alunos = session('codcur') ? json_decode(json_encode(Posgraduacao::alunosPrograma(config('replicado.codundclg'), session('codcur')))) : [];
 
         array_map(function($obj){
             $obj->telefones = Pessoa::telefones($obj->codpes);
@@ -38,10 +36,8 @@ class PosgradController extends Controller
 
     public function show($codcur)
     {
-
-        $orientadores = json_decode(json_encode(Posgraduacao::orientadores('18134')));
-
         \UspTheme::activeUrl('posgrad');
+        $orientadores = json_decode(json_encode(Posgraduacao::orientadores('18134')));
         return view('posgrad.show', compact('orientadores'));
     }
 }

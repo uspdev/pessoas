@@ -6,10 +6,6 @@ use Uspdev\Replicado\Pessoa;
 
 class AfastadoController extends Controller
 {
-	public function __construct() {
-		$this->middleware('can:pessoas.avancado');
-	}
-
 	public function index() {
 		$afastados = Pessoa::listarAfastados();
 

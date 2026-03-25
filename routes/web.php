@@ -14,11 +14,14 @@ Route::get('pessoas/{codpes}/edit', [PessoaController::class, 'edit'])->name('pe
 Route::patch('pessoas/{codpes}', [PessoaController::class, 'update'])->name('pessoas.update');
 
 # Pós graduação
-Route::get('posgrad', [PosgradController::class, 'index']);
-Route::post('posgrad', [PosgradController::class, 'index']);
 
-Route::get('posgrad/{codcur}', [PosgradController::class, 'show']);
+Route::middleware(['can:posgraduacao'])->group(function () {
+    Route::get('posgrad', [PosgradController::class, 'index']);
+    Route::post('posgrad', [PosgradController::class, 'index']);
+    Route::get('posgrad/{codcur}', [PosgradController::class, 'show']);
+});
 
-Route::get('designados', [DesignadoController::class, 'index'])->name('designados.index');
-
-Route::get('afastados', [AfastadoController::class, 'index'])->name('afastados.index');
+Route::middleware(['can:pessoas.avancado'])->group(function () {
+    Route::get('designados', [DesignadoController::class, 'index'])->name('designados.index');
+    Route::get('afastados', [AfastadoController::class, 'index'])->name('afastados.index');
+});
