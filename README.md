@@ -26,6 +26,12 @@ mais fácil, para os setores/pessoas que tem essa permissão.
 
 ## Atualização
 
+#### Versão 2.1.0 de 25/3/2026
+
+* Pessoas que não tem dados extras preenchidos não salva no BD local
+* Uso de datatable-simples em afastados e designados
+* refact de código em vários pequenos lugares
+
 #### Versão 2.0.0 de 4/9/2024
 
 * Atualizado para Laravel 11
