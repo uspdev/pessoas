@@ -9,7 +9,12 @@
     {{ $pessoa->codpes }} - <i>{{ $pessoa->replicado('nome') }}</i>
     | <b>Dados USP</b>
     @can('pessoas.complementar')
-      | <a href="{{ url()->current() }}#card_campos_extras">Campos Extras <i class="fas fa-caret-down"></i></a>
+      | <a href="{{ url()->current() }}#card_campos_extras">Campos Extras
+        @if ($pessoa->possuiDadosExtra())
+          <i class="fas fa-comment-dots text-danger" title="Possui dados extra !!"></i>
+        @endif
+        <i class="fas fa-caret-down"></i>
+      </a>
     @endcan
   </div>
   <div class="card-body">
@@ -64,7 +69,8 @@
 
         <div class="my-3">
           <div class="font-weight-bold">Titulações</div>
-           <div class="small">As titulações dentro da USP são adicionadas automaticamente, as demais cada servidor pode adicionar no sistema MarteWeb.</div>
+          <div class="small">As titulações dentro da USP são adicionadas automaticamente, as demais cada servidor pode
+            adicionar no sistema MarteWeb.</div>
           <ul class="list-group">
             @foreach (\Uspdev\Replicado\Pessoa::listarTitulacoes($pessoa->codpes) as $titulacao)
               <li class="list-group-item list-group-item-action py-1">
@@ -94,17 +100,27 @@
         @can('pessoas.avancado')
 
           <div class="row">
-            <div class="col-md">
+            <div class="col-md-6 my-2">
               <div class="font-weight-bold">Gênero</div>
               <ul class="list-group">
-                <li class="list-group-item py-1">{{ $pessoa->replicado('genero') }}</li>
+                <li class="list-group-item py-1">
+                  {{ $pessoa->replicado('genero') }}
+                  @if (!empty($pessoa->sexo) && $pessoa->replicado('genero') != $pessoa->sexo)
+                    (<a href="{{ url()->current() }}#card_campos_extras" class="text-danger" title="Campo extra">{{ $pessoa->sexo }}</a>)
+                  @endif
+                </li>
               </ul>
             </div>
 
-            <div class="col-md">
+            <div class="col-md-6">
               <div class="font-weight-bold">Nascimento</div>
               <ul class="list-group">
-                <li class="list-group-item py-1">{{ $pessoa->replicado('nasc') }}</li>
+                <li class="list-group-item py-1">
+                  <span title="replicado">{{ $pessoa->replicado('nasc') }}</span>
+                  @if ($pessoa->replicado('nasc') != $pessoa->data_nascimento)
+                    (<a href="{{ url()->current() }}#card_campos_extras" class="text-danger" title="Campo extra">{{ $pessoa->data_nascimento }}</a>)
+                  @endif
+                </li>
               </ul>
             </div>
           </div>
@@ -162,7 +178,8 @@
                 @forelse(\Uspdev\Replicado\Pessoa::listarHistoricoFuncional($pessoa->codpes) as $historico)
                   <li class="list-group-item list-group-item-action py-1">
                     {{ $historico['nomfnc'] }} | {{ $historico['nomset'] }} ({{ $historico['nomabvset'] }}) <br />
-                    Período: {{ Carbon\Carbon::parse($historico['dtainisitfun'])->format('d/m/Y') }} a {{ Carbon\Carbon::parse($historico['dtafimsitfun'])->format('d/m/Y') }}
+                    Período: {{ Carbon\Carbon::parse($historico['dtainisitfun'])->format('d/m/Y') }} a
+                    {{ Carbon\Carbon::parse($historico['dtafimsitfun'])->format('d/m/Y') }}
                   </li>
                 @empty
                   <li class="list-group-item py-1">-</li>

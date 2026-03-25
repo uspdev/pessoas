@@ -16,6 +16,21 @@ class PessoaRequest extends FormRequest
         return true;
     }
 
+    public function prepareForValidation()
+    {
+        if ($this->filled('data_nascimento')) {
+            $this->merge([
+                'data_nascimento' => $this->convertDate($this->input('data_nascimento')),
+            ]);
+        }
+    }
+
+    private function convertDate($date)
+    {
+        $d = \DateTime::createFromFormat('d/m/Y', $date);
+        return $d ? $d->format('Y-m-d') : $date; // retorna no formato ISO
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -26,8 +41,8 @@ class PessoaRequest extends FormRequest
         return [
             'codpes'             => 'nullable',
             'nome'               => 'nullable',
-            'data_nascimento'    => 'nullable|data',
-            'sexo'               => 'nullable',
+            'data_nascimento'    => 'nullable|date',
+            'sexo'               => 'nullable|in:F,M',
             'pai'                => 'nullable',
             'mae'                => 'nullable',
             'endereco'           => 'nullable',
@@ -52,4 +67,3 @@ class PessoaRequest extends FormRequest
         ];
     }
 }
-

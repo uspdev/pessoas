@@ -2,58 +2,60 @@
 
 namespace App\Models;
 
-use App\Replicado\Graduacao;
 use App\Replicado\Lattes;
-use App\Replicado\Pessoa as PessoaReplicado;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Uspdev\Replicado\Posgraduacao;
-use Uspdev\Replicado\Uteis;
 use Uspdev\Utils\Generic;
+use Uspdev\Replicado\Uteis;
+use App\Replicado\Graduacao;
+use Uspdev\Replicado\Posgraduacao;
+use Illuminate\Database\Eloquent\Model;
+use App\Replicado\Pessoa as PessoaReplicado;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Pessoa extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
 
-    public function getDataNascimentoAttribute($value)
+    protected function dataNascimento(): Attribute
     {
-        return implode('/', array_reverse(explode('-', $value)));
+        return Attribute::make(
+            get: fn($value) => implode('/', array_reverse(explode('-', $value))),
+            set: fn($value) => !empty($value)
+                ? implode('-', array_reverse(explode('/', $value)))
+                : null
+        );
     }
 
-    public function setDataNascimentoAttribute($value)
+    protected function validadeVisto(): Attribute
     {
-        if (!empty($value)) {
-            $this->attributes['data_nascimento'] = implode('-', array_reverse(explode('/', $value)));
-        }
+        return Attribute::make(
+            get: fn($value) => !empty($value)
+                ? implode('/', array_reverse(explode('-', $value)))
+                : null,
+            set: fn($value) => !empty($value)
+                ? implode('-', array_reverse(explode('/', $value)))
+                : null
+        );
     }
 
-    public function getValidadeVistoAttribute($value)
+    protected function cpf(): Attribute
     {
-        if (!empty($value)) {
-            return implode('/', array_reverse(explode('-', $value)));
-        }
+        return Attribute::make(
+            get: fn($value) => !empty($value)
+                ? substr($value, 0, 3) . '.' . substr($value, 3, 3) . '.' . substr($value, 6, 3) . '-' . substr($value, 9, 2)
+                : null,
+            set: fn($value) => !empty($value)
+                ? preg_replace('/[^0-9]/', '', $value)
+                : null
+        );
     }
 
-    public function setValidadeVistoAttribute($value)
+    protected function sexo(): Attribute
     {
-        if (!empty($value)) {
-            $this->attributes['validade_visto'] = implode('-', array_reverse(explode('/', $value)));
-        }
-    }
-
-    public function getCpfAttribute($value)
-    {
-        if (!empty($value)) {
-            return substr($value, 0, 3) . '.' . substr($value, 3, 3) . '.' . substr($value, 6, 3) . '-' . substr($value, 9, 2);
-        }
-    }
-
-    public function setCpfAttribute($value)
-    {
-        if (!empty($value)) {
-            $this->attributes['cpf'] = preg_replace('/[^0-9]/', '', $value);
-        }
+        return Attribute::make(
+            get: fn($value) => $value === 'M' ? 'Masculino' : ($value === 'F' ? 'Feminino' : null),
+        );
     }
 
     /**
@@ -111,23 +113,24 @@ class Pessoa extends Model
             case 'vinculosEncerrados':
                 return PessoaReplicado::listarVinculosEncerrados($this->codpes);
                 break;
-            case 'endereco':return PessoaReplicado::retornarEnderecoFormatado($this->codpes);
+            case 'endereco':
+                return PessoaReplicado::retornarEnderecoFormatado($this->codpes);
                 break;
             case 'ramal':
                 return PessoaReplicado::obterRamalUsp($this->codpes);
                 break;
             case 'lattes':
                 return ($lattes = Lattes::id($this->codpes))
-                ? 'Lattes: <a href="https://lattes.cnpq.br/' . $lattes . '" target="_lattes">' . $lattes . '</a>'
-                : 'Lattes: -';
+                    ? 'Lattes: <a href="https://lattes.cnpq.br/' . $lattes . '" target="_lattes">' . $lattes . '</a>'
+                    : 'Lattes: -';
                 break;
             case 'lattesAtualizacao':
                 return Lattes::retornarDataUltimaAtualizacao($this->codpes);
                 break;
             case 'orcid':
                 return ($orcid = Lattes::retornarOrcidID($this->codpes))
-                ? 'Orcid: <a href="' . $orcid . '" target="_orcid">' . str_replace('https://orcid.org/', '', $orcid) . '</a>'
-                : 'Orcid: -';
+                    ? 'Orcid: <a href="' . $orcid . '" target="_orcid">' . str_replace('https://orcid.org/', '', $orcid) . '</a>'
+                    : 'Orcid: -';
                 break;
         }
     }
@@ -200,6 +203,9 @@ class Pessoa extends Model
         return $ret;
     }
 
+    /**
+     * Retorna a categoria da pessoa (designados, afastados ou posgrad)
+     */
     public function obterCategoria()
     {
         if (in_array($this->codpes, array_column(PessoaReplicado::listarDesignados(), 'codpes')))
@@ -213,5 +219,24 @@ class Pessoa extends Model
 
         else
             return '';
+    }
+
+    /**
+     * Verifica se possui algum campo extra preenchido
+     * 
+     * @return bool
+     * @author Masaki K Neto, 7/2025
+     */
+    public function possuiDadosExtra(): bool
+    {
+        $excluded = ['id', 'codpes', 'created_at', 'updated_at'];
+
+        foreach ($this->getAttributes() as $key => $value) {
+            if (!in_array($key, $excluded) && !empty($value)) {
+                return true; // existe pelo menos um campo preenchido
+            }
+        }
+
+        return false; // todos os campos (exceto os excluídos) são nulos ou vazios
     }
 }

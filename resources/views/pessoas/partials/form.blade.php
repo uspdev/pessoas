@@ -12,11 +12,16 @@
       </div>
 
       <div class="col-sm form-group">
-        <div class="form-group">
-          <label for="sexo" class="required"><b>Sexo: </b></label>
-          <input type="text" class="form-control" id="sexo" name="sexo"
-            value="{{ old('sexo', $pessoa->sexo) }}">
-        </div>
+        <label for="sexo" class="required"><b>Sexo:</b></label>
+        <select class="form-control" id="sexo" name="sexo">
+          <option value="">Selecione...</option>
+          <option value="F" {{ old('sexo', $pessoa->getRawOriginal('sexo')) === 'F' ? 'selected' : '' }}>
+            Feminino
+          </option>
+          <option value="M" {{ old('sexo', $pessoa->getRawOriginal('sexo')) === 'M' ? 'selected' : '' }}>
+            Masculino
+          </option>
+        </select>
       </div>
 
       <div class="col-sm form-group">
@@ -162,7 +167,8 @@
       <div class="col-sm form-group">
         <div class="form-group">
           <label for="uf" class="required"><b>UF: </b></label>
-          <input type="text" class="form-control" id="uf" name="uf" value="{{ old('uf', $pessoa->uf) }}">
+          <input type="text" class="form-control" id="uf" name="uf"
+            value="{{ old('uf', $pessoa->uf) }}">
         </div>
       </div>
 
@@ -173,9 +179,9 @@
             value="{{ old('pais', $pessoa->pais) }}">
         </div>
       </div>
-      
+
     </div>
-    
+
   </div>
 </div>
 
