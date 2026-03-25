@@ -16,13 +16,17 @@
     </thead>
     <tbody>
       @foreach ($afastados as $afastado)
+        @php
+          $dtainisitoco = \Carbon\Carbon::parse(strtotime($afastado['dtainisitoco']));
+          $dtafimsitoco = \Carbon\Carbon::parse(strtotime($afastado['dtafimsitoco']));
+        @endphp
         <tr>
           <td>{{ $afastado['codpes'] }}</td>
           <td><a href="{{ route('pessoas.show', $afastado['codpes']) }}">{{ $afastado['nompes'] }}</a></td>
           <td>{{ $afastado['nomabvset'] }}</td>
           <td>{{ $afastado['sitoco'] }}</td>
-          <td>{{ date('d/m/Y', strtotime($afastado['dtainisitoco'])) }}</td>
-          <td>{{ date('d/m/Y', strtotime($afastado['dtafimsitoco'])) }}</td>
+          <td data-sort="{{ $dtainisitoco->format('Ymd') }}">{{ $dtainisitoco->format('d/m/Y') }}</td>
+          <td data-sort="{{ $dtafimsitoco->format('Ymd') }}">{{ $dtafimsitoco->format('d/m/Y') }}</td>
           <td>{{ $afastado['codema'] }}</td>
           <td>{{ implode(' / ', $afastado['telefones']) }}</td>
         </tr>
