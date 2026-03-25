@@ -16,7 +16,7 @@
           <select class="form-control" name="tipvinext">
             <option selected="selected" value="">ou Vínculo</option>
             {{-- Verificar se o código de unidade pode ser opicional no método Pessoa::tiposVinculos --}}
-            @foreach (Uspdev\Replicado\Pessoa::tiposVinculos(env('REPLICADO_CODUNDCLG')) as $vinculo)
+            @foreach ($tiposVinculos as $vinculo)
               @php
                 $vinculoSelecionado = $vinculo['tipvinext'] == \Request::query('tipvinext') ? 'selected' : '';
               @endphp
@@ -29,7 +29,7 @@
         </div>
         <div class="col input-group mb-3">
           <select class="select2-setor" name="codset[]" multiple="multiple">
-            @foreach (Uspdev\Replicado\Estrutura::listarSetores() as $setor)
+            @foreach ($listarSetores as $setor)
               @php
                 $setorSelecionado = (!empty(\Request::query('codset')) and in_array($setor['codset'], \Request::query('codset'))) ? 'selected' : '';
               @endphp

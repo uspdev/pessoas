@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PessoaRequest;
 use App\Models\Pessoa;
 use App\Replicado\Lattes;
+use App\Replicado\Pessoa as pessoaReplicado;
 use Illuminate\Http\Request;
+use Uspdev\Replicado\Estrutura;
+use Uspdev\Wsfoto;
 
 class PessoaController extends Controller
 {
@@ -13,9 +16,12 @@ class PessoaController extends Controller
     {
         $this->authorize('pessoas.basico');
 
+        $tiposVinculos = PessoaReplicado::tiposVinculos(config('replicado.codundclg'));
+        $listarSetores = Estrutura::listarSetores();
+
         # Caso 1: Nenhuma busca feita ainda, só mostramos o formulário
         if (empty($request->codpes) && empty($request->nompes) && empty($request->tipvinext) && empty($request->codset)) {
-            return view('pessoas.index');
+            return view('pessoas.index', compact('tiposVinculos', 'listarSetores'));
         }
 
         # Caso 2: Busca apenas por um campo
@@ -39,7 +45,7 @@ class PessoaController extends Controller
                 'codpes' => 'required|integer',
             ]);
             /* Verificamos se a pessoa existe no replicado */
-            if (empty(\Uspdev\Replicado\Pessoa::dump($request->codpes))) {
+            if (empty(PessoaReplicado::dump($request->codpes))) {
                 $request->session()->flash('alert-danger', 'Pessoa não encontrada');
                 return redirect('/');
             }
@@ -48,12 +54,14 @@ class PessoaController extends Controller
 
         # Caso 4: Se a busca tiver nompes, vamos montar uma lista de possíveis candidatos
         if (!empty($request->nompes)) {
-            $pessoas = \Uspdev\Replicado\Pessoa::procurarPorNome($request->nompes, true, false);
+            $pessoas = PessoaReplicado::procurarPorNome($request->nompes, true, false);
             if (empty($pessoas)) {
                 $request->session()->flash('alert-danger', 'Nenhuma pessoa encontrada');
             }
             return view('pessoas.index', [
                 'pessoas' => $pessoas,
+                'tiposVinculos' => $tiposVinculos,
+                'listarSetores' => $listarSetores,
             ]);
         }
 
@@ -61,27 +69,31 @@ class PessoaController extends Controller
         if (!empty($request->tipvinext)) {
             // Verificar se o código de unidade pode ser opicional no método Pessoa::ativosVinculos
             if ($request->tipvinext == 'Servidor' or $request->tipvinext == 'Docente' or $request->tipvinext == 'Docente Aposentado') {
-                $pessoas = \Uspdev\Replicado\Pessoa::listarMaisInformacoesServidores($request->tipvinext);
+                $pessoas = PessoaReplicado::listarMaisInformacoesServidores($request->tipvinext);
             } else {
-                $pessoas = \Uspdev\Replicado\Pessoa::ativosVinculo($request->tipvinext, env('REPLICADO_CODUNDCLG'));
+                $pessoas = PessoaReplicado::ativosVinculo($request->tipvinext, config('replicado.codundclg'));
             }
             if (empty($pessoas)) {
                 $request->session()->flash('alert-danger', 'Nenhuma pessoa encontrada');
             }
             return view('pessoas.index', [
                 'pessoas' => $pessoas,
+                'tiposVinculos' => $tiposVinculos,
+                'listarSetores' => $listarSetores,
             ]);
         }
 
         # Caso 6: Se a busca tiver setor, lista as pessoas do setor
         if (!empty($request->codset)) {
             $aposentados = ($request->docente_aposentado == null) ? 1 : 0;
-            $pessoas = \Uspdev\Replicado\Pessoa::listarServidoresSetor($request->codset, $aposentados);
+            $pessoas = PessoaReplicado::listarServidoresSetor($request->codset, $aposentados);
             if (empty($pessoas)) {
                 $request->session()->flash('alert-danger', 'Nenhuma pessoa encontrada');
             }
             return view('pessoas.index', [
                 'pessoas' => $pessoas,
+                'tiposVinculos' => $tiposVinculos,
+                'listarSetores' => $listarSetores,
             ]);
         }
     }
@@ -90,7 +102,7 @@ class PessoaController extends Controller
     {
         $this->authorize('pessoas.basico');
         /* Verificamos se a pessoa existe no replicado */
-        if (empty(\Uspdev\Replicado\Pessoa::dump($codpes))) {
+        if (empty(PessoaReplicado::dump($codpes))) {
             $request->session()->flash('alert-danger', 'Pessoa não encontrada');
             return redirect('/');
         }
@@ -108,10 +120,13 @@ class PessoaController extends Controller
         } else {
             $fotoLattes = '';
         }
-        $foto = \Uspdev\Wsfoto::obter($codpes);
+        $foto = Wsfoto::obter($codpes);
+
+        $tiposVinculos = PessoaReplicado::tiposVinculos(config('replicado.codundclg'));
+        $listarSetores = Estrutura::listarSetores();
 
         \UspTheme::activeUrl($pessoa->obterCategoria());
-        return view('pessoas.show', compact('pessoa', 'foto', 'fotoLattes'));
+        return view('pessoas.show', compact('pessoa', 'foto', 'fotoLattes', 'tiposVinculos', 'listarSetores'));
     }
 
     public function edit($codpes)
@@ -142,7 +157,7 @@ class PessoaController extends Controller
         }
         $pessoa->fill($validated);
         $pessoa->save();
-        
+
         $request->session()->flash('alert-info', 'Dados editados com sucesso!');
         return redirect(route('pessoas.show', $codpes));
     }

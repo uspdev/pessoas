@@ -117,7 +117,7 @@
               <ul class="list-group">
                 <li class="list-group-item py-1">
                   <span title="replicado">{{ $pessoa->replicado('nasc') }}</span>
-                  @if ($pessoa->replicado('nasc') != $pessoa->data_nascimento)
+                  @if ($pessoa->replicado('nasc') != $pessoa->data_nascimento && !empty($pessoa->data_nascimento))
                     (<a href="{{ url()->current() }}#card_campos_extras" class="text-danger" title="Campo extra">{{ $pessoa->data_nascimento }}</a>)
                   @endif
                 </li>
