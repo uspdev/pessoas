@@ -1,5 +1,6 @@
 services:
   pessoas:
+    build: .
     image: pessoas:latest
     container_name: pessoas
     ports:
@@ -8,12 +9,11 @@ services:
       - mariadb
     networks:
       - pessoas-network
-    volumes:
-      - ./:/var/www/html
-      - vendor:/var/www/html/vendor
     environment:
       HOME: /tmp
     user: "${UID:-1000}:${GID:-1000}"
+    volumes:
+      - ./:/var/www/html
 
   mariadb:
     image: mariadb:11
@@ -33,7 +33,7 @@ services:
     image: selenium/standalone-chrome
     container_name: pessoas_selenium
     ports:
-      - "7901:7900" # VNC (pra ver o browser rodando)
+      - "7900:7900" # VNC (pra ver o browser rodando)
     networks:
       - pessoas-network
     shm_size: 2gb
@@ -43,5 +43,4 @@ networks:
 
 volumes:
   mariadb_data:
-  vendor:
 
