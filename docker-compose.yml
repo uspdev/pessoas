@@ -24,8 +24,6 @@ services:
       MYSQL_USER: pessoas
       MYSQL_PASSWORD: pessoas
       MYSQL_ROOT_PASSWORD: pessoas
-    volumes:
-      - mariadb_data:/var/lib/mysql
     networks:
       - pessoas-network
 
@@ -40,7 +38,3 @@ services:
 
 networks:
   pessoas-network:
-
-volumes:
-  mariadb_data:
-
