@@ -25,3 +25,5 @@ php.ini
 
 # DDEV
 /.ddev
+
+/.phpunit.cache/test-results

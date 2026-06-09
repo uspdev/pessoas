@@ -1,0 +1,40 @@
+services:
+  pessoas:
+    build: .
+    image: pessoas:latest
+    container_name: pessoas
+    ports:
+      - "8000:80"
+    depends_on:
+      - mariadb
+    networks:
+      - pessoas-network
+    environment:
+      HOME: /tmp
+    user: "${UID:-1000}:${GID:-1000}"
+    volumes:
+      - ./:/var/www/html
+
+  mariadb:
+    image: mariadb:11
+    container_name: pessoas_mariadb
+    restart: always
+    environment:
+      MYSQL_DATABASE: pessoas
+      MYSQL_USER: pessoas
+      MYSQL_PASSWORD: pessoas
+      MYSQL_ROOT_PASSWORD: pessoas
+    networks:
+      - pessoas-network
+
+  selenium:
+    image: selenium/standalone-chrome
+    container_name: pessoas_selenium
+    ports:
+      - "7900:7900" # VNC (pra ver o browser rodando)
+    networks:
+      - pessoas-network
+    shm_size: 2gb
+
+networks:
+  pessoas-network:
