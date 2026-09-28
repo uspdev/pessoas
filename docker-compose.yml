@@ -9,11 +9,11 @@ services:
       - mariadb
     networks:
       - pessoas-network
+    volumes:
+      - ./:/var/www/html
     environment:
       HOME: /tmp
     user: "${UID:-1000}:${GID:-1000}"
-    volumes:
-      - ./:/var/www/html
 
   mariadb:
     image: mariadb:11
@@ -24,6 +24,24 @@ services:
       MYSQL_USER: pessoas
       MYSQL_PASSWORD: pessoas
       MYSQL_ROOT_PASSWORD: pessoas
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - pessoas-network
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: pessoas_phpmyadmin
+    restart: always
+    depends_on:
+      - mariadb
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mariadb
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: pessoas
     networks:
       - pessoas-network
 
@@ -31,10 +49,36 @@ services:
     image: selenium/standalone-chrome
     container_name: pessoas_selenium
     ports:
-      - "7900:7900" # VNC (pra ver o browser rodando)
+      - "7900:7900"
     networks:
       - pessoas-network
     shm_size: 2gb
 
+  # No /etc/hosts do seu computador colocar a linha `127.0.0.1 auth.local`
+  # particularidades do protocolo oAuth1 usado na USP
+  senhaunica-faker:
+    image: uspdev/senhaunica-faker
+    container_name: pessoas_senhaunica-faker
+    ports:
+      - "3141:3141"
+    environment:
+          - APP_URL=http://auth.local:3141
+    networks:
+      pessoas-network:
+        aliases:
+          - auth.local
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: pessoas_mailpit
+    ports:
+      - "1025:1025"   # SMTP
+      - "8025:8025"   # Interface Web
+    networks:
+      - pessoas-network
+
 networks:
   pessoas-network:
+
+volumes:
+  mariadb_data:
