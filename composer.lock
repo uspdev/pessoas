@@ -7816,16 +7816,16 @@
         },
         {
             "name": "uspdev/replicado",
-            "version": "1.28.4",
+            "version": "1.28.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uspdev/replicado.git",
-                "reference": "b5f2fdc1ebb2d1c645dcb948bc2a99e2d3e4fa15"
+                "reference": "977f0a7c37f87d64fceb0d55da3db3b0ce631b6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uspdev/replicado/zipball/b5f2fdc1ebb2d1c645dcb948bc2a99e2d3e4fa15",
-                "reference": "b5f2fdc1ebb2d1c645dcb948bc2a99e2d3e4fa15",
+                "url": "https://api.github.com/repos/uspdev/replicado/zipball/977f0a7c37f87d64fceb0d55da3db3b0ce631b6a",
+                "reference": "977f0a7c37f87d64fceb0d55da3db3b0ce631b6a",
                 "shasum": ""
             },
             "require": {
@@ -7859,9 +7859,9 @@
             "homepage": "https://github.com/uspdev/replicado",
             "support": {
                 "issues": "https://github.com/uspdev/replicado/issues",
-                "source": "https://github.com/uspdev/replicado/tree/1.28.4"
+                "source": "https://github.com/uspdev/replicado/tree/1.28.8"
             },
-            "time": "2026-09-03T15:10:07+00:00"
+            "time": "2026-11-03T20:56:52+00:00"
         },
         {
             "name": "uspdev/senhaunica-socialite",
