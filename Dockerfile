@@ -13,5 +13,4 @@ RUN composer install \
     --optimize-autoloader \
     --no-interaction
 
-# Inicia o memcached usando as configurações padrão do /etc/memcached.conf e o Apache
-CMD ["bash", "-c", "memcached -d && apache2-foreground"]
+CMD ["apache2-foreground"]
