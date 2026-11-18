@@ -77,6 +77,12 @@ services:
     networks:
       - pessoas-network
 
+  memcached:
+    image: memcached:1.6-alpine
+    container_name: pessoas_memcached
+    networks:
+      - pessoas-network
+
 networks:
   pessoas-network:
 

@@ -7484,16 +7484,16 @@
         },
         {
             "name": "uspdev/cache",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/uspdev/cache.git",
-                "reference": "5ac05e7c2913ddb1e35f5652b0930f19b5fb283c"
+                "reference": "52f31d6664fb5aa7a8c4223a3f87826323b72815"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/uspdev/cache/zipball/5ac05e7c2913ddb1e35f5652b0930f19b5fb283c",
-                "reference": "5ac05e7c2913ddb1e35f5652b0930f19b5fb283c",
+                "url": "https://api.github.com/repos/uspdev/cache/zipball/52f31d6664fb5aa7a8c4223a3f87826323b72815",
+                "reference": "52f31d6664fb5aa7a8c4223a3f87826323b72815",
                 "shasum": ""
             },
             "require": {
@@ -7519,9 +7519,10 @@
             "homepage": "https://github.com/uspdev/cache",
             "support": {
                 "issues": "https://github.com/uspdev/cache/issues",
-                "source": "https://github.com/uspdev/cache/tree/1.0.0"
+                "source": "https://github.com/uspdev/cache/tree/1.1.0"
             },
-            "time": "2021-04-07T23:14:52+00:00"
+            "time": "2026-11-10T18:15:00+00:00",
+            "published-time": "2026-11-10T18:15:42+00:00"
         },
         {
             "name": "uspdev/cadastros-auxiliares-client",
